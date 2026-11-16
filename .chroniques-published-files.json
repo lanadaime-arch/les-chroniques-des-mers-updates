@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "files": [
+    "assets/harbor-portrait.webp",
+    "assets/ocean-port.webp",
+    "assets/wave-texture.png",
+    "fruit-data.js",
+    "game.js",
+    "icon.svg",
+    "index.html",
+    "manifest.webmanifest",
+    "roam.js",
+    "style.css",
+    "sw.js",
+    "tactics.js",
+    "theme-v08.css",
+    "theme-v09.css",
+    "theme-v091.css",
+    "theme-v10.css",
+    "theme-v11.css",
+    "theme-v12.css",
+    "theme-v121.css"
+  ]
+}

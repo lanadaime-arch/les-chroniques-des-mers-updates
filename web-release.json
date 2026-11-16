@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "kind": "public-web-game",
+  "sourceRepository": "lanadaime-arch/les-chroniques-des-mers",
+  "sourceCommit": "47ae643ed99633aeb5f665b9d22d3452a3a50f1f",
+  "versionCode": 12201,
+  "versionName": "1.2.1",
+  "notes": "Base du jeu V1.2.1 pour la nouvelle chaîne de distribution multiformat",
+  "archive": null,
+  "archiveSha256": null,
+  "archiveBytes": null,
+  "androidOtaSigned": false,
+  "publicationMode": "BROWSER_ONLY_INITIAL_RELEASE"
+}
