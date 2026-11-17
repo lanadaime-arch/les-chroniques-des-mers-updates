@@ -1,0 +1,42 @@
+/* Panneau autonome, partage par toutes les versions du jeu. */
+#chroniques-updates-button {
+  position:fixed;z-index:9995;right:14px;bottom:12px;
+  border:1px solid #d9b875;border-radius:999px;padding:9px 14px;
+  background:#09263bf5;color:#f9e2b8;font:700 12px/1.2 system-ui,sans-serif;
+  cursor:pointer;box-shadow:0 4px 19px #0009;
+}
+#chroniques-updates-button:focus-visible,
+#chroniques-updates-dialog button:focus-visible {outline:3px solid #ffd974;outline-offset:3px}
+#chroniques-updates-dialog[hidden] {display:none!important}
+#chroniques-updates-dialog {
+  position:fixed;z-index:9998;right:14px;bottom:58px;
+  width:min(440px,calc(100vw - 28px));max-height:min(73vh,620px);overflow:auto;
+  color:#f3eadb;background:#091b2df8;border:2px solid #c9a77a;border-radius:13px;
+  box-shadow:0 12px 48px #000c;padding:17px;text-align:left;font:400 13px/1.5 system-ui,sans-serif;
+}
+#chroniques-updates-dialog header {display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;}
+#chroniques-updates-dialog header strong {font-size:16px;color:#ffe6af}
+#chroniques-updates-dialog p {margin:8px 0;color:#d4e0e2;}
+#chroniques-updates-dialog header button {border:0;background:transparent;color:#ffe6af;font-size:22px;cursor:pointer;}
+#chroniques-update-list {display:flex;flex-direction:column;gap:8px;margin:14px 0;}
+#chroniques-updates-dialog .chroniques-update-version {
+  border:1px solid #576b6d;border-radius:9px;padding:11px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;background:#143042
+}
+#chroniques-updates-dialog .chroniques-update-version div{display:flex;flex:1;flex-direction:column;min-width:0;gap:4px}
+#chroniques-updates-dialog .chroniques-update-version strong{font-size:13px;color:#fff0ca}
+#chroniques-updates-dialog .chroniques-update-version small{font-size:11px;color:#c7d6d7}
+#chroniques-updates-dialog .chroniques-update-version button{
+  flex-shrink:0;max-width:175px;border-radius:7px;border:1px solid #e1bf8c;
+  background:#3d573d;color:#fff4de;padding:8px 10px;font:700 11px/1.2 system-ui,sans-serif;cursor:pointer
+}
+#chroniques-updates-dialog button:disabled {opacity:.55;cursor:default}
+#chroniques-update-status {min-height:17px;color:#e8dfba!important;font-weight:600}
+#chroniques-update-status.error {color:#ffac9e!important}
+#chroniques-updates-dialog > small {display:block;font-size:10px;color:#adbdc3}
+@media(max-width:560px) {
+ #chroniques-updates-button{right:8px;bottom:8px;padding:6px 10px;font-size:10px}
+ #chroniques-updates-dialog{right:6px;bottom:42px;width:calc(100vw - 12px);padding:13px}
+ #chroniques-updates-dialog .chroniques-update-version{gap:5px}
+ #chroniques-updates-dialog .chroniques-update-version button{max-width:125px;font-size:10px}
+}
