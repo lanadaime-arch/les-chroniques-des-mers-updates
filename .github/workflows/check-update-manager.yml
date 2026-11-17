@@ -1,0 +1,21 @@
+name: Contrôler les versions du jeu Windows et le retour arrière
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-web-versions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Tester le panneau de mises à jour et les versions conservées
+        run: node --test tests/check_update_manager.mjs
