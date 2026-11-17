@@ -225,6 +225,61 @@ test('V1.4.6: attitudes du chibi distribuées avec code et styles',()=>{
  assert.ok(fakeClass.has('v146-breeze'));
  assert.ok(!actor.includes('localStorage'));
 });
+test('au démarrage, l ancienne interface ne peut pas apparaître avant la redirection',async()=>{
+ const index=read('index.html');
+ const first=index.match(/<script id="chroniques-root-boot">([\s\S]*?)<\/script>/);
+ const last=index.match(/<script id="chroniques-root-fallback">([\s\S]*?)<\/script>/);
+ assert.ok(first&&last,'boot et repli installés dans la page racine');
+ assert.ok(index.indexOf('chroniques-root-boot')<index.indexOf('href="style.css"'));
+ assert.ok(!index.includes('<script src="game.js" defer></script>'),
+  'le code de l ancien menu ne doit pas être exécuté sur une page de transition');
+ assert.ok(index.includes('html.chroniques-root-routing body{visibility:hidden!important}'));
+ function simulate(active){
+  const names=new Set(),insertions=[],listeners={};
+  const document={
+   readyState:'loading',
+   documentElement:{classList:{add:x=>names.add(x),remove:x=>names.delete(x)}},
+   body:{append:el=>insertions.push(el)},
+   createElement:()=>({}),
+   addEventListener:(name,fn)=>{listeners[name]=fn}
+  };
+  const window={};
+  const sandbox={document,window,localStorage:{getItem:()=>active}};
+  vm.runInNewContext(first[1],sandbox);
+  vm.runInNewContext(last[1],sandbox);
+  return {names,insertions,listeners,boot:window.ChroniquesRootBoot};
+ }
+ const installed=simulate('1.4.6');
+ assert.ok(installed.names.has('chroniques-root-routing'));
+ assert.equal(installed.insertions.length,0);
+ assert.equal(installed.boot.pending,true);
+ installed.boot.fallback();
+ assert.equal(installed.names.size,0);
+ assert.equal(installed.insertions.length,1);
+ assert.equal(installed.insertions[0].src,'game.js');
+ installed.boot.fallback();
+ assert.equal(installed.insertions.length,1,'pas deux initialisations au repli');
+ const uninstalled=simulate(null);
+ assert.ok(!uninstalled.boot);
+ assert.equal(uninstalled.insertions.length,0);
+ uninstalled.listeners.DOMContentLoaded();
+ assert.equal(uninstalled.insertions.length,1);
+ assert.equal(uninstalled.insertions[0].src,'game.js');
+ const stable=simulate('1.2.1');
+ assert.ok(!stable.boot);
+ stable.listeners.DOMContentLoaded();
+ assert.equal(stable.insertions.length,1);
+});
+test('la redirection conserve le test réseau et le repli hors ligne',()=>{
+ const script=read('update-manager.js');
+ assert.ok(script.includes("method:'HEAD',cache:'no-store'"));
+ assert.ok(script.includes("'chroniques-web-versions-'+active"));
+ assert.ok(script.includes('ChroniquesRootBoot.fallback()'));
+ assert.ok(script.includes("response.status===404||response.status===410"));
+ assert.ok(script.includes('location.replace(target.href)'));
+ assert.ok(!script.includes('localStorage.removeItem(PROFILES_KEY)'));
+ assert.match(read('sw.js'),/chroniques-mers-root-redirect-20261118/);
+});
 test('origin et chemins : aucun changement de domaine pour les profils locaux',()=>{
  for(const v of manifest.versions){
   const html=read(path.join(v.directory,'index.html'));
