@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.4.0",
+  "latest": "1.4.1",
   "versions": [
     {
       "id": "1.2.1",
@@ -61,6 +61,11 @@
       "id": "1.4.0",
       "directory": "versions/v1.4.0/",
       "notes": "Fuchsia sur l’Île de l’Aube : village et quai illustrés, East Blue, profils existants conservés."
+    },
+    {
+      "id": "1.4.1",
+      "directory": "versions/v1.4.1/",
+      "notes": "Préversion d’essai PC/Android : menu orné, capitaine animé, personnalisation. Retour à 1.4.0 possible."
     }
   ]
 }

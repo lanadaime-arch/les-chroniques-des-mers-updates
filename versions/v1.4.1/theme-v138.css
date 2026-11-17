@@ -1,0 +1,120 @@
+/* V1.3.8 — Choix des quatre emplacements dans une vraie fenêtre.
+   Le décor et les données du jeu ne sont pas modifiés. */
+.v138-menu .v133-topnav button[data-lobby-open="slots"] {
+  min-width:clamp(105px,8vw,130px)
+}
+.v138-lobby-dialog.panel-slots .overlay-sheet {
+  width:min(840px,100%);
+  height:auto;
+  max-height:min(87dvh,760px);
+  min-height:0
+}
+.v138-slot-chooser {
+  padding:2px 0 8px;
+  color:#f5e8d2;
+}
+.v138-slot-chooser>p {
+  margin:0 0 16px;
+  color:#f4dfba;
+  font:500 14px/1.55 system-ui,sans-serif
+}
+.v138-chooser-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px
+}
+.v138-chooser-slot {
+  min-width:0;min-height:112px;
+  display:flex;align-items:center;gap:12px;
+  text-align:left;padding:12px;
+  border:2px solid #a67c4a;border-radius:12px;
+  color:#fff1d2;
+  background:linear-gradient(145deg,#123c4e,#061d30);
+  box-shadow:inset 0 0 0 2px #deb77320,0 5px 14px #00101b88;
+  font-family:system-ui,sans-serif;
+  cursor:pointer;
+  transition:border-color .12s ease,background .12s ease
+}
+.v138-chooser-slot:hover {
+  border-color:#ffde94;
+  background:linear-gradient(145deg,#1a5160,#10283b)
+}
+.v138-chooser-slot.selected {
+  border-color:#ffd781;
+  box-shadow:inset 0 0 0 2px #ffdb9b50,0 0 16px #e1b76c5e
+}
+.v138-chooser-slot:focus-visible {
+  outline:3px solid #fef6d1;
+  outline-offset:2px
+}
+.v138-chooser-portrait {
+  flex:0 0 65px;
+  width:65px;height:65px;
+  border:2px solid #dab16d;border-radius:11px;
+  display:grid;place-items:center;
+  background:linear-gradient(155deg,#28677c,#0d293b);
+  color:#ffda8b;
+  font:700 42px/1 system-ui,sans-serif;
+  overflow:hidden
+}
+.v138-chooser-portrait img {
+  display:block;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center top
+}
+.v138-chooser-slot.vacant .v138-chooser-portrait {
+  border-style:dashed;
+  background:#0c3040
+}
+.v138-chooser-info {
+  display:flex;flex:1;min-width:0;
+  flex-direction:column;gap:3px
+}
+.v138-chooser-info small {
+  color:#f1c681;
+  font:700 10px/1.4 system-ui,sans-serif
+}
+.v138-chooser-info strong {
+  color:#fff2d5;
+  font:700 clamp(14px,1.2vw,18px)/1.25 Georgia,serif;
+  overflow-wrap:anywhere
+}
+.v138-chooser-info>span {
+  color:#c8e0df;
+  font:500 11px/1.45 system-ui,sans-serif
+}
+.v138-chooser-cta {
+  flex:0 0 auto;
+  border:1px solid #d5aa6a;border-radius:7px;
+  color:#ffe4a5;
+  background:#193547;
+  padding:7px 9px;
+  font:700 11px/1.2 system-ui,sans-serif
+}
+.v138-chooser-footer {
+  margin-top:16px;padding:11px 3px 0;
+  border-top:1px solid #bb956c77;
+  color:#d1dddd;
+  font:500 12px/1.5 system-ui,sans-serif
+}
+@media(max-width:720px){
+  .v138-lobby-dialog.panel-slots .overlay-sheet{
+    height:100dvh;max-height:none;
+    width:100%;border-radius:0
+  }
+  .v138-chooser-grid {
+    grid-template-columns:1fr;gap:10px
+  }
+  .v138-chooser-slot {
+    min-height:88px;padding:10px;gap:9px
+  }
+  .v138-chooser-portrait {
+    flex-basis:56px;width:56px;height:56px
+  }
+  .v138-chooser-info strong {font-size:16px}
+  .v138-chooser-cta {font-size:11px;padding:8px}
+  .v138-slot-chooser>p {font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){
+  .v138-chooser-slot{transition:none}
+}
