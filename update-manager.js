@@ -80,7 +80,8 @@
     const targetCache = await caches.open(temporary);
     try {
       const urls = FILES.slice();
-      if (version.id === '1.2.2') urls.push('theme-v122.css');
+      if (version.id === '1.2.2' || version.id === '1.2.3') urls.push('theme-v122.css');
+      if (version.id === '1.2.3') urls.push('theme-v123.css');
       // The updater is shared at the same origin, and is usable in both versions.
       const resources = urls.map(file => fileUrl(version,file));
       resources.push(new URL('update-manager.js',root),new URL('update-manager.css',root));
