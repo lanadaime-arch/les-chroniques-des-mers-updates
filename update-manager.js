@@ -195,11 +195,35 @@
     const active=localStorage.getItem(STORE);
     if (isRoot && active && active!==STABLE && /^\d+\.\d+\.\d+$/.test(active)) {
       const path='versions/v'+active+'/index.html';
-      // Fail safe: if a release was withdrawn, stay on the original game.
-      fetch(new URL(path,root),{method:'HEAD',cache:'no-store'})
-        .then(response => {if(response.ok)location.replace(new URL(path,root).href);
-          else localStorage.removeItem(STORE);})
-        .catch(()=>{});
+      const target=new URL(path,root);
+      // L'ancien accueil ne s'initialise pas avant le verdict. Sa page reste
+      // le repli sûr si la version n'est plus présente.
+      const fallback=()=>{
+        if(window.ChroniquesRootBoot?.pending)window.ChroniquesRootBoot.fallback();
+        else document.documentElement?.classList?.remove?.('chroniques-root-routing');
+      };
+      const cached=async()=>{
+        try{
+          if(!('caches' in window))return false;
+          const cache=await window.caches.open('chroniques-web-versions-'+active);
+          return !!(await cache.match(target.href));
+        }catch{return false;}
+      };
+      const check=async()=>{
+        try{
+          const response=await fetch(target,{method:'HEAD',cache:'no-store'});
+          if(response.ok){location.replace(target.href);return;}
+          // Une version supprimée du serveur déclenche un vrai repli, sans
+          // détruire les personnages ou les caches des autres versions.
+          if(response.status===404||response.status===410){
+            localStorage.removeItem(STORE);fallback();return;
+          }
+        }catch{}
+        // Offline : la version déjà installée peut rester jouable depuis son cache.
+        if(await cached())location.replace(target.href);
+        else fallback();
+      };
+      check();
     }
     if (document.getElementById('chroniques-updates-button')) return;
     const button=document.createElement('button');

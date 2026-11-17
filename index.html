@@ -9,6 +9,30 @@
   <meta name="apple-mobile-web-app-title" content="Chroniques">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="description" content="RPG solo de pirates, nouvelle ville isométrique, caméra tactile et combats tactiques.">
+  <!-- Tout premier script : déterminer si une version installée doit s'ouvrir.
+       Ne pas charger l'ancien jeu pendant la décision, pas d'écran de remplacement. -->
+  <style id="chroniques-root-routing-style">
+    html.chroniques-root-routing{background:#081b2d}
+    html.chroniques-root-routing body{visibility:hidden!important}
+  </style>
+  <script id="chroniques-root-boot">
+  (function(){
+    'use strict';
+    var active=null;
+    try{active=localStorage.getItem('chroniques_mers_active_web_version_v1')}catch(e){}
+    if(!/^\d+\.\d+\.\d+$/.test(active||'')||active==='1.2.1')return;
+    document.documentElement.classList.add('chroniques-root-routing');
+    window.ChroniquesRootBoot={
+      pending:true,onFallback:null,
+      fallback:function(){
+        if(!this.pending)return;
+        this.pending=false;
+        document.documentElement.classList.remove('chroniques-root-routing');
+        if(typeof this.onFallback==='function')this.onFallback();
+      }
+    };
+  })();
+  </script>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="style.css">
@@ -29,6 +53,25 @@
   <script src="roam.js" defer></script>
   <script src="fruit-data.js" defer></script>
   <script src="tactics.js" defer></script>
-  <script src="game.js" defer></script>
+  <!-- L'ancien jeu ne doit s'initialiser QUE si aucune version n'est active,
+       ou si la version demandée est définitivement inaccessible. -->
+  <script id="chroniques-root-fallback">
+  (function(){
+    'use strict';
+    var loaded=false;
+    function startLegacyGame(){
+      if(loaded)return;
+      loaded=true;
+      var script=document.createElement('script');
+      script.src='game.js';
+      script.async=false;
+      document.body.append(script);
+    }
+    var boot=window.ChroniquesRootBoot;
+    if(boot&&boot.pending){boot.onFallback=startLegacyGame;return}
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startLegacyGame,{once:true});
+    else startLegacyGame();
+  })();
+  </script>
 </body>
 </html>
