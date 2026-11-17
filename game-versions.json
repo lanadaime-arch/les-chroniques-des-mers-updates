@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.2.2",
+  "latest": "1.2.3",
   "versions": [
     {
       "id": "1.2.1",
@@ -11,6 +11,11 @@
       "id": "1.2.2",
       "directory": "versions/v1.2.2/",
       "notes": "Mise à jour de l’interface, testée avec les personnages existants."
+    },
+    {
+      "id": "1.2.3",
+      "directory": "versions/v1.2.3/",
+      "notes": "Suivi de quêtes dans l'exploration : objectif, progression et récompense."
     }
   ]
 }
