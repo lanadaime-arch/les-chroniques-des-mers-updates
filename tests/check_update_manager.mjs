@@ -8,10 +8,10 @@ const root=path.resolve('.');
 const manifest=JSON.parse(fs.readFileSync('game-versions.json','utf8'));
 const read=pathName=>fs.readFileSync(path.isAbsolute(pathName)?pathName:path.join(root,pathName),'utf8');
 
-test('quatorze versions disponibles et des chemins locaux, sans publication externe',()=>{
+test('quinze versions disponibles et des chemins locaux, sans publication externe',()=>{
  assert.equal(manifest.schema,1);
- assert.equal(manifest.latest,'1.4.2');
- assert.deepEqual(manifest.versions.map(v=>v.id),['1.2.1','1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2']);
+ assert.equal(manifest.latest,'1.4.3');
+ assert.deepEqual(manifest.versions.map(v=>v.id),['1.2.1','1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3']);
  for(const v of manifest.versions){
   assert.equal(v.directory,`versions/v${v.id}/`);
   assert.match(v.directory,/^versions\/v\d+\.\d+\.\d+\/$/);
@@ -33,7 +33,7 @@ test('quatorze versions disponibles et des chemins locaux, sans publication exte
  for (const f of ['theme-v136.css','assets/chibi-avatar-azur.webp','assets/chibi-avatar-flamme.webp','assets/chibi-avatar-brume.webp'])
    assert.ok(fs.statSync('versions/v1.3.6/'+f).isFile(),f);
 });
-test('scripts JS des quatorze versions et gestionnaire chargent sans erreurs de syntaxe',()=>{
+test('scripts JS des quinze versions et gestionnaire chargent sans erreurs de syntaxe',()=>{
  for(const v of manifest.versions){
   for(const file of ['game.js','roam.js','tactics.js','fruit-data.js','sw.js']){
    const p=path.join(root,v.directory,file);assert.doesNotThrow(()=>new vm.Script(read(p),{filename:p}),p);
@@ -125,6 +125,25 @@ test('V1.4.2: menu PC premium sans écraser les versions antérieures',()=>{
  assert.ok(style.includes('v133-play'));
  assert.ok(style.includes('max-height:940px'));
  assert.ok(!read('versions/v1.4.1/index.html').includes('theme-v142.css'));
+});
+test('V1.4.3 menu PC riche et SVG décoratif correctement installés',()=>{
+ const dir='versions/v1.4.3/';
+ const html=read(dir+'index.html'),game=read(dir+'game.js'),sw=read(dir+'sw.js'),css=read(dir+'theme-v143.css');
+ const image=read(dir+'assets/v143-wave-flourish.svg');
+ assert.ok(html.includes('href="theme-v143.css"'));
+ assert.ok(html.includes('src="../../update-manager.js"'));
+ assert.ok(html.includes('href="../../update-manager.css"'));
+ assert.ok(game.includes('v143-menu'));
+ assert.ok(game.includes('V1.4.3'));
+ assert.ok(game.includes('v143-nav-crest'));
+ assert.ok(game.includes('chroniques_mers_profiles_v1'));
+ assert.ok(css.includes('assets/v143-wave-flourish.svg'));
+ assert.ok(image.includes('<svg'));
+ assert.ok(sw.includes('./theme-v143.css'));
+ assert.ok(sw.includes('./assets/v143-wave-flourish.svg'));
+ assert.ok(read('update-manager.js').includes("'theme-v143.css'"));
+ assert.ok(read('update-manager.js').includes("'assets/v143-wave-flourish.svg'"));
+ assert.ok(!read('versions/v1.4.2/index.html').includes('theme-v143.css'));
 });
 test('origin et chemins : aucun changement de domaine pour les profils locaux',()=>{
  for(const v of manifest.versions){
@@ -218,7 +237,7 @@ test('installation et retour arriere sauvegardent les profils avec le meme domai
  first.elements.get('chroniques-updates-button').handlers.click();
  await new Promise(resolve=>setImmediate(resolve));
  const items=first.elements.get('chroniques-update-list').children;
- assert.equal(items.length,14);
+ assert.equal(items.length,15);
  const hidden=items.filter(line=>line.hidden);
  assert.ok(hidden.length>=5,'Les anciennes versions sont repliees par defaut');
  assert.equal(first.elements.get('chroniques-update-history-toggle').hidden,false);
@@ -316,6 +335,20 @@ test('installation et retour arriere sauvegardent les profils avec le meme domai
  await new Promise(resolve=>setImmediate(resolve));
  await staged142.elements.get('chroniques-update-list').children[13].children[1].handlers.click();
  assert.ok(staged142.nav[0].endsWith('/versions/v1.4.2/index.html'));
+ assert.equal(local.get(activeKey),'1.4.2');
+ assert.equal(local.get('chroniques_mers_profiles_v1'),original);
+ const installed143=start('/les-chroniques-des-mers-updates/versions/v1.4.2/index.html');
+ installed143.elements.get('chroniques-updates-button').handlers.click();
+ await new Promise(resolve=>setImmediate(resolve));
+ await installed143.elements.get('chroniques-update-list').children[14].children[1].handlers.click();
+ assert.ok(installed143.nav[0].endsWith('/versions/v1.4.3/index.html'));
+ assert.equal(local.get(activeKey),'1.4.3');
+ assert.equal(local.get('chroniques_mers_profiles_v1'),original);
+ const rollback143=start('/les-chroniques-des-mers-updates/versions/v1.4.3/index.html');
+ rollback143.elements.get('chroniques-updates-button').handlers.click();
+ await new Promise(resolve=>setImmediate(resolve));
+ await rollback143.elements.get('chroniques-update-list').children[13].children[1].handlers.click();
+ assert.ok(rollback143.nav[0].endsWith('/versions/v1.4.2/index.html'));
  assert.equal(local.get(activeKey),'1.4.2');
  assert.equal(local.get('chroniques_mers_profiles_v1'),original);
  const rollback142=start('/les-chroniques-des-mers-updates/versions/v1.4.2/index.html');
