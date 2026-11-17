@@ -80,11 +80,12 @@
     const targetCache = await caches.open(temporary);
     try {
       const urls = FILES.slice();
-      if (['1.2.2','1.2.3','1.3.0','1.3.3','1.3.4'].includes(version.id)) urls.push('theme-v122.css');
-      if (['1.2.3','1.3.0','1.3.3','1.3.4'].includes(version.id)) urls.push('theme-v123.css');
-      if (['1.3.0','1.3.3','1.3.4'].includes(version.id)) urls.push('theme-v130.css');
-      if (version.id === '1.3.3' || version.id === '1.3.4') urls.push('theme-v133.css', 'assets/chibi-captain.webp');
-      if (version.id === '1.3.4') urls.push('theme-v134.css');
+      if (['1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5'].includes(version.id)) urls.push('theme-v122.css');
+      if (['1.2.3','1.3.0','1.3.3','1.3.4','1.3.5'].includes(version.id)) urls.push('theme-v123.css');
+      if (['1.3.0','1.3.3','1.3.4','1.3.5'].includes(version.id)) urls.push('theme-v130.css');
+      if (['1.3.3','1.3.4','1.3.5'].includes(version.id)) urls.push('theme-v133.css', 'assets/chibi-captain.webp');
+      if (version.id === '1.3.4' || version.id === '1.3.5') urls.push('theme-v134.css');
+      if (version.id === '1.3.5') urls.push('theme-v135.css', 'assets/ocean-port-ponton.webp', 'assets/chibi-capitaine-azur.webp', 'assets/chibi-capitaine-flamme.webp', 'assets/chibi-capitaine-brume.webp');
       // The updater is shared at the same origin, and is usable in both versions.
       const resources = urls.map(file => fileUrl(version,file));
       resources.push(new URL('update-manager.js',root),new URL('update-manager.css',root));
