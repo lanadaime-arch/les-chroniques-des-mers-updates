@@ -18,4 +18,4 @@ jobs:
         with:
           node-version: '22'
       - name: Tester le panneau de mises à jour et les versions conservées
-        run: node --test tests/check_update_manager.mjs tests/test_quest_tracker.cjs tests/test_menu_v130.cjs tests/test_menu_v133.cjs tests/test_menu_v134.cjs
+        run: node --test tests/check_update_manager.mjs tests/test_quest_tracker.cjs tests/test_menu_v130.cjs tests/test_menu_v133.cjs tests/test_menu_v134.cjs tests/test_menu_v135.cjs

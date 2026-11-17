@@ -8,10 +8,10 @@ const root=path.resolve('.');
 const manifest=JSON.parse(fs.readFileSync('game-versions.json','utf8'));
 const read=pathName=>fs.readFileSync(path.isAbsolute(pathName)?pathName:path.join(root,pathName),'utf8');
 
-test('six versions disponibles et des chemins locaux, sans publication externe',()=>{
+test('sept versions disponibles et des chemins locaux, sans publication externe',()=>{
  assert.equal(manifest.schema,1);
- assert.equal(manifest.latest,'1.3.4');
- assert.deepEqual(manifest.versions.map(v=>v.id),['1.2.1','1.2.2','1.2.3','1.3.0','1.3.3','1.3.4']);
+ assert.equal(manifest.latest,'1.3.5');
+ assert.deepEqual(manifest.versions.map(v=>v.id),['1.2.1','1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5']);
  for(const v of manifest.versions){
   assert.equal(v.directory,`versions/v${v.id}/`);
   assert.match(v.directory,/^versions\/v\d+\.\d+\.\d+\/$/);
@@ -28,8 +28,10 @@ test('six versions disponibles et des chemins locaux, sans publication externe',
  assert.ok(fs.statSync('versions/v1.3.3/assets/chibi-captain.webp').isFile());
  assert.ok(fs.statSync('versions/v1.3.4/theme-v134.css').isFile());
  assert.ok(fs.statSync('versions/v1.3.4/assets/chibi-captain.webp').isFile());
+ for(const f of ['theme-v135.css','assets/ocean-port-ponton.webp','assets/chibi-capitaine-azur.webp','assets/chibi-capitaine-flamme.webp','assets/chibi-capitaine-brume.webp'])
+   assert.ok(fs.statSync('versions/v1.3.5/'+f).isFile(),f);
 });
-test('scripts JS des six versions et gestionnaire chargent sans erreurs de syntaxe',()=>{
+test('scripts JS des sept versions et gestionnaire chargent sans erreurs de syntaxe',()=>{
  for(const v of manifest.versions){
   for(const file of ['game.js','roam.js','tactics.js','fruit-data.js','sw.js']){
    const p=path.join(root,v.directory,file);assert.doesNotThrow(()=>new vm.Script(read(p),{filename:p}),p);
@@ -62,6 +64,11 @@ test('l ancien jeu est inchange, sauf indication de version',()=>{
  assert.ok(read('versions/v1.3.4/index.html').includes('theme-v134.css'));
  assert.ok(read('versions/v1.3.4/game.js').includes('v134-free-stage'));
  assert.ok(!read('versions/v1.3.3/index.html').includes('theme-v134.css'));
+ assert.ok(read('versions/v1.3.5/game.js').includes('lobby-root v133-menu v134-menu v135-menu'));
+ assert.ok(read('versions/v1.3.5/index.html').includes('theme-v135.css'));
+ assert.ok(!read('versions/v1.3.4/index.html').includes('theme-v135.css'));
+ assert.ok(!read('versions/v1.3.5/game.js').includes('class="v134-pier"'));
+ assert.ok(read('versions/v1.3.5/sw.js').includes('./assets/ocean-port-ponton.webp'));
 });
 test('origin et chemins : aucun changement de domaine pour les profils locaux',()=>{
  for(const v of manifest.versions){
@@ -155,7 +162,7 @@ test('installation et retour arriere sauvegardent les profils avec le meme domai
  first.elements.get('chroniques-updates-button').handlers.click();
  await new Promise(resolve=>setImmediate(resolve));
  const items=first.elements.get('chroniques-update-list').children;
- assert.equal(items.length,6);
+ assert.equal(items.length,7);
  const install=items[1].children[1];
  assert.equal(install.dataset.installVersion,'1.2.2');
  await install.handlers.click();
@@ -192,15 +199,29 @@ test('installation et retour arriere sauvegardent les profils avec le meme domai
  assert.ok(fifth.nav[0].endsWith('/versions/v1.3.4/index.html'));
  assert.equal(local.get(activeKey),'1.3.4');
  assert.equal(local.get('chroniques_mers_profiles_v1'),original);
- const latest=start('/les-chroniques-des-mers-updates/versions/v1.3.4/index.html');
+ const sixth=start('/les-chroniques-des-mers-updates/versions/v1.3.4/index.html');
+ sixth.elements.get('chroniques-updates-button').handlers.click();
+ await new Promise(resolve=>setImmediate(resolve));
+ await sixth.elements.get('chroniques-update-list').children[6].children[1].handlers.click();
+ assert.ok(sixth.nav[0].endsWith('/versions/v1.3.5/index.html'));
+ assert.equal(local.get(activeKey),'1.3.5');
+ assert.equal(local.get('chroniques_mers_profiles_v1'),original);
+ const latest=start('/les-chroniques-des-mers-updates/versions/v1.3.5/index.html');
  latest.elements.get('chroniques-updates-button').handlers.click();
  await new Promise(resolve=>setImmediate(resolve));
- const rollback=latest.elements.get('chroniques-update-list').children[4].children[1];
+ const rollback=latest.elements.get('chroniques-update-list').children[5].children[1];
  await rollback.handlers.click();
- assert.ok(latest.nav[0].endsWith('/versions/v1.3.3/index.html'));
- assert.equal(local.get(activeKey),'1.3.3');
+ assert.ok(latest.nav[0].endsWith('/versions/v1.3.4/index.html'));
+ assert.equal(local.get(activeKey),'1.3.4');
  assert.equal(local.get('chroniques_mers_profiles_v1'),original);
  assert.equal(JSON.parse(local.get(backupKey)).values.chroniques_mers_profiles_v1,original);
+ const sixthBack=start('/les-chroniques-des-mers-updates/versions/v1.3.4/index.html');
+ sixthBack.elements.get('chroniques-updates-button').handlers.click();
+ await new Promise(resolve=>setImmediate(resolve));
+ await sixthBack.elements.get('chroniques-update-list').children[4].children[1].handlers.click();
+ assert.ok(sixthBack.nav[0].endsWith('/versions/v1.3.3/index.html'));
+ assert.equal(local.get(activeKey),'1.3.3');
+ assert.equal(local.get('chroniques_mers_profiles_v1'),original);
  const fifthBack=start('/les-chroniques-des-mers-updates/versions/v1.3.3/index.html');
  fifthBack.elements.get('chroniques-updates-button').handlers.click();
  await new Promise(resolve=>setImmediate(resolve));
@@ -230,6 +251,7 @@ test('installation et retour arriere sauvegardent les profils avec le meme domai
  assert.equal(local.get(activeKey),'1.2.1');
  assert.equal(local.get('chroniques_mers_profiles_v1'),original);
  assert.equal(JSON.parse(local.get(backupKey)).values.chroniques_mers_profiles_v1,original);
+ assert.ok(cacheMap.has('chroniques-web-versions-1.3.5'));
  assert.ok(cacheMap.has('chroniques-web-versions-1.3.4'));
  assert.ok(cacheMap.has('chroniques-web-versions-1.3.3'));
  assert.ok(cacheMap.has('chroniques-web-versions-1.3.0'));
