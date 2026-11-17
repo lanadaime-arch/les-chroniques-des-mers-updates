@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.4.1",
+  "latest": "1.4.2",
   "versions": [
     {
       "id": "1.2.1",
@@ -66,6 +66,11 @@
       "id": "1.4.1",
       "directory": "versions/v1.4.1/",
       "notes": "Préversion d’essai PC/Android : menu orné, capitaine animé, personnalisation. Retour à 1.4.0 possible."
+    },
+    {
+      "id": "1.4.2",
+      "directory": "versions/v1.4.2/",
+      "notes": "Finition visuelle du menu Fuchsia : cadres bois et or, barre et bouton JOUER retravaillés, Kisuke mieux intégré. Retour à 1.4.1 possible."
     }
   ]
 }
