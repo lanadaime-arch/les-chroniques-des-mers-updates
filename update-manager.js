@@ -80,7 +80,7 @@
     const targetCache = await caches.open(temporary);
     try {
       const urls = FILES.slice();
-      if (version.id !== STABLE) urls.push('theme-v122.css');
+      if (version.id === '1.2.2') urls.push('theme-v122.css');
       // The updater is shared at the same origin, and is usable in both versions.
       const resources = urls.map(file => fileUrl(version,file));
       resources.push(new URL('update-manager.js',root),new URL('update-manager.css',root));
@@ -96,8 +96,8 @@
       // Make the package available under a stable name only when completely cached.
       await caches.delete(cacheName);
       const finalCache = await caches.open(cacheName);
-      const urls = await targetCache.keys();
-      for (const url of urls) {
+      const cachedRequests = await targetCache.keys();
+      for (const url of cachedRequests) {
         const response = await targetCache.match(url);
         if (!response) throw Error('Archive incomplète.');
         await finalCache.put(url,response);
