@@ -80,19 +80,20 @@
     const targetCache = await caches.open(temporary);
     try {
       const urls = FILES.slice();
-      if (['1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3'].includes(version.id)) urls.push('theme-v122.css');
-      if (['1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3'].includes(version.id)) urls.push('theme-v123.css');
-      if (['1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3'].includes(version.id)) urls.push('theme-v130.css');
-      if (['1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3'].includes(version.id)) urls.push('theme-v133.css', 'assets/chibi-captain.webp');
-      if (['1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3'].includes(version.id)) urls.push('theme-v134.css');
-      if (['1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3'].includes(version.id)) urls.push('theme-v135.css', 'assets/ocean-port-ponton.webp', 'assets/chibi-capitaine-azur.webp', 'assets/chibi-capitaine-flamme.webp', 'assets/chibi-capitaine-brume.webp');
-      if (['1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3'].includes(version.id)) urls.push('theme-v136.css', 'assets/chibi-avatar-azur.webp', 'assets/chibi-avatar-flamme.webp', 'assets/chibi-avatar-brume.webp');
-      if (['1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3'].includes(version.id)) urls.push('theme-v137.css');
-      if (['1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3'].includes(version.id)) urls.push('theme-v138.css');
+      if (['1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4'].includes(version.id)) urls.push('theme-v122.css');
+      if (['1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4'].includes(version.id)) urls.push('theme-v123.css');
+      if (['1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4'].includes(version.id)) urls.push('theme-v130.css');
+      if (['1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4'].includes(version.id)) urls.push('theme-v133.css', 'assets/chibi-captain.webp');
+      if (['1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4'].includes(version.id)) urls.push('theme-v134.css');
+      if (['1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4'].includes(version.id)) urls.push('theme-v135.css', 'assets/ocean-port-ponton.webp', 'assets/chibi-capitaine-azur.webp', 'assets/chibi-capitaine-flamme.webp', 'assets/chibi-capitaine-brume.webp');
+      if (['1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4'].includes(version.id)) urls.push('theme-v136.css', 'assets/chibi-avatar-azur.webp', 'assets/chibi-avatar-flamme.webp', 'assets/chibi-avatar-brume.webp');
+      if (['1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4'].includes(version.id)) urls.push('theme-v137.css');
+      if (['1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4'].includes(version.id)) urls.push('theme-v138.css');
       if (version.id === '1.4.0') urls.push('theme-v140.css','assets/fuchsia-aube-quai.webp');
       if (version.id === '1.4.1') urls.push('theme-v140.css','assets/fuchsia-aube-quai.webp','theme-v141.css','captain-rig.css','captain-rig.js','captain-customization.css','captain-ribbon-masks.js');
       if (version.id === '1.4.2') urls.push('theme-v140.css','assets/fuchsia-aube-quai.webp','theme-v141.css','captain-rig.css','captain-rig.js','captain-customization.css','captain-ribbon-masks.js','theme-v142.css');
       if (version.id === '1.4.3') urls.push('theme-v140.css','assets/fuchsia-aube-quai.webp','theme-v141.css','captain-rig.css','captain-rig.js','captain-customization.css','captain-ribbon-masks.js','theme-v142.css','theme-v143.css','assets/v143-wave-flourish.svg');
+      if (version.id === '1.4.4') urls.push('theme-v140.css','assets/fuchsia-aube-quai.webp','theme-v141.css','captain-rig.css','captain-rig.js','captain-customization.css','captain-ribbon-masks.js','theme-v142.css','theme-v143.css','assets/v143-wave-flourish.svg','theme-v144.css');
       // The updater is shared at the same origin, and is usable in both versions.
       const resources = urls.map(file => fileUrl(version,file));
       resources.push(new URL('update-manager.js',root),new URL('update-manager.css',root));

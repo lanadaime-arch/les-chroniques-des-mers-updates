@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.4.3",
+  "latest": "1.4.4",
   "versions": [
     {
       "id": "1.2.1",
@@ -76,6 +76,11 @@
       "id": "1.4.3",
       "directory": "versions/v1.4.3/",
       "notes": "Menu PC illustré : rose des vents, cadres bois/or retravaillés, icônes et bouton Jouer avec arabesques marines. Retour à 1.4.2 possible."
+    },
+    {
+      "id": "1.4.4",
+      "directory": "versions/v1.4.4/",
+      "notes": "Correctifs PC : rose des vents lisible, pictogrammes agrandis, vagues du bouton Jouer mieux intégrées et ombre de Kisuke ajustée. Retour à 1.4.3 possible."
     }
   ]
 }
