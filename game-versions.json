@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.3.4",
+  "latest": "1.3.5",
   "versions": [
     {
       "id": "1.2.1",
@@ -31,6 +31,11 @@
       "id": "1.3.4",
       "directory": "versions/v1.3.4/",
       "notes": "Menu amélioré : quai sous le chibi, emplacements vides et apparences, textes mobiles plus lisibles."
+    },
+    {
+      "id": "1.3.5",
+      "directory": "versions/v1.3.5/",
+      "notes": "Menu revu : ponton en perspective dans le décor, chibis Azur/Flamme/Brume, confort mobile."
     }
   ]
 }
