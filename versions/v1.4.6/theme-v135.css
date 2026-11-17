@@ -1,0 +1,98 @@
+/* Les Chroniques des Mers — menu V1.3.5.
+   Le ponton est peint DANS le décor ocean-port-ponton.webp : aucune fausse planche CSS.
+   Personnages et commandes restent des éléments DOM interactifs indépendants. */
+.v135-menu {
+  --gold:#f5c86c;--paper:#fff2d2;
+  background:
+    linear-gradient(90deg,#061a2bcb 0%,#061e2a21 24%,transparent 48%,#06192f15 73%,#071a2ddc 100%),
+    linear-gradient(180deg,#041627bd 0%,transparent 26%,#061b2670 93%),
+    url('assets/ocean-port-ponton.webp') center 52% / cover no-repeat,
+    #0d536b;
+}
+/* Suppression de la planche CSS rejetée après essai V1.3.4. */
+.v135-menu .v134-pier, .v135-menu .v134-pier-trim,
+.v135-menu .v134-pier-post{display:none!important}
+.v135-menu .v133-scene { isolation:isolate;overflow:visible; }
+.v135-menu .v133-scene-glow {bottom:10%;height:55%;opacity:.8}
+.v135-menu .v133-stage-shadow {
+  z-index:1;bottom:8px;width:40%;height:16px;
+  background:#26170dba;filter:blur(8px)
+}
+.v135-menu .v135-chibi {
+  z-index:3;object-fit:contain;object-position:bottom;
+  filter:drop-shadow(0 2px 0 #0b1b22c2) drop-shadow(0 14px 15px #00121ca6)!important;
+  animation:v133-chibi-idle 4.6s ease-in-out infinite
+}
+.v135-menu .v134-appearance-tag {
+  z-index:5;bottom:48px;right:6%;background:#082b36de;
+  font-size:12px;border-radius:8px
+}
+.v135-menu .v133-scene-ribbon {
+  bottom:-1px;box-shadow:0 4px 15px #00111bd9;
+}
+.v135-menu .v133-port-badge,
+.v135-menu .v133-panel,
+.v135-menu .v133-slots,
+.v135-menu .v133-header {
+  border-color:#f4c576;
+  box-shadow:inset 0 0 0 2px #ecc07930,0 6px 18px #010e1b95;
+}
+.v135-menu .v133-header {
+  background:linear-gradient(165deg,#0b2438fa,#0c3450f4);
+  border-radius:10px
+}
+.v135-menu .v133-panel {
+  background:linear-gradient(152deg,#051c31f5,#0d3247f2);
+}
+.v135-menu .v133-panel-title {color:#ffe2ac}
+.v135-menu .v133-stat-line strong,
+.v135-menu .v133-slot-data strong {color:#ffe3a0}
+.v135-menu .v133-slot.selected{border-color:#ffe3a2}
+.v135-menu .v133-play {
+  border-color:#fff1b6;
+  background:linear-gradient(180deg,#fff0b2,#ffc85b 49%,#bd7824 98%);
+  box-shadow:inset 0 2px 0 #fffce3,0 5px 0 #70411f,0 14px 26px #03131ed1;
+}
+.v135-menu .v134-free-stage{
+  background:radial-gradient(ellipse,#0e324dbd,#092b425e 67%,transparent 100%);
+  border:1px dashed #fbe0a28c
+}
+.v135-menu .v134-free-silhouette {border-style:solid;border-color:#e9bd6eaa}
+.v135-menu .v133-footer button {border-color:#e0bb72}
+/* Les quatre cases et les contrôles restent utilisables au tactile. */
+@media(max-width:720px){
+  .v135-menu{
+    background:
+      linear-gradient(90deg,#062234c9,transparent 30%,transparent 75%,#072337b2),
+      linear-gradient(180deg,#081a2acc,transparent 36%,#051b308b 95%),
+      url('assets/ocean-port-ponton.webp') center 48% / cover no-repeat,#0d536b;
+  }
+  .v135-menu .v134-appearance-tag{right:2%;bottom:42px;font-size:11px}
+  .v135-menu .v133-slot{min-height:70px}
+  .v135-menu .v133-footer button{min-height:44px}
+  .v135-menu .v133-play{min-height:72px}
+  .v135-menu .v133-topnav button{min-height:55px}
+}
+@media(min-width:721px) and (max-height:950px){
+  .v135-menu{gap:7px;padding-bottom:50px}
+  .v135-menu .v133-layout{min-height:380px}
+  .v135-menu .v133-center{min-height:390px;height:min(54vh,495px)}
+  .v135-menu .v133-slots{padding:9px 13px}
+}
+@media(prefers-reduced-motion:reduce){.v135-menu .v135-chibi{animation:none}}
+/* Dernière mise au point : personnage posé sur le ponton (pas de lévitation). */
+@media(min-width:721px){
+  .v135-menu .v135-chibi{animation:none;transform:scale(1.11);transform-origin:50% 96%}
+}
+@media(max-width:720px){
+  .v135-menu{gap:7px;padding-bottom:64px}
+  .v135-menu .v133-center{padding-top:46px}
+  .v135-menu .v133-scene{height:min(33vh,285px);max-height:285px;min-height:220px}
+  .v135-menu .v135-chibi{animation:none;height:min(33vh,285px);max-height:285px;width:auto}
+  .v135-menu .v133-slot{min-height:60px}
+  .v135-menu .v133-slots{padding:8px}
+  .v135-menu .v133-footer{margin-top:0}
+  .v135-menu .v133-footer>span{display:none}
+  .v135-menu .v133-footer button[data-lobby-updates]{display:none}
+  .v135-menu .v133-footer button[data-action="lobby-import"]{min-height:42px}
+}

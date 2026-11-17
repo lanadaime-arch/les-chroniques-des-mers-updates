@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="inventory">
+<defs>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff6c6"/><stop offset=".34" stop-color="#e9ba60"/><stop offset=".62" stop-color="#fbdc86"/><stop offset="1" stop-color="#875019"/></linearGradient>
+  <linearGradient id="steel" x1=".1" y1="0" x2=".9" y2="1"><stop stop-color="#ffffff"/><stop offset=".38" stop-color="#bceaf0"/><stop offset=".74" stop-color="#6a98af"/><stop offset="1" stop-color="#edf9fa"/></linearGradient>
+  <linearGradient id="leather" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b26c31"/><stop offset=".5" stop-color="#7e421f"/><stop offset="1" stop-color="#3e271b"/></linearGradient>
+  <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3c6"/><stop offset=".7" stop-color="#eec77a"/><stop offset="1" stop-color="#ba8346"/></linearGradient>
+  <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d1fbff"/><stop offset=".5" stop-color="#52c5e9"/><stop offset="1" stop-color="#11678a"/></linearGradient>
+  <radialGradient id="medal" cx=".37" cy=".26" r=".76"><stop stop-color="#2b7393"/><stop offset=".56" stop-color="#0a3757"/><stop offset="1" stop-color="#05172c"/></radialGradient>
+  <filter id="shade" x="-40%" y="-40%" width="180%" height="190%"><feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#000a15" flood-opacity=".75"/></filter>
+</defs>
+<circle cx="48" cy="48" r="45" fill="url(#medal)" stroke="#201b20" stroke-width="3"/>
+<circle cx="48" cy="48" r="41" fill="none" stroke="url(#gold)" stroke-width="4"/>
+<circle cx="48" cy="48" r="35" fill="none" stroke="#fbdc9e" stroke-width="1" opacity=".5"/>
+<g filter="url(#shade)">
+ <path d="M34 23q14-16 29 0v12H54V27q-7-7-12 0v9h-8z" fill="#6c3c24" stroke="url(#gold)" stroke-width="3"/>
+ <path d="M22 33h54l5 43q-27 13-61 0z" fill="url(#leather)" stroke="url(#gold)" stroke-width="3" stroke-linejoin="round"/>
+ <path d="M20 33q25 10 58 0l-7 24q-20 11-44 0z" fill="#b5793b" stroke="#58331c" stroke-width="3"/>
+ <path d="M47 34v36m-19 4q24 6 45-1" stroke="#e3a865" stroke-width="3" fill="none" opacity=".9"/>
+ <rect x="42" y="46" width="15" height="17" rx="3" fill="url(#gold)" stroke="#583723" stroke-width="2"/>
+ <path d="M47 53h6v5h-6z" fill="#5c3521"/>
+ <circle cx="30" cy="64" r="2" fill="#ffdea2"/><circle cx="69" cy="64" r="2" fill="#ffdea2"/>
+ </g>
+</svg>
