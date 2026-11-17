@@ -73,3 +73,82 @@ test('service workers ne suppriment pas les caches des autres versions',()=>{
  assert.ok(rootSw.includes("k.startsWith('chroniques-mers-root-')"));
  assert.ok(!rootSw.includes("keys.filter(k => k !== CACHE)"));
 });
+
+test('installation et retour arriere sauvegardent les profils avec le meme domaine',async()=>{
+ const origin='https://lanadaime-arch.github.io';
+ const base=origin+'/les-chroniques-des-mers-updates/';
+ const local=new Map([
+   ['chroniques_mers_profiles_v1','{"schema":1,"selected":0,"slots":[{"name":"Test"}]}'],
+   ['chroniques_mers_solo_v1','{"name":"Ancien"}']
+ ]);
+ const activeKey='chroniques_mers_active_web_version_v1';
+ const backupKey='chroniques_mers_pre_update_backup_v1';
+ const records=[];
+ const cacheMap=new Map();
+ const caches={
+   async delete(name){return cacheMap.delete(name);},
+   async open(name){
+     if(!cacheMap.has(name))cacheMap.set(name,new Map());
+     const entries=cacheMap.get(name);
+     return {
+       async put(url,response){entries.set(String(url),response);},
+       async keys(){return [...entries.keys()];},
+       async match(url){return entries.get(String(url));}
+     };
+   }
+ };
+ function fakeElement(){
+  return {id:'',hidden:false,textContent:'',children:[],dataset:{},disabled:false,
+   classList:{toggle(){}},handlers:{},setAttribute(){},focus(){},append(...items){this.children.push(...items);},
+   replaceChildren(...items){this.children=items;},addEventListener(type,handler){this.handlers[type]=handler;}
+  };
+ }
+ function start(pathname){
+   const elements=new Map();
+   const doc={
+     readyState:'complete',currentScript:{src:base+'update-manager.js'},
+     body:{append(...items){for(const item of items)if(item.id)elements.set(item.id,item);}},
+     createElement(){return fakeElement();},
+     getElementById(id){if(!elements.has(id))elements.set(id,fakeElement());return elements.get(id);},
+     addEventListener(){}
+   };
+   const nav=[];
+   const location={origin,pathname,assign(url){nav.push(url);},replace(url){nav.push(url);}};
+   const fetch=async(url,options={})=>{
+     if(String(url).endsWith('game-versions.json'))return {ok:true,async json(){return manifest;}};
+     const mime=/\.(?:js|css)$/.test(String(url))?'text/javascript':'text/plain';
+     return {ok:true,type:'basic',headers:{get(){return mime;}}};
+   };
+   const sandbox={document:doc,location,window:{caches},caches,localStorage:{
+     getItem(key){return local.has(key)?local.get(key):null;},
+     setItem(key,value){local.set(key,String(value));},
+     removeItem(key){local.delete(key);}
+   },URL,fetch,Date,Set,Map,Error,console};
+   vm.runInNewContext(read('update-manager.js'),sandbox);
+   return {elements,nav};
+ }
+ const original=local.get('chroniques_mers_profiles_v1');
+ const first=start('/les-chroniques-des-mers-updates/');
+ first.elements.get('chroniques-updates-button').handlers.click();
+ await new Promise(resolve=>setImmediate(resolve));
+ const items=first.elements.get('chroniques-update-list').children;
+ assert.equal(items.length,2);
+ const install=items[1].children[1];
+ assert.equal(install.dataset.installVersion,'1.2.2');
+ await install.handlers.click();
+ assert.ok(first.nav[0].endsWith('/versions/v1.2.2/index.html'));
+ assert.equal(local.get(activeKey),'1.2.2');
+ assert.equal(JSON.parse(local.get(backupKey)).values.chroniques_mers_profiles_v1,original);
+ assert.equal(local.get('chroniques_mers_profiles_v1'),original);
+ const latest=start('/les-chroniques-des-mers-updates/versions/v1.2.2/index.html');
+ latest.elements.get('chroniques-updates-button').handlers.click();
+ await new Promise(resolve=>setImmediate(resolve));
+ const rollback=latest.elements.get('chroniques-update-list').children[0].children[1];
+ await rollback.handlers.click();
+ assert.ok(latest.nav[0].endsWith('/versions/v1.2.1/index.html'));
+ assert.equal(local.get(activeKey),'1.2.1');
+ assert.equal(local.get('chroniques_mers_profiles_v1'),original);
+ assert.equal(JSON.parse(local.get(backupKey)).values.chroniques_mers_profiles_v1,original);
+ assert.ok(cacheMap.has('chroniques-web-versions-1.2.2'));
+ assert.ok(cacheMap.has('chroniques-web-versions-1.2.1'));
+});
