@@ -1,0 +1,292 @@
+/* Les Chroniques des Mers V1.4.2 — finition des vrais contrôles du menu Fuchsia.
+   Priorité PC 1440×900. Aucun élément interactif remplacé par une image. */
+.v142-menu{--gold:#fbe0a2;--brass:#b97d35;--ink:#071c33;--copper:#5c321e}
+.v142-menu .v133-header,.v142-menu .v133-panel,.v142-menu .v133-slots{
+  border:2px solid #f7cb77;border-radius:13px;
+  background:radial-gradient(ellipse at 17% -15%,#4b83a04b,transparent 65%),
+    radial-gradient(ellipse at 95% 105%,#1c52717f,transparent 56%),
+    repeating-linear-gradient(19deg,transparent 0 21px,#fad49b06 23px 24px),
+    linear-gradient(160deg,#0a2c4cf8,#041b35fc 65%,#092c4bfa);
+  box-shadow:inset 0 0 0 2px #613518,inset 0 0 0 4px #e6ad568e,
+    inset 0 0 0 6px #392318b0,inset 0 2px 4px #fff0ba49,
+    0 3px 0 #5a2e1c,0 9px 20px #000b;
+}
+.v142-menu .v133-header::before,.v142-menu .v133-panel::before,.v142-menu .v133-slots::before{
+  pointer-events:none;
+  background:radial-gradient(circle at 9px 9px,#fff3ba 0 2px,#935822 3px 4px,transparent 5px),
+    radial-gradient(circle at calc(100% - 9px) 9px,#fff3ba 0 2px,#935822 3px 4px,transparent 5px),
+    radial-gradient(circle at 9px calc(100% - 9px),#fff3ba 0 2px,#935822 3px 4px,transparent 5px),
+    radial-gradient(circle at calc(100% - 9px) calc(100% - 9px),#fff3ba 0 2px,#935822 3px 4px,transparent 5px);
+}
+.v142-menu .v133-panel::after,.v142-menu .v133-slots::after{
+  content:'❧';position:absolute;right:8px;bottom:4px;
+  font:900 18px Georgia,serif;color:#efc17b8c;
+  text-shadow:0 1px #382416;pointer-events:none;
+}
+.v142-menu .v133-header{
+  min-height:75px;padding:5px 16px;
+  background:radial-gradient(ellipse at 55% -15%,#43799360,transparent 65%),
+    linear-gradient(180deg,#123c58,#041a34 68%,#0c2d4b);
+}
+.v142-menu .v133-header::after{height:3px;bottom:1px;
+  background:linear-gradient(90deg,#95601f,#ffe4a0,#a8702e,#ffedab,#a56c2a);
+  box-shadow:0 1px 7px #ffd58a62;
+}
+.v142-menu .v133-brand{
+  flex:1 0 270px;max-width:30%;min-width:252px;
+  position:relative;border-right:1px solid #ffd58d4c;
+  padding:0 13px 0 2px;
+}
+.v142-menu .v133-brand-icon{
+  width:57px;height:57px;flex-basis:57px;
+  border:3px solid #ffe5a7;border-radius:50%;
+  background:radial-gradient(circle at 35% 23%,#36768d,#0a2a49 69%,#061627);
+  box-shadow:inset 0 0 0 2px #a46929,inset 0 0 0 4px #ffe7a475,
+    0 0 0 2px #865324,0 4px 0 #3c2419,0 0 16px #ffc5687c;
+}
+.v142-menu .v133-brand small{color:#ffe3a0;letter-spacing:.19em;text-shadow:0 2px 2px #000}
+.v142-menu .v133-brand strong{
+  font:italic 900 clamp(22px,2.2vw,35px)/.88 Georgia,serif;
+  letter-spacing:.008em;color:#fff8df;
+  text-shadow:1px 2px #824b1c,0 4px 7px #000d;
+}
+.v142-menu .v133-brand em{color:#ffca6b;text-shadow:0 2px #583012,0 4px 7px #000a}
+.v142-menu .v133-topnav{align-self:stretch;gap:4px}
+.v142-menu .v133-topnav button{
+  position:relative;min-height:60px;gap:4px;
+  color:#fff1d0;font-size:clamp(11px,.98vw,14px);
+  background:linear-gradient(#396b8224,transparent);
+}
+.v142-menu .v133-topnav button+button::before{
+  content:'';position:absolute;top:15%;bottom:15%;left:-3px;width:1px;
+  background:linear-gradient(transparent,#eab768a8,#f7dfa085,#98602b83,transparent);
+  pointer-events:none;
+}
+.v142-menu .v133-topnav button.selected,.v142-menu .v133-topnav button:hover{
+  transform:translateY(-1px);border:2px solid #fce19e;color:#fff7dc;
+  background:radial-gradient(ellipse at 50% 0%,#ffdb9e6a,transparent 58%),
+    linear-gradient(#5f3f25,#133d58 44%,#061e39);
+  box-shadow:inset 0 0 0 2px #a06d2c,
+    inset 0 1px 5px #fff4cd8b,0 0 17px #ffd58876;
+}
+.v142-menu .v133-topnav button.selected::after{
+  content:'✦';bottom:-7px;left:50%;right:auto;width:18px;height:18px;
+  transform:translateX(-50%);background:#593218;
+  border:1px solid #f9cc7e;border-radius:50%;text-align:center;
+  font:700 12px/17px Georgia,serif;color:#fff1bd;
+  box-shadow:0 0 8px #ffd37f;
+}
+.v142-menu .v133-topnav button .v136-glyph{
+  width:29px;height:29px;
+  filter:drop-shadow(0 2px 0 #59371a) drop-shadow(0 0 5px #ffdc8a60);
+}
+.v142-menu .v133-version{
+  border:2px solid #f4d48c;border-radius:19px;padding:7px 11px;
+  background:linear-gradient(#664322,#103954 45%,#06182d);
+  box-shadow:inset 0 0 0 2px #a36c2c,0 2px 6px #0009;
+  color:#fff1ca;
+}
+/* Main panel headers are long engraved wooden plaques, not short CSS tabs. */
+.v142-menu .v133-panel{padding-top:13px}
+.v142-menu .v133-panel-title{
+  min-width:88%;max-width:calc(100% + 1px);min-height:35px;
+  margin:-15px 0 12px -13px;padding:4px 22px 5px 11px;
+  position:relative;border:2px solid #f8cf83;border-radius:12px 21px 8px 19px;
+  background:radial-gradient(ellipse at 40% 0%,#d39d5b65,transparent 65%),
+    repeating-linear-gradient(1deg,transparent 0 8px,#17100b77 9px 10px),
+    linear-gradient(180deg,#9b6734,#633b25 31%,#2b1b19 61%,#8f602f);
+  box-shadow:inset 0 1px 0 #fff0baa9,inset 0 0 0 2px #3f241c,
+    inset 0 -3px 3px #1a100eaa,0 3px 0 #56301c,0 6px 10px #0009;
+  font:800 clamp(17px,1.42vw,22px)/1.07 Georgia,serif;
+  color:#fff4d8;text-shadow:0 2px 2px #231411;
+}
+.v142-menu .v133-panel-title::before{
+  content:'';inset:5px;position:absolute;border:1px solid #ffe1a16e;
+  border-radius:9px 15px 5px 14px;pointer-events:none;
+}
+.v142-menu .v133-panel-title::after{
+  content:'❧';position:static;margin-left:auto;padding:0;
+  font:800 21px Georgia,serif;color:#ffe1a0;text-shadow:0 2px 2px #362113;
+  background:none;border:0;
+}
+.v142-menu .v133-panel-title .v136-glyph{
+  width:25px;height:25px;filter:drop-shadow(0 2px 1px #4a291a);
+}
+.v142-menu .v133-profile-line strong{font-size:clamp(16px,1.45vw,22px)}
+.v142-menu .v133-portrait{
+  width:61px;height:61px;flex-basis:61px;border:3px solid #ffe4a3;
+  background:radial-gradient(circle at 35% 23%,#5eabc3,#0a3450 75%);
+  box-shadow:0 0 0 3px #7e451f,0 0 0 5px #e9bf7c65,0 5px 10px #0009;
+}
+.v142-menu .v133-stat-line{border-color:#e9c2855f}
+.v142-menu .v133-followed-name{color:#ffe28c}
+.v142-menu .v133-xp-bar{border-color:#efca89;box-shadow:inset 0 2px 5px #000d}
+/* Nautical wood and brass place plaque. */
+.v142-menu .v133-port-badge{
+  border:3px solid #ffe5a1;border-radius:21px 10px 21px 10px;
+  padding:10px 26px;min-width:260px;
+  background:radial-gradient(ellipse at 50% 0%,#ab723e9b,transparent 80%),
+    linear-gradient(#764420,#42261c 30%,#0b2944 76%,#50311d);
+  box-shadow:inset 0 0 0 2px #5e351e,inset 0 0 0 5px #f4c57591,
+    0 4px 0 #432619,0 9px 16px #000b;
+}
+.v142-menu .v133-port-badge::before,.v142-menu .v133-port-badge::after{
+  content:'⚓';position:absolute;top:50%;left:-16px;
+  transform:translateY(-50%);width:30px;height:30px;
+  display:grid;place-items:center;color:#ffe3a4;font:800 20px Georgia,serif;
+  border:2px solid #fbd594;border-radius:50%;background:linear-gradient(#694323,#09243c);
+  box-shadow:0 3px 5px #0008;
+}
+.v142-menu .v133-port-badge::after{left:auto;right:-16px;transform:translateY(-50%)}
+.v142-menu .v140-region-label{
+  border:2px solid #f7cf89;background:linear-gradient(#145c75,#041c32);
+  box-shadow:inset 0 0 0 2px #9d622f,0 3px 5px #000a;
+}
+/* Ground Kisuke on the wood; improved local motion, never global image wobble. */
+.v142-menu .v133-stage-shadow{
+  bottom:6px;width:min(44%,174px);height:21px;
+  background:radial-gradient(ellipse,#051525e8 0%,#25190c88 48%,transparent 77%);
+  filter:blur(4px);box-shadow:0 1px 9px #081a2bb0;
+}
+.v142-menu .v141-rig-stage{
+  width:min(80%,302px);margin-bottom:13px;max-height:100%;
+  transform:scale(1.055);transform-origin:50% 95%;
+  filter:drop-shadow(0 2px 1px #46301b9c)
+    drop-shadow(0 9px 7px #061b29b0) drop-shadow(0 13px 8px #02121dc2);
+}
+.v142-menu .v141-rig-stage .v141-rig-breath{animation:cdm-breath-142 3.35s ease-in-out infinite}
+.v142-menu .v141-rig-stage .v141-rig-head{animation:cdm-head-142 4.25s ease-in-out infinite}
+.v142-menu .v141-rig-stage .v141-rig-cape-left{animation:cdm-cape-left-142 3.7s ease-in-out infinite}
+.v142-menu .v141-rig-stage .v141-rig-cape-right{animation:cdm-cape-right-142 4.15s ease-in-out infinite}
+@keyframes cdm-breath-142{0%,100%{transform:scale(1,1)}50%{transform:scale(1.016,1.029)}}
+@keyframes cdm-head-142{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1.9deg) translateY(-1px)}}
+@keyframes cdm-cape-left-142{0%,100%{transform:rotate(-1.7deg)}50%{transform:rotate(3.3deg)}}
+@keyframes cdm-cape-right-142{0%,100%{transform:rotate(1.5deg)}50%{transform:rotate(-3.2deg)}}
+/* Main red enamel button, carved border and blue scrollwork. */
+.v142-menu .v133-main-action{width:min(460px,96%);margin-top:8px}
+.v142-menu .v133-play{
+  isolation:isolate;position:relative;min-height:84px;padding:10px 17px;
+  border:4px solid #ffe29e;border-radius:14px 24px 14px 24px;
+  background:radial-gradient(ellipse at 50% 0%,#ffad5b71,transparent 58%),
+    linear-gradient(#ca4931,#8b281e 37%,#61161a 77%,#a33224);
+  box-shadow:inset 0 0 0 2px #71331a,inset 0 0 0 5px #f3c477,
+    inset 0 3px 5px #fff4bf73,inset 0 -8px 11px #370c13b5,
+    0 4px 0 #704019,0 7px 0 #2e1e17,0 15px 24px #000a;
+  color:#fff5d5;
+}
+.v142-menu .v133-play::before,.v142-menu .v133-play::after{
+  content:'❧';position:absolute;left:-30px;top:49%;
+  transform:translateY(-50%) rotate(-16deg);
+  font:900 58px/.8 Georgia,serif;color:#26a8d5;
+  text-shadow:-2px 0 #064875,2px 2px #d8f9ff,0 4px #051e3c;
+  pointer-events:none;
+}
+.v142-menu .v133-play::after{left:auto;right:-30px;transform:translateY(-50%) scaleX(-1) rotate(-16deg)}
+.v142-menu .v133-play strong{
+  font:900 clamp(32px,3vw,47px)/.98 Georgia,serif;
+  letter-spacing:.09em;color:#fff5d7;
+  text-shadow:0 2px #793b1c,1px 4px #481e16,0 5px 7px #000a;
+}
+.v142-menu .v133-play>span .v136-glyph{width:27px;height:27px}
+.v142-menu .v133-play small{font:800 11px/1.12 Georgia,serif;color:#fff0c4}
+.v142-menu .v133-play:hover{
+  transform:translateY(-2px);filter:brightness(1.1);
+  box-shadow:inset 0 0 0 2px #9c5828,inset 0 0 0 5px #ffe09d,
+    0 5px 0 #674019,0 0 24px #ffdd8b8c;
+}
+/* Rich engraved shortcut tiles and preserved keyboard focus. */
+.v142-menu .v133-quick-grid button{
+  min-height:71px;border:2px solid #f6cb81;border-radius:11px 6px 11px 6px;
+  background:radial-gradient(ellipse at 45% 0%,#3380a15c,transparent 75%),
+    linear-gradient(160deg,#174465,#051d38 75%,#0c3254);
+  box-shadow:inset 0 0 0 2px #875326,inset 0 0 0 4px #ffde9856,
+    0 3px 0 #35221b,0 4px 9px #0007;
+}
+.v142-menu .v133-quick-grid button::before{
+  border-color:#ffe7a05b;
+  background:radial-gradient(circle at 4px 4px,#fbd78c 0 2px,transparent 2.5px),
+    radial-gradient(circle at calc(100% - 4px) calc(100% - 4px),#fbd78c 0 2px,transparent 2.5px);
+}
+.v142-menu .v133-quick-grid button .v136-glyph{
+  width:33px;height:33px;
+  filter:drop-shadow(0 2px 1px #321a0a) drop-shadow(0 0 5px #e9b75b69);
+}
+.v142-menu .v133-quick-grid button:hover{
+  transform:translateY(-2px);border-color:#ffecb1;
+  background:linear-gradient(#246083,#09314e);
+  box-shadow:inset 0 0 0 2px #d9a45b,0 0 15px #ffd3917e;
+}
+.v142-menu .v133-play:focus-visible,.v142-menu .v133-slot:focus-visible,
+.v142-menu .v133-topnav button:focus-visible,.v142-menu .v133-quick-grid button:focus-visible{
+  outline:3px solid #fef1c1;outline-offset:3px;
+}
+/* Bottom four save cards remain independent buttons. */
+.v142-menu .v133-slots{padding:9px 13px 11px}
+.v142-menu .v133-slots-title h2{
+  font-size:clamp(19px,1.6vw,24px);text-shadow:0 2px #4c2a16;color:#fff2d2;
+}
+.v142-menu .v133-new-slot{
+  border:2px solid #f8cf82;
+  background:linear-gradient(#6a451f,#103952 60%,#061a32);
+  box-shadow:inset 0 0 0 2px #c28e44,0 3px 5px #0008;
+}
+.v142-menu .v133-slot{
+  min-height:65px;border:2px solid #e6b773;border-radius:11px 6px 11px 6px;
+  background:linear-gradient(160deg,#205578,#0b3453 50%,#041b33);
+  box-shadow:inset 0 0 0 2px #815021,inset 0 0 0 4px #f9d7954b,0 3px 0 #221b21;
+}
+.v142-menu .v133-slot.selected{
+  border-color:#ffecb3;background:linear-gradient(#2d7490,#123b5b 62%,#051b33);
+  box-shadow:inset 0 0 0 2px #b98037,inset 0 0 0 4px #ffe8a86b,
+    0 0 14px #f7ca747b;
+}
+.v142-menu .v133-slot-face{
+  border:2px solid #f5d48e;box-shadow:0 0 0 1px #6f481e,0 3px 6px #0008;
+}
+.v142-menu .v133-footer button{border:2px solid #eabe71;color:#fff4da}
+/* PC short screens and narrow monitors: no lower menu collisions. */
+@media(min-width:721px) and (max-height:940px){
+  .v142-menu .v133-header{min-height:69px;padding:4px 12px}
+  .v142-menu .v133-brand-icon{width:51px;height:51px;flex-basis:51px}
+  .v142-menu .v133-brand strong{font-size:clamp(20px,1.9vw,29px)}
+  .v142-menu .v133-topnav button{min-height:53px}
+  .v142-menu .v133-topnav button .v136-glyph{width:25px;height:25px}
+  .v142-menu .v133-panel-title{min-height:29px;margin-top:-14px;margin-bottom:7px;
+    padding:3px 18px 4px 10px;font-size:clamp(16px,1.3vw,19px)}
+  .v142-menu .v133-portrait{width:55px;height:55px;flex-basis:55px}
+  .v142-menu .v133-quick-grid button{min-height:61px}
+  .v142-menu .v133-quick-grid button .v136-glyph{width:28px;height:28px}
+  .v142-menu .v133-play{min-height:74px}
+  .v142-menu .v133-slot{min-height:59px}
+  .v142-menu .v133-slots{padding-top:8px;padding-bottom:9px}
+}
+@media(min-width:721px) and (max-width:1200px){
+  .v142-menu .v133-brand{flex-basis:205px;min-width:170px;max-width:42%}
+  .v142-menu .v133-panel-title{min-width:80%;margin-left:-9px;padding-right:12px}
+  .v142-menu .v133-main-action{width:min(410px,93%)}
+  .v142-menu .v133-play strong{font-size:clamp(26px,3.7vw,41px)}
+}
+@media(max-width:720px){
+  .v142-menu .v133-header{min-height:0;padding:7px 8px;border-radius:9px;overflow:hidden}
+  .v142-menu .v133-brand{min-width:0;max-width:none;flex:1 1 auto;padding:0;border:0}
+  .v142-menu .v133-brand-icon{width:40px;height:40px;flex-basis:40px;border-width:2px}
+  .v142-menu .v133-brand strong{font-size:clamp(18px,4.7vw,23px)}
+  .v142-menu .v133-topnav button{min-width:78px;min-height:47px;font-size:10px}
+  .v142-menu .v133-topnav button .v136-glyph{width:20px;height:20px}
+  .v142-menu .v133-port-badge{min-width:0;max-width:95%;font-size:clamp(18px,5vw,22px);padding:7px 12px}
+  .v142-menu .v133-port-badge::before,.v142-menu .v133-port-badge::after{display:none}
+  .v142-menu .v141-rig-stage{width:auto;height:min(29vh,230px);max-height:230px;
+    margin-bottom:30px;transform:scale(1.02)}
+  .v142-menu .v133-main-action{width:min(350px,88%)}
+  .v142-menu .v133-play{min-height:68px;padding:8px 9px;border-width:3px;border-radius:15px}
+  .v142-menu .v133-play strong{font-size:clamp(24px,6.2vw,31px)}
+  .v142-menu .v133-play::before{left:-24px;font-size:44px}
+  .v142-menu .v133-play::after{right:-24px;font-size:44px}
+  .v142-menu .v133-slots{padding:7px;border-radius:9px}
+  .v142-menu .v133-slot{min-height:60px;padding:5px}
+}
+@media(prefers-reduced-motion:reduce){
+  .v142-menu .v141-rig-stage *,
+  .v142-menu .v133-play,.v142-menu .v133-topnav button,
+  .v142-menu .v133-quick-grid button {animation:none!important;transition:none!important}
+}

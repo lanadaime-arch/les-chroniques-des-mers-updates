@@ -1,0 +1,136 @@
+/* Chroniques des Mers — HUD V0.9, original, offline, responsive */
+:root{--hud-gold:#efcb88;--hud-ink:#081b2b}
+.play-stage .v09-hud{isolation:isolate}
+.play-stage .v09-hud .scene-window{z-index:0}
+.play-stage .hud-upper{position:absolute;z-index:9;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;padding:max(11px,env(safe-area-inset-top)) 12px 0;background:linear-gradient(180deg,#031423db,transparent);min-height:124px}
+.hud-upper button{font:inherit}
+.hud-profile{pointer-events:auto;display:flex;align-items:center;gap:8px;width:min(53vw,252px);min-width:0;padding:6px;min-height:70px;background:linear-gradient(120deg,#071a2bf6,#103b4de5 65%,#061a2bdd);border:2px ridge #c19b63;border-radius:10px;box-shadow:0 3px 0 #40301c,0 8px 24px #000a,inset 0 0 0 2px #ffe8a912;color:#fff3d2;text-align:left}
+.hud-profile:focus-visible,.hud-map:focus-visible,.hud-action:focus-visible,.hud-quick button:focus-visible{outline:3px solid #fff4bf;outline-offset:2px}
+.hud-portrait{flex:0 0 55px;width:55px;height:59px;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 50% 28%,#508995,#0c273b 76%);border:2px solid #d6b075;border-radius:7px;box-shadow:inset 0 -4px 10px #0005}
+.hud-bust{height:100%;width:100%;overflow:visible}
+.hud-id{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.hud-id-row{display:flex;justify-content:space-between;gap:5px;align-items:baseline;white-space:nowrap}
+.hud-id-row strong{font:bold 13px Georgia,serif;overflow:hidden;text-overflow:ellipsis;color:#ffe3a7}
+.hud-id-row>span{font-size:9px;flex-shrink:0;color:#dac9af}
+.hud-meter{height:12px;position:relative;border:1px solid #776b5f;border-radius:5px;background:#061828;overflow:hidden;box-shadow:inset 0 2px 2px #000b}
+.hud-meter i{display:block;height:100%;border-radius:5px;background:linear-gradient(#ffa49c,#bc3847 58%,#8b203b);box-shadow:inset 0 2px #fff4}
+.hud-meter.energy i{background:linear-gradient(#9ae2fa,#288cbd 60%,#1c618f)}
+.hud-meter em{position:absolute;inset:0;text-align:center;color:white;font:800 8px/11px system-ui;text-shadow:0 1px 2px #000;pointer-events:none}
+.hud-xp{height:4px;border-radius:7px;background:#324455;overflow:hidden}
+.hud-xp i{display:block;height:100%;background:linear-gradient(90deg,#c1a7ed,#fce29a)}
+.hud-location{position:absolute;top:calc(max(11px,env(safe-area-inset-top)) + 86px);left:14px;max-width:180px;display:flex;flex-direction:column;gap:2px;text-shadow:0 2px 5px #000c}
+.hud-location span{font-size:9px;letter-spacing:.06em;color:#f0d1a5}
+.hud-location strong{font:bold 16px Georgia,serif;color:#fff1cb}
+.hud-map-wrap{pointer-events:auto;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.hud-map{width:129px;height:105px;position:relative;padding:4px;display:block;overflow:hidden;border:2px ridge #e6c18a;border-radius:10px;background:#072637;box-shadow:0 3px 0 #4b3727,0 6px 21px #000b;color:#ffe7af}
+.hud-map canvas{width:100%;height:100%;display:block;image-rendering:pixelated;border-radius:6px}
+.hud-map:after{content:'✧';position:absolute;right:7px;top:4px;color:#ffe4a6;text-shadow:0 1px 5px #000}
+.hud-map-label{position:absolute;bottom:2px;left:4px;right:4px;text-align:center;font-size:8px;font-weight:900;letter-spacing:.17em;background:#071c2bc9}
+.hud-money{display:flex;align-items:center;gap:6px;padding:3px 9px;background:#081f32e8;border:1px solid #bd9769;border-radius:22px;color:#ffe2a1;font:bold 12px system-ui;box-shadow:0 3px 12px #0008}
+.hud-money span{width:18px;height:18px;display:grid;place-items:center;border-radius:50%;background:#d8af55;color:#4c3424;border:1px solid #fee6ac}
+.play-stage .v09-hud .scene-prompt{top:calc(max(11px,env(safe-area-inset-top)) + 137px);max-width:51%;padding:6px 10px;font-size:10px;left:42%;background:#071d2bda;border:1px solid #bd9a73aa}
+.play-stage .v09-hud .scene-camera-tools{top:calc(max(11px,env(safe-area-inset-top)) + 157px);right:10px;gap:4px;z-index:9}
+.play-stage .v09-hud .scene-camera-tools button{width:38px;height:38px;min-width:38px;min-height:38px;font-size:20px;border:1px solid #bf9e72;border-radius:8px;background:linear-gradient(150deg,#1b4356,#081e31);box-shadow:0 3px 8px #0008}
+.play-stage .v09-hud #scene-zoom-label{border-radius:5px;padding:2px;background:#092136ce;color:#ffebca;font-size:10px}
+.play-stage .v09-hud .scene-camera-tools .scene-recenter{font-size:18px}
+.play-stage .v09-hud .scene-camera-tools .scene-recenter span{font-size:8px}
+.play-stage .hud-quick{position:absolute;z-index:8;right:10px;top:55%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px;pointer-events:auto}
+.hud-quick button{width:49px;min-height:49px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:3px 2px;border-radius:9px;border:1px solid #cea771;background:linear-gradient(160deg,#245168ea,#082337ed);color:#ffe6bb;box-shadow:inset 0 2px #ffdc9922,0 4px 12px #000a;cursor:pointer}
+.hud-quick-icon{display:block;font-size:23px;line-height:25px;filter:drop-shadow(0 2px 2px #0009)}
+.hud-quick small{font-size:8px;color:#ffe1aa;font-weight:750;line-height:12px}
+.hud-quick button:active,.hud-action:active{transform:translateY(2px);filter:brightness(1.15)}
+.play-stage .v09-hud .scene-controls{bottom:calc(77px + env(safe-area-inset-bottom));padding:0 max(11px,env(safe-area-inset-left));z-index:7}
+.play-stage .v09-hud .scene-stick{width:120px;height:120px}
+.play-stage .v09-hud .scene-stick-ring{width:103px;height:103px;border:2px solid #f1d19f;background:radial-gradient(circle at 43% 30%,#4775838a,#061829ce 74%);box-shadow:inset 0 2px 14px #0009,0 5px 16px #0009}
+.play-stage .v09-hud .scene-stick-knob{width:54px;height:54px;border:2px solid #fff0c3;background:radial-gradient(circle at 30% 25%,#fff0c6,#b48f62)}
+.play-stage .v09-hud .scene-buttons{padding-right:54px;padding-bottom:4px}
+.play-stage .v09-hud .scene-button.interact{width:69px;height:69px;border:2px solid #ffe2ac;font-size:24px;background:radial-gradient(circle at 30% 20%,#75c8be,#0d6b85 75%);box-shadow:0 4px 0 #0a424b,0 9px 18px #0009}
+.play-stage .v09-hud .scene-button.interact span{font-size:10px}
+.play-stage .v09-hud .scene-toolbar{position:absolute;z-index:9;left:0;right:0;bottom:0;min-height:calc(79px + env(safe-area-inset-bottom));display:flex;justify-content:center;align-items:center;gap:12px;padding:7px 9px max(7px,env(safe-area-inset-bottom));border:0;border-top:3px double #d7af7b;border-radius:0;background:linear-gradient(180deg,#204f5de9,#0b2b3bee 45%,#041626ff);box-shadow:0 -6px 23px #000b,inset 0 2px #ffe5b422}
+.hud-dock-title{display:flex;flex-direction:column;gap:2px;align-items:center;font:800 9px system-ui;text-transform:uppercase;letter-spacing:.09em;color:#ead3a7}
+.hud-dock-title>span{font-size:20px}
+.hud-action-list{display:flex;align-items:center;justify-content:center;gap:9px}
+.hud-action{position:relative;min-width:0;width:65px;height:62px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1px;padding:3px;border:2px ridge #d4a876;border-radius:8px;color:#ffeccc;background:radial-gradient(circle at 30% 15%,#376176,#0a263a 70%);box-shadow:inset 0 1px #fff3d525,0 5px 10px #000a;cursor:pointer}
+.hud-action-icon{font-size:27px;line-height:30px;filter:drop-shadow(0 2px 2px #000a)}
+.hud-action span:last-of-type{font-size:9px;font-weight:900;text-shadow:0 1px 3px #000c}
+.hud-action.strike{background:radial-gradient(circle at 30% 20%,#b87058,#602940 76%)}
+.hud-action.cure{background:radial-gradient(circle at 30% 20%,#b25967,#54283e 76%)}
+.hud-action.tonic{background:radial-gradient(circle at 30% 20%,#4c94b4,#173853 76%)}
+.hud-action.rest{background:radial-gradient(circle at 30% 20%,#7776ae,#30324e 76%)}
+.hud-action em{position:absolute;right:-5px;top:-6px;border:1px solid #e6c88a;border-radius:15px;background:#0a2234;color:#f6d99b;padding:1px 5px;font:800 10px system-ui}
+.hud-action:disabled{opacity:.37;filter:grayscale(1);cursor:not-allowed}
+.hud-dock-sigil{font-size:26px;color:#dabf8480}
+/* Same style in combat; battle logic unchanged. */
+.play-stage .tactical-head{background:linear-gradient(180deg,#061d2cef,#0c2938ba,transparent);padding:13px 12px 18px}
+.play-stage .tactical-head h2{color:#ffe8b5;text-shadow:0 2px 4px #000}
+.play-stage .tactical-hud span{border:1px solid #d1ac77;border-radius:6px;background:#0b2a3ce9;color:#ffe8c1}
+.play-stage .tactical-message{border:1px solid #b79664;border-left:4px solid #edc78b;border-radius:6px;background:#061e31ee;box-shadow:0 4px 14px #0009}
+.play-stage .tactical-buttons{border-top:3px double #d8ac78;background:linear-gradient(180deg,#214557ef,#061c2ffb);gap:5px}
+.play-stage .tactical-buttons .tactic-btn{border:2px ridge #c4a274;border-radius:7px;background:linear-gradient(155deg,#35596b,#071f36 76%);box-shadow:inset 0 2px #fff3d01c,0 3px 9px #0008}
+.play-stage .tactical-buttons .tactic-btn.selected{border:2px solid #ffdf9f;background:linear-gradient(130deg,#577c84,#183b58);box-shadow:0 0 12px #ebca7b55}
+.play-stage .tactic-ready{background:linear-gradient(160deg,#ffe6a7,#c18538)!important;color:#092536!important}
+@media(max-width:600px){
+ .play-stage .v09-hud .hud-upper{padding:8px 8px 0}
+ .hud-profile{width:min(56vw,219px);min-height:64px;gap:5px;padding:4px}
+ .hud-portrait{width:48px;height:53px;flex-basis:48px}
+ .hud-id{gap:3px}
+ .hud-id-row strong{font-size:12px}.hud-id-row>span{font-size:8px}
+ .hud-meter{height:11px}
+ .hud-map{width:102px;height:88px;padding:3px}
+ .hud-money{font-size:10px;padding:2px 6px}
+ .hud-location{top:83px;left:9px}.hud-location strong{font-size:14px}
+ .play-stage .v09-hud .scene-prompt{top:138px;left:40%;max-width:53%;padding:5px 7px;font-size:9px}
+ .play-stage .v09-hud .scene-camera-tools{top:156px;right:9px;gap:3px}
+ .play-stage .v09-hud .scene-camera-tools button{width:35px;height:35px;min-width:35px;min-height:35px;font-size:18px}
+ .play-stage .v09-hud .hud-quick{right:9px;top:55%;gap:6px}
+ .hud-quick button{width:42px;min-height:43px}.hud-quick-icon{font-size:19px;line-height:21px}
+ .play-stage .v09-hud .scene-controls{bottom:calc(77px + env(safe-area-inset-bottom));padding:0 7px}
+ .play-stage .v09-hud .scene-stick{width:97px;height:97px}
+ .play-stage .v09-hud .scene-stick-ring{width:89px;height:89px}
+ .play-stage .v09-hud .scene-stick-knob{width:44px;height:44px}
+ .play-stage .v09-hud .scene-buttons{padding-right:48px;padding-bottom:0}
+ .play-stage .v09-hud .scene-button.interact{width:60px;height:60px;font-size:21px}
+ .play-stage .v09-hud .scene-toolbar{min-height:calc(74px + env(safe-area-inset-bottom));padding:5px 4px max(5px,env(safe-area-inset-bottom));gap:6px}
+ .hud-action-list{gap:6px}.hud-action{width:clamp(51px,14.5vw,62px);height:59px}
+ .hud-action-icon{font-size:25px}.hud-dock-sigil{display:none}
+ .hud-dock-title{font-size:8px}.hud-dock-title>span{font-size:16px}
+}
+@media(max-width:365px){
+ .hud-profile{width:58vw}.hud-portrait{width:41px;flex-basis:41px}
+ .hud-map{width:86px;height:78px}.hud-location{top:75px}
+ .play-stage .v09-hud .scene-camera-tools{top:138px}
+ .play-stage .v09-hud .scene-prompt{top:122px}
+ .hud-dock-title{display:none}.hud-action-list{gap:4px}.hud-action{width:52px;height:56px}
+}
+@media(orientation:landscape) and (max-height:550px){
+ .play-stage .v09-hud .hud-upper{padding:5px 12px 0}
+ .hud-profile{width:221px;min-height:51px;padding:3px 6px}
+ .hud-portrait{width:41px;height:45px;flex-basis:41px}
+ .hud-meter{height:9px}.hud-id-row strong{font-size:11px}
+ .hud-map{width:98px;height:65px}.hud-map-wrap{gap:2px}
+ .hud-money{font-size:9px;min-height:16px;padding:1px 5px}
+ .hud-location{top:62px;left:12px}.hud-location strong{font-size:12px}
+ .play-stage .v09-hud .scene-camera-tools{top:94px;right:8px;gap:2px}
+ .play-stage .v09-hud .scene-camera-tools button{width:32px;height:32px;min-width:32px;min-height:32px}
+ .play-stage .v09-hud .scene-prompt{top:66px;max-width:38%;left:47%}
+ .play-stage .v09-hud .scene-controls{bottom:61px;padding:0 11px}
+ .play-stage .v09-hud .scene-stick{width:81px;height:81px}
+ .play-stage .v09-hud .scene-stick-ring{width:73px;height:73px}
+ .play-stage .v09-hud .scene-stick-knob{width:38px;height:38px}
+ .play-stage .v09-hud .scene-buttons{padding-right:52px}
+ .play-stage .v09-hud .scene-button.interact{width:52px;height:52px}
+ .play-stage .v09-hud .hud-quick{right:8px;top:52%;gap:3px}
+ .hud-quick button{width:39px;min-height:37px}.hud-quick-icon{font-size:17px;line-height:19px}.hud-quick small{font-size:7px}
+ .play-stage .v09-hud .scene-toolbar{min-height:60px;padding:3px 6px}
+ .hud-action{width:58px;height:50px}.hud-action-icon{font-size:22px;line-height:24px}
+ .hud-dock-title{font-size:8px}
+ .play-stage .tactical-head{padding:6px 9px}.play-stage .tactical-hud{top:60px}
+ .play-stage .tactical-buttons{min-height:57px;padding:4px 6px}.play-stage .tactical-buttons .tactic-btn{min-height:47px}
+ .play-stage .tactical-message{bottom:62px}
+}
+/* Compact landscape: keep navigation shortcuts in the free area at top center,
+   instead of stacking them below the camera controls. */
+@media(orientation:landscape) and (max-height:550px){
+ .play-stage .v09-hud .hud-quick{position:absolute;top:7px;left:50%;right:auto;bottom:auto;transform:translateX(-50%);flex-direction:row;gap:6px}
+ .play-stage .v09-hud .hud-quick button{width:46px;min-height:44px}
+}
