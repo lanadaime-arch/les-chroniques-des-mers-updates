@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.3.6",
+  "latest": "1.3.7",
   "versions": [
     {
       "id": "1.2.1",
@@ -41,6 +41,11 @@
       "id": "1.3.6",
       "directory": "versions/v1.3.6/",
       "notes": "Menu façon RPG pirate : palette dorée, icônes illustrées, panneaux ornés et portraits chibi harmonisés."
+    },
+    {
+      "id": "1.3.7",
+      "directory": "versions/v1.3.7/",
+      "notes": "Menu plus clair : vraie fiche Personnage, accès distincts et historique de mises à jour simplifié."
     }
   ]
 }
