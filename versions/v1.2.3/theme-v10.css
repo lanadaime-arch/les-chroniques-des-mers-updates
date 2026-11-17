@@ -1,0 +1,6 @@
+/* V1.0 — micro-polish only, combat and interactions remain identical. */
+.play-stage .hud-location strong{text-shadow:0 2px 5px #081f2e,0 0 12px #102c40}
+.play-stage .scene-prompt{backdrop-filter:blur(5px)}
+@media(orientation:landscape) and (max-height:600px){
+ .play-stage .hud-location{max-width:150px}
+}
