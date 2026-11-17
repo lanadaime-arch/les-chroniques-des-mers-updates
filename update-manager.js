@@ -20,7 +20,7 @@
     'icon.svg', 'manifest.webmanifest', 'sw.js',
     'assets/harbor-portrait.webp', 'assets/ocean-port.webp', 'assets/wave-texture.png'
   ];
-  const state = {manifest:null, busy:false};
+  const state = {manifest:null, busy:false, historyExpanded:false};
   const versionFromPath = () => {
     const sub = location.pathname.slice(root.pathname.length);
     const match = /^versions\/v([0-9]+\.[0-9]+\.[0-9]+)\/(?:index\.html)?$/.exec(sub);
@@ -80,13 +80,14 @@
     const targetCache = await caches.open(temporary);
     try {
       const urls = FILES.slice();
-      if (['1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6'].includes(version.id)) urls.push('theme-v122.css');
-      if (['1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6'].includes(version.id)) urls.push('theme-v123.css');
-      if (['1.3.0','1.3.3','1.3.4','1.3.5','1.3.6'].includes(version.id)) urls.push('theme-v130.css');
-      if (['1.3.3','1.3.4','1.3.5','1.3.6'].includes(version.id)) urls.push('theme-v133.css', 'assets/chibi-captain.webp');
-      if (['1.3.4','1.3.5','1.3.6'].includes(version.id)) urls.push('theme-v134.css');
-      if (version.id === '1.3.5' || version.id === '1.3.6') urls.push('theme-v135.css', 'assets/ocean-port-ponton.webp', 'assets/chibi-capitaine-azur.webp', 'assets/chibi-capitaine-flamme.webp', 'assets/chibi-capitaine-brume.webp');
-      if (version.id === '1.3.6') urls.push('theme-v136.css', 'assets/chibi-avatar-azur.webp', 'assets/chibi-avatar-flamme.webp', 'assets/chibi-avatar-brume.webp');
+      if (['1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7'].includes(version.id)) urls.push('theme-v122.css');
+      if (['1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7'].includes(version.id)) urls.push('theme-v123.css');
+      if (['1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7'].includes(version.id)) urls.push('theme-v130.css');
+      if (['1.3.3','1.3.4','1.3.5','1.3.6','1.3.7'].includes(version.id)) urls.push('theme-v133.css', 'assets/chibi-captain.webp');
+      if (['1.3.4','1.3.5','1.3.6','1.3.7'].includes(version.id)) urls.push('theme-v134.css');
+      if (['1.3.5','1.3.6','1.3.7'].includes(version.id)) urls.push('theme-v135.css', 'assets/ocean-port-ponton.webp', 'assets/chibi-capitaine-azur.webp', 'assets/chibi-capitaine-flamme.webp', 'assets/chibi-capitaine-brume.webp');
+      if (version.id === '1.3.6' || version.id === '1.3.7') urls.push('theme-v136.css', 'assets/chibi-avatar-azur.webp', 'assets/chibi-avatar-flamme.webp', 'assets/chibi-avatar-brume.webp');
+      if (version.id === '1.3.7') urls.push('theme-v137.css');
       // The updater is shared at the same origin, and is usable in both versions.
       const resources = urls.map(file => fileUrl(version,file));
       resources.push(new URL('update-manager.js',root),new URL('update-manager.css',root));
@@ -145,9 +146,17 @@
       const catalogue=await manifest();
       const current=versionFromPath();
       list.replaceChildren();
+      const currentIndex=catalogue.versions.findIndex(v=>v.id===current);
+      const previous=catalogue.versions[Math.max(0,currentIndex-1)]?.id;
+      const highlighted=new Set([current,catalogue.latest,previous]);
+      let archived=0;
       for (const version of catalogue.versions) {
         const line=document.createElement('div');
         line.className='chroniques-update-version';
+        const isOlder=!highlighted.has(version.id);
+        line.dataset.history=isOlder?'older':'recent';
+        line.hidden=isOlder&&!state.historyExpanded;
+        if(isOlder)archived++;
         const left=document.createElement('div');
         const heading=document.createElement('strong');
         heading.textContent='Version '+version.id+(version.id===current?' · installée':'')+(version.id===catalogue.latest?' · dernière':'');
@@ -160,6 +169,11 @@
         button.textContent=version.id===current?'Actuelle':(version.id===STABLE?'Revenir à cette version':'Télécharger et installer');
         button.addEventListener('click',()=>install(version.id));
         line.append(button);list.append(line);
+      }
+      const olderButton=document.getElementById('chroniques-update-history-toggle');
+      if(olderButton){
+        olderButton.hidden=archived===0;
+        olderButton.textContent=state.historyExpanded?'Masquer les anciennes versions':'Afficher les '+archived+' anciennes versions';
       }
     } catch (error) {
       list.textContent='Connexion impossible : '+String(error.message||error);
@@ -193,16 +207,25 @@
     dialog.setAttribute('aria-label','Mises à jour du jeu');
     dialog.innerHTML='<header><strong>↻ Mises à jour du jeu</strong><button type="button" id="chroniques-updates-close" aria-label="Fermer">✕</button></header>'+
       '<p>Version active : <strong id="chroniques-update-current"></strong>. Les personnages restent sur cet appareil. Une copie de sécurité est créée avant chaque changement.</p>'+
-      '<div id="chroniques-update-list"></div><p id="chroniques-update-status" role="status" aria-live="polite"></p>'+
+      '<div id="chroniques-update-list"></div><button type="button" id="chroniques-update-history-toggle" hidden>Afficher les anciennes versions</button><p id="chroniques-update-status" role="status" aria-live="polite"></p>'+
       '<small>Les mises à jour modifient uniquement le contenu du jeu, jamais l’installation Windows.</small>';
     document.body.append(button,dialog);
     const close=()=>{dialog.hidden=true;button.focus();};
+    document.getElementById('chroniques-update-history-toggle').addEventListener('click',()=>{
+      state.historyExpanded=!state.historyExpanded;
+      const list=document.getElementById('chroniques-update-list');
+      if(list)Array.from(list.children).forEach(line=>{if(line.dataset.history==='older')line.hidden=!state.historyExpanded;});
+      const toggle=document.getElementById('chroniques-update-history-toggle');
+      const count=list?Array.from(list.children).filter(line=>line.dataset.history==='older').length:0;
+      toggle.textContent=state.historyExpanded?'Masquer les anciennes versions':'Afficher les '+count+' anciennes versions';
+    });
     document.getElementById('chroniques-updates-close').addEventListener('click',close);
     button.addEventListener('click',()=>{
       dialog.hidden=!dialog.hidden;
       if(!dialog.hidden){
         document.getElementById('chroniques-update-current').textContent=versionFromPath();
         updateStatus('',false);
+        state.historyExpanded=false;
         drawCatalogue();
         document.getElementById('chroniques-updates-close').focus();
       }

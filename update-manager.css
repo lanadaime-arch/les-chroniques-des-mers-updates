@@ -40,3 +40,14 @@
  #chroniques-updates-dialog .chroniques-update-version{gap:5px}
  #chroniques-updates-dialog .chroniques-update-version button{max-width:125px;font-size:10px}
 }
+
+/* Les anciennes versions restent installables, mais n'encombrent plus le panneau. */
+#chroniques-updates-dialog .chroniques-update-version[hidden] {display:none!important}
+#chroniques-update-history-toggle[hidden] {display:none!important}
+#chroniques-update-history-toggle {
+ display:block;width:100%;margin:3px 0 14px;padding:10px 12px;
+ border:1px solid #947549;border-radius:8px;
+ background:linear-gradient(#1c3444,#0b2638);color:#ffe3b2;
+ font:700 12px/1.4 system-ui,sans-serif;cursor:pointer;
+}
+#chroniques-update-history-toggle:hover {background:#214354}
