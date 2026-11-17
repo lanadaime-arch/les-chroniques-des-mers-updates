@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.3.9",
+  "latest": "1.4.0",
   "versions": [
     {
       "id": "1.2.1",
@@ -56,6 +56,11 @@
       "id": "1.3.9",
       "directory": "versions/v1.3.9/",
       "notes": "Menu épuré : bouton Emplacements du haut retiré, les quatre personnages restent accessibles en bas."
+    },
+    {
+      "id": "1.4.0",
+      "directory": "versions/v1.4.0/",
+      "notes": "Fuchsia sur l’Île de l’Aube : village et quai illustrés, East Blue, profils existants conservés."
     }
   ]
 }
