@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "latest": "1.2.2",
+  "versions": [
+    {
+      "id": "1.2.1",
+      "directory": "versions/v1.2.1/",
+      "notes": "Version actuelle conservée pour le retour arrière."
+    },
+    {
+      "id": "1.2.2",
+      "directory": "versions/v1.2.2/",
+      "notes": "Mise à jour de l’interface, testée avec les personnages existants."
+    }
+  ]
+}
