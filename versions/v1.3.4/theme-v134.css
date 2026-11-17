@@ -82,8 +82,8 @@
   color:#ffdd94;box-shadow:0 9px 20px #03121a88
 }
 .v134-menu .v134-free-stage strong{
-  max-width:250px;
-  font:700 clamp(15px,1.5vw,20px)/1.18 Georgia,serif;
+  max-width:285px;
+  font:700 clamp(15px,1.25vw,18px)/1.2 Georgia,serif;
 }
 .v134-menu .v134-free-stage small{font:600 12px/1.4 system-ui,sans-serif;color:#e3dfcb}
 .v134-menu .v134-profile-placeholder{
