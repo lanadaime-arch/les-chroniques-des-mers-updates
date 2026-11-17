@@ -6,7 +6,7 @@ import path from 'node:path';
 
 const root=path.resolve('.');
 const manifest=JSON.parse(fs.readFileSync('game-versions.json','utf8'));
-const read=pathName=>fs.readFileSync(path.join(root,pathName),'utf8');
+const read=pathName=>fs.readFileSync(path.isAbsolute(pathName)?pathName:path.join(root,pathName),'utf8');
 
 test('deux versions disponibles et des chemins locaux, sans publication externe',()=>{
  assert.equal(manifest.schema,1);
