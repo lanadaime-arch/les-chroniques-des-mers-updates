@@ -1,0 +1,68 @@
+/* V1.2.3: compact quest tracker. No character/profile data migration. */
+.play-stage .hud-quest-track {
+  pointer-events:auto;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  width:min(196px,46vw);
+  min-height:48px;
+  margin-top:9px;
+  padding:8px 11px;
+  border:1px solid #c7a16b;
+  border-radius:9px;
+  background:linear-gradient(120deg,rgba(7,24,42,.96),rgba(15,55,67,.94));
+  box-shadow:0 3px 10px #0008;
+  color:#fff0c9;
+  text-align:left;
+  cursor:pointer;
+  text-shadow:none;
+}
+.play-stage .hud-quest-track:hover,
+.play-stage .hud-quest-track:focus-visible {
+  border-color:#f9db9a;
+  outline:2px solid #f4ce85;
+  outline-offset:1px;
+}
+.play-stage .hud-quest-track .hud-quest-label {
+  color:#e6c28d;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.02em;
+}
+.play-stage .hud-quest-track strong {
+  display:block;
+  font:700 12px/1.25 system-ui,sans-serif;
+  color:#fff4df;
+  overflow-wrap:anywhere;
+}
+.play-stage .hud-quest-track small {
+  display:block;
+  color:#d4e4e7;
+  font:700 11px/1.2 system-ui,sans-serif;
+}
+.play-stage .hud-quest-track.is-ready {
+  border-color:#d4b850;
+  background:linear-gradient(130deg,rgba(65,48,20,.96),rgba(92,66,21,.92));
+}
+.quest-buttons {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px;
+}
+.quest-buttons .btn { white-space:nowrap; }
+@media (max-width:700px) {
+  .play-stage .hud-quest-track {
+    flex-direction:row;
+    align-items:center;
+    width:max-content;
+    max-width:min(194px,47vw);
+    min-height:28px;
+    padding:5px 7px;
+    margin-top:4px;
+    gap:7px;
+  }
+  .play-stage .hud-quest-track strong { display:none; }
+  .play-stage .hud-quest-track small { font-size:10px;white-space:nowrap; }
+  .play-stage .hud-quest-track .hud-quest-label { font-size:9px;white-space:nowrap; }
+}
