@@ -1,0 +1,50 @@
+/* V1.4.0 — Fuchsia, village de départ sur l'Île de l'Aube, East Blue.
+   N'affecte que l'emplacement de départ id=albe, conservé pour les sauvegardes.
+   Le quai fait partie de l'illustration, aucun faux ponton CSS. */
+.v140-menu.v140-fuchsia {
+  background:
+    linear-gradient(90deg,rgba(2,15,28,.74) 0%,rgba(3,22,33,.26) 23%,transparent 43%,transparent 65%,rgba(5,20,32,.68) 100%),
+    linear-gradient(180deg,rgba(3,17,28,.35),transparent 24%,rgba(2,18,28,.1) 64%,rgba(11,23,31,.48) 100%),
+    url('assets/fuchsia-aube-quai.webp') center 54%/cover no-repeat,
+    #0e8198;
+}
+.v140-fuchsia .v133-port-badge {
+  max-width:min(96%,380px);
+  min-width:0;
+  padding:9px 18px;
+  gap:7px;
+  font-size:clamp(19px,1.9vw,28px);
+}
+.v140-fuchsia .v140-region-label {
+  position:absolute;z-index:5;
+  top:71px;left:50%;transform:translateX(-50%);
+  padding:4px 13px;border:1px solid #efd09a;border-radius:999px;
+  background:#08283aca;color:#ffedba;
+  box-shadow:0 4px 12px #00111b73;
+  white-space:nowrap;
+  font:700 11px/1.25 system-ui,sans-serif;letter-spacing:.08em;
+  text-shadow:0 1px 3px #07141c;
+  pointer-events:none
+}
+.v140-fuchsia .v133-scene-glow {opacity:.57}
+.v140-fuchsia .v133-stage-shadow {bottom:0;height:12px;filter:blur(7px)}
+.v140-fuchsia .v135-chibi {filter:drop-shadow(0 2px 0 #162637cd) drop-shadow(0 9px 11px #091f2c9e)!important}
+.v140-fuchsia .v133-sidebar .v133-panel,
+.v140-fuchsia .v133-slots,
+.v140-fuchsia .v133-header {backdrop-filter:blur(3px)}
+@media(max-width:720px){
+  .v140-menu.v140-fuchsia {
+    background:
+      linear-gradient(90deg,rgba(2,19,31,.53) 0%,transparent 24%,transparent 75%,rgba(2,20,32,.49) 100%),
+      linear-gradient(180deg,rgba(4,19,30,.5),transparent 35%,rgba(2,18,28,.38) 91%),
+      url('assets/fuchsia-aube-quai.webp') 48% 52%/cover no-repeat,
+      #107c92
+  }
+  .v140-fuchsia .v133-port-badge {max-width:95%;padding:7px 12px;font-size:clamp(18px,5vw,23px)}
+  .v140-fuchsia .v140-region-label {top:46px;font-size:9px;padding:4px 9px;letter-spacing:.03em}
+  .v140-fuchsia .v133-center {padding-top:80px}
+  .v140-fuchsia .v133-scene {min-height:220px}
+}
+@media(min-width:721px) and (max-height:790px){
+  .v140-fuchsia .v140-region-label {top:61px}
+}
