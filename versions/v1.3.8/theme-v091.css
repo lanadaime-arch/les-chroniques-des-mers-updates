@@ -1,0 +1,13 @@
+/* V0.9.1 — caméra tactile unifiée en combat. */
+.play-stage #tactical-canvas{touch-action:none!important;cursor:grab;user-select:none;-webkit-user-select:none;overscroll-behavior:contain}
+.play-stage #tactical-canvas:active{cursor:grabbing}
+.play-stage .tactic-camera-tools{position:absolute;z-index:9;top:38%;right:max(8px,env(safe-area-inset-right));display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:auto}
+.play-stage .tactic-camera-tools button{width:44px;height:44px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:1.5px solid #d2a775;border-radius:10px;color:#ffeac7;background:linear-gradient(150deg,#173e51e9,#071e32f5);box-shadow:0 4px 10px #0017289c;font-size:26px;font-weight:800;padding:0;touch-action:manipulation}
+.play-stage .tactic-camera-tools button small{font-size:10px;line-height:1;margin-top:-7px}
+.play-stage .tactic-camera-tools button:active{background:#527280}
+.play-stage .tactic-camera-level{font-size:11px;font-weight:750;color:#ffe4b0;border-radius:12px;padding:4px 5px;background:#061a2be9;border:1px solid #a58d6488;min-width:44px;text-align:center;pointer-events:none}
+@media(orientation:landscape) and (max-height:620px){
+ .play-stage .tactic-camera-tools{top:34%;right:6px;gap:3px}
+ .play-stage .tactic-camera-tools button{height:39px;min-height:39px;width:42px;min-width:42px;font-size:23px}
+ .play-stage .tactic-camera-level{font-size:10px;padding:2px}
+}
