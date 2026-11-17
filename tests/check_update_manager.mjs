@@ -110,7 +110,8 @@ test('installation et retour arriere sauvegardent les profils avec le meme domai
      body:{append(...items){for(const item of items)if(item.id)elements.set(item.id,item);}},
      createElement(){return fakeElement();},
      getElementById(id){if(id==='chroniques-updates-button'&&!elements.has(id))return null;if(!elements.has(id))elements.set(id,fakeElement());return elements.get(id);},
-     addEventListener(){}
+     addEventListener(){},
+     querySelectorAll(){return (elements.get('chroniques-update-list')?.children||[]).map(line=>line.children[1]);}
    };
    const nav=[];
    const location={origin,pathname,assign(url){nav.push(url);},replace(url){nav.push(url);}};
