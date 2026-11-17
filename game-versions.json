@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.4.4",
+  "latest": "1.4.5",
   "versions": [
     {
       "id": "1.2.1",
@@ -81,6 +81,11 @@
       "id": "1.4.4",
       "directory": "versions/v1.4.4/",
       "notes": "Correctifs PC : rose des vents lisible, pictogrammes agrandis, vagues du bouton Jouer mieux intégrées et ombre de Kisuke ajustée. Retour à 1.4.3 possible."
+    },
+    {
+      "id": "1.4.5",
+      "directory": "versions/v1.4.5/",
+      "notes": "Menu PC : six grandes icônes illustrées originales, textes de progression et quêtes plus lisibles, ombre de Kisuke réajustée. Retour à 1.4.4 possible."
     }
   ]
 }

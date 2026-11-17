@@ -1,0 +1,118 @@
+/* Chroniques des Mers · V0.8 · Première passe de direction artistique originale */
+:root{
+ --bg:#061827; --bg2:#0b283b; --panel:#0e2b3d; --panel2:#17384c;
+ --line:#557281; --ink:#f7f0df; --muted:#b9cacf; --gold:#f8d79a; --gold2:#ca9255;
+ --sea:#79dbe2; --radius:12px;
+}
+body{background:#071b2c;color:#f7ecd4}
+/* Hub illustré : une véritable scène plutôt qu'un simple dégradé. */
+.lobby-root{
+ background:linear-gradient(180deg,rgba(3,19,38,.47) 0%,rgba(4,16,29,.11) 30%,rgba(2,15,27,.42) 66%,#051723f2 100%),
+ url('assets/ocean-port.webp') 50% 45% / cover no-repeat,#123e59;
+}
+.lobby-atmosphere{background:linear-gradient(90deg,#03192b65,transparent 34%,transparent 69%,#0317275b),linear-gradient(180deg,#04172b40,transparent 53%,#03152466)}
+.lobby-atmosphere:before{content:none}
+.lobby-sun,.lobby-island,.lobby-waves{display:none}
+.lobby-root:after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;box-shadow:inset 0 0 160px #021528a6}
+.lobby-brand{
+ background:linear-gradient(100deg,#071c2fd9,#082438aa 68%,#05213944);
+ border:1px solid #dab47488;border-radius:13px;padding:10px 17px;min-height:78px;
+ box-shadow:0 12px 35px #05111d77,inset 0 0 0 2px #e9cd8417;
+ backdrop-filter:blur(6px)
+}
+.lobby-brand h1{font-family:Georgia,serif;font-weight:800;color:#fff7d9;text-shadow:1px 2px 0 #76552b,0 5px 17px #000e;letter-spacing:.12em}
+.lobby-brand h1 em{color:#f7d58a;text-shadow:0 2px 7px #000b}
+.brand-monogram{background:radial-gradient(circle at 32% 21%,#466a76,#102c3a 65%,#071a2a);border:3px double #ffd99c;box-shadow:0 0 0 4px #041626b5,0 0 0 6px #bd9a5c,inset 0 2px 8px #ffe5a331;text-shadow:0 2px 5px #000}
+.lobby-version{border-color:#bb995e;background:#071d31dd;color:#ffe0aa;font-weight:800}
+.lobby-caption{font-weight:800;text-shadow:0 2px 5px #001}
+.lobby-story{padding:21px 17px;background:linear-gradient(125deg,#051a2ad9,#092b3bb3);border-left:3px solid #edbb68;border-radius:2px 12px 12px 2px;backdrop-filter:blur(5px);box-shadow:0 10px 35px #0007;max-width:300px}
+.lobby-story h2{color:#ffe9b7;text-shadow:0 3px 12px #000b}
+.lobby-story p{color:#d8e5e0}
+.lobby-character{filter:drop-shadow(0 10px 2px #0b1824a5) drop-shadow(0 24px 26px #01131ce0)}
+.lobby-character:before{content:'';position:absolute;z-index:-1;inset:5% 2% 4%;border:1px solid #d0a55c66;border-radius:50% 50% 12% 12%;background:radial-gradient(ellipse at center,#efd49248,transparent 65%),repeating-conic-gradient(from 22.5deg,#ffd89116 0 1deg,transparent 1deg 15deg);box-shadow:inset 0 0 0 5px #091f3155}
+.lobby-location{border:2px double #efcd87!important;background:linear-gradient(150deg,#09253cef,#183f53ed 45%,#061e32f4)!important;box-shadow:inset 0 0 0 2px #f6d99514,0 8px 25px #000b!important}
+.lobby-level{background:linear-gradient(115deg,#092a3eec,#071d2fef);border:1px solid #e7bf76;border-radius:8px;box-shadow:0 5px 19px #010e1b9a}
+.lobby-play{border-radius:8px;border:2px solid #fce0a0;background:linear-gradient(180deg,#fff0b7,#f1bf61 39%,#b8772f);box-shadow:inset 0 2px 0 #fffce4,0 4px 0 #553820,0 8px 24px #000b;transition:filter .15s,transform .12s;letter-spacing:.13em}
+.lobby-play:hover:not(:disabled){filter:brightness(1.08)}
+.lobby-slots{background:linear-gradient(145deg,#071f32f2,#102d41ef);border:2px ridge #bda06a;box-shadow:inset 0 0 0 3px #fbe3a51a,0 12px 34px #000a;backdrop-filter:blur(12px)}
+.lobby-slots-head h3{letter-spacing:.025em}
+.slot-card{background:linear-gradient(145deg,#16394de7,#081f32df);border-color:#557a82;border-radius:7px;box-shadow:inset 0 1px #d4edec13;transition:border-color .16s,background .16s,transform .16s}
+.slot-card:hover:not(:disabled){transform:translateY(-2px);border-color:#efd196}
+.slot-card.selected{background:linear-gradient(145deg,#274758,#0b2a3e);border:2px solid #f3d48e;box-shadow:inset 0 0 0 2px #edc67e24,0 0 14px #f3bf5e33}
+.slot-avatar{border-radius:50%;border:1px solid #c2a776;background:radial-gradient(circle at 30% 20%,#4d8b91,#0c3049 69%)}
+.lobby-footer{background:#04182a83;border-radius:5px;padding:4px 12px;color:#e5d8bf}
+/* Character creation shares the painterly port identity. */
+.create-root{background:linear-gradient(135deg,#051526ed,#092337e8 55%,#051728c9),url('assets/ocean-port.webp') center/cover fixed}
+.create-head{padding:12px 18px;background:#071d31ed;border:1px solid #c8a56b;border-radius:9px;box-shadow:0 8px 26px #0008}
+.create-art{background:radial-gradient(ellipse at 50% 35%,#c99e5545,transparent 55%),linear-gradient(180deg,#08293e55,#071a2ff5),url('assets/harbor-portrait.webp') 44% center /cover;border:2px ridge #efca84;border-radius:12px;box-shadow:0 20px 34px #0007}
+.create-art .captain-portrait{filter:drop-shadow(0 10px 12px #000c)}
+.create-form{background:linear-gradient(160deg,#102f43f9,#071e31fb);border:2px ridge #c7a66d;border-radius:10px;box-shadow:0 18px 39px #0008,inset 0 0 0 3px #edd39a11}
+.create-form input:not([type=radio]),.create-form select{background:#051b2b;color:#fff0d3;border-color:#6b8b93;border-radius:5px}
+.appearance-choice span{background:linear-gradient(150deg,#1c4459,#081d31);border:1px solid #718d92;border-radius:6px}
+.appearance-choice:has(input:checked) span{background:linear-gradient(155deg,#4d5b5e,#213d4a);border:2px solid #ffde91;box-shadow:inset 0 0 0 1px #ffe7b242}
+/* The menu and character sheets are one visual system. */
+.game-overlay{background:#0004}
+.overlay-scrim{background:#031423bb;backdrop-filter:blur(6px)}
+.overlay-sheet{position:relative;background:linear-gradient(165deg,#133a4ded,#092539f9 57%,#061b2eea),url('assets/wave-texture.png');border:2px ridge #c7a26a;border-radius:11px;box-shadow:inset 0 0 0 3px #efcd8a1c,0 21px 80px #010912f2}
+.overlay-sheet:before,.overlay-sheet:after{content:'✦';position:absolute;z-index:3;top:3px;left:6px;color:#e6bd7d;font-size:12px;pointer-events:none}
+.overlay-sheet:after{right:6px;left:auto}
+.overlay-header{border-bottom:2px double #c09a5e;background:linear-gradient(95deg,#092438,#174455 55%,#09283c);box-shadow:inset 0 -2px #ffe0a11a}
+.overlay-header h2{font-family:Georgia,serif;color:#ffe6ad;text-shadow:0 2px 6px #0008;letter-spacing:.035em}
+.overlay-back,.overlay-close{background:linear-gradient(155deg,#2e4f5c,#0b2a3d);border:1px solid #ccac77;color:#fce7c2}
+.overlay-scroll{background:linear-gradient(170deg,#0a2a3d65,#08203364),url('assets/wave-texture.png') center/300px auto}
+.char-sidebar{background:linear-gradient(165deg,#123c4f,#071e30);border:1px solid #9d8154;border-radius:7px;box-shadow:inset 0 0 0 2px #f1d08f12}
+.char-nav button{border-radius:5px}
+.char-nav button.active{background:linear-gradient(180deg,#ffebbc,#cfa053);border-color:#fce2a4;box-shadow:inset 0 1px 0 #fff8d0}
+.char-detail{background:linear-gradient(155deg,#133a4ddc,#081e32ef),url('assets/wave-texture.png');border:1px solid #a58652;border-radius:8px;box-shadow:inset 0 0 0 2px #e7c58e16}
+.char-portrait-card,.char-equipped-portrait{background:radial-gradient(ellipse at 50% 40%,#f1b95846,transparent 59%),linear-gradient(180deg,#0f3b4d9c,#051a2fe8),url('assets/harbor-portrait.webp') 45% center /cover;border:1px solid #d5b075;border-radius:7px}
+.char-portrait-card .captain-portrait,.char-equipped-portrait .captain-portrait{filter:drop-shadow(0 10px 12px #000a)}
+.char-stats .bar{height:13px;background:#061a29;border:1px solid #6b6e5e;padding:2px}
+.char-attributes>div,.equipment-slot,.char-tech-grid article,.char-future-grid article{background:linear-gradient(145deg,#194157,#0a2b3e);border:1px solid #527481;border-radius:7px;box-shadow:inset 0 1px 0 #d1edee0d}
+.char-attributes strong{color:#ffda92}
+.tech-icon,.equipment-icon{border-color:#c29d61;background:radial-gradient(circle at 32% 25%,#34576b,#071a2d 75%)}
+.menu-tiles button{background:linear-gradient(140deg,#194357,#0a283d);border:1px solid #8e7b62;border-radius:7px;box-shadow:inset 0 1px 0 #fff3c616}
+.menu-tiles button:hover{border-color:#e1b874;background:#275267}
+.menu-tiles button>span{filter:drop-shadow(0 1px 2px #07121b)}
+.dialog-panel{border-radius:7px;border:2px ridge #efbe7b;background:linear-gradient(150deg,#fff3d1,#e7d4aa);box-shadow:inset 0 0 0 3px #704e2a18,0 18px 55px #04121bdd}
+/* Exploration has a continuous cinematic vignette and nautical HUD. */
+.play-stage:after{content:'';position:absolute;z-index:2;inset:0;pointer-events:none;box-shadow:inset 0 0 95px #08203588;opacity:.72}
+.play-stage .scene-topline{border-bottom:1px solid #d6b17b47;background:linear-gradient(180deg,#03182ae9,#05233995 74%,transparent)}
+.play-stage .scene-topline>div:first-child{border-left:3px solid #f6cf7e;text-shadow:0 2px 9px #000}
+.play-stage .scene-topline h2{color:#ffe2ab}
+.play-stage .scene-stats>span{border:1px solid #d6af747a;background:linear-gradient(160deg,#092b3de0,#061d31db);box-shadow:inset 0 0 0 1px #fff8d017,0 3px 7px #0005}
+.play-stage .scene-toolbar,.play-stage .tactical-buttons{border-top:2px ridge #cc9c61;background:linear-gradient(180deg,#1b4050ee,#061b2bfa);box-shadow:0 -7px 22px #0009,inset 0 2px 0 #ffe3a31d}
+.play-stage .scene-links button{background:linear-gradient(170deg,#2a5264,#0b263b);border:1px solid #ba9966;border-radius:7px;color:#ffe5b3}
+.play-stage .scene-links button:hover{background:linear-gradient(170deg,#3c6876,#143449)}
+.play-stage .scene-camera-tools button{border-radius:8px;background:#0b2c40ed;border:1px solid #e5bf7c}
+.play-stage .scene-stick-ring{background:radial-gradient(circle,#22637877,#061f34a6);border-color:#f4d49ea0}
+.play-stage .scene-button{background:linear-gradient(165deg,#205775,#14364b);border-color:#f5d18a}
+.play-stage .scene-button.attack{background:linear-gradient(165deg,#dc7961,#9f4153)}
+.play-stage .scene-button.interact{background:linear-gradient(165deg,#319f97,#146c79)}
+.play-stage .tactical-message{border-radius:6px;background:#071f34eb;border-color:#e0b97d}
+.play-stage .tactical-buttons .tactic-btn{border-radius:7px;background:linear-gradient(160deg,#234a5c,#09263c);border-color:#b69a72}
+.play-stage .tactical-buttons .tactic-btn.selected{background:linear-gradient(155deg,#517b83,#1a3d57);border-color:#ffda87}
+.play-stage .tactical-buttons .tactic-btn.end-btn,.tactic-ready{background:linear-gradient(160deg,#ffe4a3,#b77e39)!important;color:#1a2733!important}
+/* Ensure fullscreen menus stay usable on phones. */
+@media(max-width:760px){
+ .lobby-root{background-position:41% 50%;padding:10px 10px max(9px,env(safe-area-inset-bottom))}
+ .lobby-brand{min-height:50px;padding:5px 9px;border-radius:6px}
+ .lobby-brand h1{font-size:clamp(13px,4.1vw,18px)}
+ .lobby-main{gap:0}
+ .lobby-story{padding:7px 8px;background:#06182b8c;border:0;border-radius:7px;max-width:none;box-shadow:none;backdrop-filter:blur(4px)}
+ .lobby-story h2{margin:4px 0;color:#ffe6af;text-shadow:0 3px 12px #000}
+ .lobby-character:before{inset:7% 17% 7%;background:radial-gradient(ellipse,#f4c77a2b,transparent 66%);border-color:#f6ca7533}
+ .lobby-slots{padding:8px;border-width:1px;box-shadow:0 6px 22px #000b}
+ .lobby-footer{padding:3px 5px}
+ .create-root{background-attachment:scroll;background-position:46% 50%;overflow:auto}
+ .create-art{background-position:45% center}
+ .overlay-sheet{width:100%;height:100dvh;max-height:100dvh;border-radius:0;border:0;box-shadow:none}
+ .overlay-sheet:before,.overlay-sheet:after{display:none}
+ .overlay-scroll{padding-bottom:max(24px,env(safe-area-inset-bottom))}
+ .char-portrait-card,.char-equipped-portrait{background-position:40% 55%}
+}
+@media(orientation:landscape) and (max-height:550px){
+ .lobby-root{background-position:center 55%}
+ .lobby-story{background:#071c2ccd}
+ .lobby-character:before{inset:0 10%}
+}
+@media(prefers-reduced-motion:reduce){.captain-portrait{animation:none}}
