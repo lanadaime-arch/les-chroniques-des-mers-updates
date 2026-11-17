@@ -1,0 +1,67 @@
+/* 1.4.1 branch prototype — actual interactive cosmetic creator. */
+.v141-menu .v142-customize-cta{
+ position:absolute;right:6%;bottom:8px;z-index:8;
+ border:2px solid #f2c97a;border-radius:14px;
+ background:linear-gradient(180deg,#694522,#2c2223 58%,#102f48);
+ box-shadow:inset 0 0 0 1px #ffdf944a,0 3px 9px #0009;
+ padding:6px 12px;color:#ffefc2;font:800 12px Georgia,serif;
+ cursor:pointer;max-width:43%;white-space:nowrap;
+}
+.v141-menu .v142-customize-cta:hover,
+.v141-menu .v142-customize-cta:focus-visible{background:#73502c;outline:2px solid #ffeab3;outline-offset:2px}
+.v142-creator{max-width:1370px;margin:auto;padding:18px 24px 36px;min-height:100vh;
+ background:linear-gradient(140deg,#071a2d,#124465 54%,#0a2136);color:#fff0d3;}
+.v142-creator .create-head{margin:0 0 16px;}
+.v142-creator .create-head h2{color:#ffe6ab}
+.v142-create-layout{max-width:1240px;grid-template-columns:minmax(270px,.92fr) minmax(350px,1.08fr);align-items:start;}
+.v142-create-art{position:sticky;top:12px;min-height:550px;max-height:680px;padding:18px;
+ background:radial-gradient(circle at 50% 40%,#28749b6b,transparent 58%),linear-gradient(170deg,#0b304f,#071c31);
+ border:3px double #e7be77;box-shadow:inset 0 0 0 3px #5e421f,0 12px 28px #0006;gap:13px;}
+.v142-preview-label{display:block;font:800 12px Georgia,serif;letter-spacing:.05em;color:#ffdc85;text-align:center;}
+.v142-creation-preview{height:min(58vh,490px);min-height:320px;width:100%;display:grid;place-items:end center;overflow:visible;}
+.v142-creation-preview .v141-rig-stage{display:block;width:auto;height:100%;max-width:98%;max-height:100%;cursor:pointer;
+ user-select:none;filter:drop-shadow(0 13px 17px #0007);}
+.v142-create-art>p{max-width:340px;margin:auto;font-size:13px;color:#dce4df;}
+.v142-customize-form{gap:14px;border:2px solid #edc77c;background:linear-gradient(#0f3754,#091d35);box-shadow:inset 0 0 0 3px #85603455;}
+.v142-customize-form h2{font-family:Georgia,serif;}
+.v142-custom-field{border:0;padding:0;margin:0;min-width:0;}
+.v142-custom-field legend{font:800 13px Georgia,serif;color:#ffe0a3;margin:0 0 9px;}
+.v142-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+.v142-choice{min-width:0;position:relative;cursor:pointer;}
+.v142-choice input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.v142-choice span{display:block;text-align:center;white-space:nowrap;padding:12px 5px;border:2px solid #557c89;border-radius:10px;
+ background:linear-gradient(170deg,#153c55,#071c33);color:#fff1cb;font-weight:750;}
+.v142-choice input:checked+span{background:linear-gradient(#80552e,#13405a);border-color:#ffe1a0;box-shadow:inset 0 0 0 2px #d7a95859;}
+.v142-choice input:focus-visible+span{outline:3px solid #94edf1;outline-offset:2px;}
+.v142-creator-note{font-size:12px!important;line-height:1.55;color:#bdd4d9!important;}
+.v142-customize-form .lobby-play{background:linear-gradient(180deg,#fbe5a7,#eaba55 65%,#b47e31);color:#2e1a12;}
+.v142-customize-form .lobby-play:hover{filter:brightness(1.1);}
+/* Colour substitutions affect only the clipped hat ribbon, not the entire character. */
+.v142-ribbon-tint{transform-box:fill-box;transform-origin:center center;}
+/* Chaque tenue possède sa couleur source (Azur bleu, Flamme rouge, Brume violet).
+   Origine conserve la palette historique sans retouche. */
+.v141-rig-azur .v142-ribbon-bleu{filter:hue-rotate(0deg)}
+.v141-rig-azur .v142-ribbon-rouge{filter:hue-rotate(135deg) saturate(1.5)}
+.v141-rig-azur .v142-ribbon-vert{filter:hue-rotate(-105deg) saturate(1.55)}
+.v141-rig-azur .v142-ribbon-violet{filter:hue-rotate(50deg) saturate(1.4)}
+.v141-rig-flamme .v142-ribbon-bleu{filter:hue-rotate(222deg) saturate(1.6)}
+.v141-rig-flamme .v142-ribbon-rouge{filter:hue-rotate(0deg)}
+.v141-rig-flamme .v142-ribbon-vert{filter:hue-rotate(118deg) saturate(1.5)}
+.v141-rig-flamme .v142-ribbon-violet{filter:hue-rotate(265deg) saturate(1.5)}
+.v141-rig-brume .v142-ribbon-bleu{filter:hue-rotate(-45deg) saturate(1.3)}
+.v141-rig-brume .v142-ribbon-rouge{filter:hue-rotate(95deg) saturate(1.5)}
+.v141-rig-brume .v142-ribbon-vert{filter:hue-rotate(-145deg) saturate(1.5)}
+.v141-rig-brume .v142-ribbon-violet{filter:hue-rotate(0deg)}
+.v142-accessory{pointer-events:none;filter:drop-shadow(0 2px 1px #271916a9)}
+@media(max-width:720px){
+ .v141-menu .v142-customize-cta{right:2%;bottom:7px;font-size:10px;padding:5px 7px;max-width:46%;}
+ .v142-creator{padding:9px 10px 32px;}
+ .v142-create-layout{display:flex;flex-direction:column;gap:12px;}
+ .v142-create-art{position:static;flex-direction:column;align-self:stretch;width:100%;height:auto;max-height:none;min-height:300px;padding:10px;gap:3px;}
+ .v142-creation-preview{height:235px;min-height:235px;}
+ .v142-creation-preview .v141-rig-stage{height:235px;max-height:235px;}
+ .v142-create-art>p{font-size:11px;margin:3px;max-width:100%;}
+ .v142-customize-form{padding:15px;gap:12px;}
+ .v142-choices{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media(prefers-reduced-motion:reduce){.v142-creation-preview .v141-rig-stage *, .v142-customize-form *{animation:none!important;transition:none!important;}}
