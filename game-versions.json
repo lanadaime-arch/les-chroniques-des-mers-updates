@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.2.3",
+  "latest": "1.3.0",
   "versions": [
     {
       "id": "1.2.1",
@@ -16,6 +16,11 @@
       "id": "1.2.3",
       "directory": "versions/v1.2.3/",
       "notes": "Suivi de quêtes dans l'exploration : objectif, progression et récompense."
+    },
+    {
+      "id": "1.3.0",
+      "directory": "versions/v1.3.0/",
+      "notes": "Refonte visuelle étape 1 : nouveau menu principal pour PC et Android."
     }
   ]
 }

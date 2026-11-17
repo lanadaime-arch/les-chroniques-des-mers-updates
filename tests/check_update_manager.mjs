@@ -8,10 +8,10 @@ const root=path.resolve('.');
 const manifest=JSON.parse(fs.readFileSync('game-versions.json','utf8'));
 const read=pathName=>fs.readFileSync(path.isAbsolute(pathName)?pathName:path.join(root,pathName),'utf8');
 
-test('trois versions disponibles et des chemins locaux, sans publication externe',()=>{
+test('quatre versions disponibles et des chemins locaux, sans publication externe',()=>{
  assert.equal(manifest.schema,1);
- assert.equal(manifest.latest,'1.2.3');
- assert.deepEqual(manifest.versions.map(v=>v.id),['1.2.1','1.2.2','1.2.3']);
+ assert.equal(manifest.latest,'1.3.0');
+ assert.deepEqual(manifest.versions.map(v=>v.id),['1.2.1','1.2.2','1.2.3','1.3.0']);
  for(const v of manifest.versions){
   assert.equal(v.directory,`versions/v${v.id}/`);
   assert.match(v.directory,/^versions\/v\d+\.\d+\.\d+\/$/);
@@ -23,8 +23,9 @@ test('trois versions disponibles et des chemins locaux, sans publication externe
  assert.ok(fs.statSync('versions/v1.2.2/theme-v122.css').isFile());
  assert.ok(fs.statSync('versions/v1.2.3/theme-v122.css').isFile());
  assert.ok(fs.statSync('versions/v1.2.3/theme-v123.css').isFile());
+ assert.ok(fs.statSync('versions/v1.3.0/theme-v130.css').isFile());
 });
-test('scripts JS des trois versions et gestionnaire chargent sans erreurs de syntaxe',()=>{
+test('scripts JS des quatre versions et gestionnaire chargent sans erreurs de syntaxe',()=>{
  for(const v of manifest.versions){
   for(const file of ['game.js','roam.js','tactics.js','fruit-data.js','sw.js']){
    const p=path.join(root,v.directory,file);assert.doesNotThrow(()=>new vm.Script(read(p),{filename:p}),p);
@@ -46,6 +47,9 @@ test('l ancien jeu est inchange, sauf indication de version',()=>{
  assert.equal(read('versions/v1.2.3/index.html').includes('theme-v123.css'),true);
  assert.equal(read('versions/v1.2.3/game.js').includes('DÉMO · 1.2.3'),true);
  assert.equal(read('versions/v1.2.3/game.js').includes('function questTracker()'),true);
+ assert.equal(read('versions/v1.3.0/game.js').includes('lobby-root v130-menu'),true);
+ assert.equal(read('versions/v1.3.0/index.html').includes('theme-v130.css'),true);
+ assert.equal(read('versions/v1.2.3/index.html').includes('theme-v130.css'),false);
 });
 test('origin et chemins : aucun changement de domaine pour les profils locaux',()=>{
  for(const v of manifest.versions){
@@ -139,7 +143,7 @@ test('installation et retour arriere sauvegardent les profils avec le meme domai
  first.elements.get('chroniques-updates-button').handlers.click();
  await new Promise(resolve=>setImmediate(resolve));
  const items=first.elements.get('chroniques-update-list').children;
- assert.equal(items.length,3);
+ assert.equal(items.length,4);
  const install=items[1].children[1];
  assert.equal(install.dataset.installVersion,'1.2.2');
  await install.handlers.click();
@@ -155,15 +159,29 @@ test('installation et retour arriere sauvegardent les profils avec le meme domai
  assert.ok(second.nav[0].endsWith('/versions/v1.2.3/index.html'));
  assert.equal(local.get(activeKey),'1.2.3');
  assert.equal(local.get('chroniques_mers_profiles_v1'),original);
- const latest=start('/les-chroniques-des-mers-updates/versions/v1.2.3/index.html');
+ const third=start('/les-chroniques-des-mers-updates/versions/v1.2.3/index.html');
+ third.elements.get('chroniques-updates-button').handlers.click();
+ await new Promise(resolve=>setImmediate(resolve));
+ await third.elements.get('chroniques-update-list').children[3].children[1].handlers.click();
+ assert.ok(third.nav[0].endsWith('/versions/v1.3.0/index.html'));
+ assert.equal(local.get(activeKey),'1.3.0');
+ assert.equal(local.get('chroniques_mers_profiles_v1'),original);
+ const latest=start('/les-chroniques-des-mers-updates/versions/v1.3.0/index.html');
  latest.elements.get('chroniques-updates-button').handlers.click();
  await new Promise(resolve=>setImmediate(resolve));
- const rollback=latest.elements.get('chroniques-update-list').children[1].children[1];
+ const rollback=latest.elements.get('chroniques-update-list').children[2].children[1];
  await rollback.handlers.click();
- assert.ok(latest.nav[0].endsWith('/versions/v1.2.2/index.html'));
- assert.equal(local.get(activeKey),'1.2.2');
+ assert.ok(latest.nav[0].endsWith('/versions/v1.2.3/index.html'));
+ assert.equal(local.get(activeKey),'1.2.3');
  assert.equal(local.get('chroniques_mers_profiles_v1'),original);
  assert.equal(JSON.parse(local.get(backupKey)).values.chroniques_mers_profiles_v1,original);
+ const previous=start('/les-chroniques-des-mers-updates/versions/v1.2.3/index.html');
+ previous.elements.get('chroniques-updates-button').handlers.click();
+ await new Promise(resolve=>setImmediate(resolve));
+ await previous.elements.get('chroniques-update-list').children[1].children[1].handlers.click();
+ assert.ok(previous.nav[0].endsWith('/versions/v1.2.2/index.html'));
+ assert.equal(local.get(activeKey),'1.2.2');
+ assert.equal(local.get('chroniques_mers_profiles_v1'),original);
  const stable=start('/les-chroniques-des-mers-updates/versions/v1.2.2/index.html');
  stable.elements.get('chroniques-updates-button').handlers.click();
  await new Promise(resolve=>setImmediate(resolve));
@@ -172,6 +190,7 @@ test('installation et retour arriere sauvegardent les profils avec le meme domai
  assert.equal(local.get(activeKey),'1.2.1');
  assert.equal(local.get('chroniques_mers_profiles_v1'),original);
  assert.equal(JSON.parse(local.get(backupKey)).values.chroniques_mers_profiles_v1,original);
+ assert.ok(cacheMap.has('chroniques-web-versions-1.3.0'));
  assert.ok(cacheMap.has('chroniques-web-versions-1.2.3'));
  assert.ok(cacheMap.has('chroniques-web-versions-1.2.2'));
  assert.ok(cacheMap.has('chroniques-web-versions-1.2.1'));
