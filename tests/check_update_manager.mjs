@@ -306,7 +306,7 @@ test('V1.4.7 : splash visible avant le jeu et sans fausse progression',()=>{
  assert.ok(sw.includes('../../loading-screen.js'));
  assert.ok(sw.includes('../../loading-screen.css'));
  assert.ok(read('sw.js').includes('./loading-screen.css'));
- assert.ok(read('update-manager.js').includes("if(version.id === '1.4.7')resources.push"));
+ assert.ok(read('update-manager.js').includes("['1.4.7','1.4.8'].includes(version.id)"));
  assert.ok(!read('versions/v1.4.6/index.html').includes('chroniques-loading'));
 });
 test('V1.4.8 : le créateur commence sur Humain et ne crée aucune sauvegarde',()=>{
