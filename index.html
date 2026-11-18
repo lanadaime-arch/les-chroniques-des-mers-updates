@@ -9,11 +9,23 @@
   <meta name="apple-mobile-web-app-title" content="Chroniques">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="description" content="RPG solo de pirates, nouvelle ville isométrique, caméra tactile et combats tactiques.">
+  <!-- Préaffichage natif avant le téléchargement des feuilles de style. -->
+  <style id="chroniques-loading-critical">
+    html{background:#071b30}
+    body{margin:0}
+    #chroniques-loading{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;
+      background:radial-gradient(ellipse at 50% 38%,#174966 0%,#09243d 52%,#061426 100%);color:#fff2d5}
+    #chroniques-loading[hidden]{display:none!important}
+    #chroniques-loading .chroniques-loading-title{text-align:center;font:700 clamp(26px,4vw,47px) Georgia,serif}
+    #chroniques-loading .chroniques-loading-compass{width:180px;height:180px;margin:18px auto}
+    #chroniques-loading .chroniques-loading-compass svg{width:100%;height:100%}
+  </style>
   <!-- Tout premier script : déterminer si une version installée doit s'ouvrir.
        Ne pas charger l'ancien jeu pendant la décision, pas d'écran de remplacement. -->
   <style id="chroniques-root-routing-style">
     html.chroniques-root-routing{background:#081b2d}
-    html.chroniques-root-routing body{visibility:hidden!important}
+    html.chroniques-root-routing body{visibility:visible!important}
+    html.chroniques-root-routing body > :not(#chroniques-loading){visibility:hidden!important}
   </style>
   <script id="chroniques-root-boot">
   (function(){
@@ -44,12 +56,60 @@
   <link rel="stylesheet" href="theme-v12.css">
   <link rel="stylesheet" href="theme-v121.css">
   <link rel="stylesheet" href="update-manager.css">
+  <link rel="stylesheet" href="loading-screen.css">
   <title>Les Chroniques des Mers — Aventure solo</title>
 </head>
 <body>
+  <div id="chroniques-loading" class="chroniques-loading" role="status" aria-live="polite" aria-label="Chargement des Chroniques des Mers">
+    <div class="chroniques-loading-horizon" aria-hidden="true"></div>
+    <section class="chroniques-loading-panel" aria-label="Préparation de l'aventure">
+      <p class="chroniques-loading-eyebrow">UNE AVENTURE DE PIRATES</p>
+      <h1 class="chroniques-loading-title">Les Chroniques <span>des Mers</span></h1>
+      <div class="chroniques-loading-compass" aria-hidden="true">
+        <svg viewBox="0 0 240 240" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="cl-gold" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#fff0bc"/><stop offset=".48" stop-color="#d99d4d"/><stop offset="1" stop-color="#875120"/>
+            </linearGradient>
+            <linearGradient id="cl-blue" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#1b789c"/><stop offset="1" stop-color="#072139"/>
+            </linearGradient>
+          </defs>
+          <circle cx="120" cy="120" r="113" fill="#062139" stroke="url(#cl-gold)" stroke-width="6"/>
+          <circle cx="120" cy="120" r="99" fill="url(#cl-blue)" stroke="#e2bf7b" stroke-width="2"/>
+          <circle cx="120" cy="120" r="76" fill="none" stroke="#9bd7db" stroke-width="1.5" opacity=".62"/>
+          <circle cx="120" cy="120" r="60" fill="#071f37" stroke="#f2cb7a" stroke-width="1.5"/>
+          <g stroke="#d4c399" stroke-width="2">
+            <path d="M120 19v17M120 204v17M19 120h17M204 120h17"/>
+            <path d="M49 49l13 13M178 178l13 13M191 49l-13 13M62 178l-13 13" opacity=".7"/>
+          </g>
+          <g fill="#f9dfaa" font-family="Georgia,serif" font-size="14" text-anchor="middle">
+            <text x="120" y="48">N</text><text x="120" y="202">S</text>
+            <text x="39" y="125">O</text><text x="201" y="125">E</text>
+          </g>
+          <g class="chroniques-loading-needle">
+            <path d="M120 32L137 119 120 208 103 121Z" fill="#b64b37" stroke="#fbd68b" stroke-width="2.5"/>
+            <path d="M120 32L120 208 137 119Z" fill="#ecd394" opacity=".95"/>
+            <path d="M120 32L103 121 120 119Z" fill="#8b2925"/>
+            <circle cx="120" cy="120" r="12" fill="#f2d089" stroke="#53311e" stroke-width="3"/>
+            <circle cx="120" cy="120" r="4.5" fill="#10354f"/>
+          </g>
+        </svg>
+      </div>
+      <p class="chroniques-loading-tagline">CAP SUR L’AVENTURE</p>
+      <div class="chroniques-loading-progress" role="progressbar" aria-label="Étapes de préparation du jeu" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0">
+        <span id="chroniques-loading-progress-fill"></span>
+      </div>
+      <p class="chroniques-loading-stage" id="chroniques-loading-stage">Préparation de la traversée…</p>
+      <p class="chroniques-loading-tip" id="chroniques-loading-tip">Conseil : explore chaque île pour découvrir ses secrets.</p>
+      <button id="chroniques-loading-retry" class="chroniques-loading-retry" type="button" hidden>Réessayer le lancement</button>
+    </section>
+    <span class="chroniques-loading-bottom" aria-hidden="true">✦ &nbsp; L’HORIZON NOUS ATTEND &nbsp; ✦</span>
+  </div>
   <div id="app" aria-live="polite"></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="update-manager.js" defer></script>
+  <script src="loading-screen.js" defer></script>
   <script src="roam.js" defer></script>
   <script src="fruit-data.js" defer></script>
   <script src="tactics.js" defer></script>
@@ -65,6 +125,8 @@
       var script=document.createElement('script');
       script.src='game.js';
       script.async=false;
+      script.onload=function(){window.ChroniquesLoading?.ready();};
+      script.onerror=function(){window.ChroniquesLoading?.failed('Impossible de charger le jeu ancien.');};
       document.body.append(script);
     }
     var boot=window.ChroniquesRootBoot;

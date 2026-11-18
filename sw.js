@@ -1,6 +1,6 @@
 /* Coquille web du jeu original : ne supprime pas les caches des versions. */
-const CACHE = "chroniques-mers-root-redirect-20261118";
-const FILES = ["./","./index.html","./fruit-data.js","./game.js","./icon.svg","./manifest.webmanifest","./roam.js","./style.css","./tactics.js","./theme-v08.css","./theme-v09.css","./theme-v091.css","./theme-v10.css","./theme-v11.css","./theme-v12.css","./theme-v121.css","./assets/harbor-portrait.webp","./assets/ocean-port.webp","./assets/wave-texture.png","./update-manager.js","./update-manager.css","./game-versions.json"];
+const CACHE = "chroniques-mers-root-compass-20261118";
+const FILES = ["./","./index.html","./fruit-data.js","./game.js","./icon.svg","./manifest.webmanifest","./roam.js","./style.css","./tactics.js","./theme-v08.css","./theme-v09.css","./theme-v091.css","./theme-v10.css","./theme-v11.css","./theme-v12.css","./theme-v121.css","./assets/harbor-portrait.webp","./assets/ocean-port.webp","./assets/wave-texture.png","./update-manager.js","./update-manager.css","./game-versions.json","./loading-screen.js","./loading-screen.css"];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting()));
 });

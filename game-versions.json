@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.4.6",
+  "latest": "1.4.7",
   "versions": [
     {
       "id": "1.2.1",
@@ -91,6 +91,11 @@
       "id": "1.4.6",
       "directory": "versions/v1.4.6/",
       "notes": "Kisuke plus vivant au menu : regards, brise et attitudes articulées, réaction au survol et au clic. Retour à 1.4.5 possible."
+    },
+    {
+      "id": "1.4.7",
+      "directory": "versions/v1.4.7/",
+      "notes": "Écran de chargement marin avec boussole animée, conseils et progression réelle par étapes, sans attente artificielle. Retour à 1.4.6 possible."
     }
   ]
 }
