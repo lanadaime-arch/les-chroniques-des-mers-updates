@@ -350,12 +350,14 @@ test('V1.4.9 : atelier chibi en vrai WebGL, indépendant des sauvegardes et hors
  assert.ok(html.includes('src="../../loading-screen.js"'));
  assert.ok(js.includes("import * as THREE from './vendor/three.module.js'"));
  assert.ok(js.includes('THREE.WebGLRenderer'));
+ assert.doesNotThrow(()=>new vm.Script(js.replace(/^import .*\n/m,'')),'module JS sans erreur de syntaxe');
  assert.ok(js.includes('THREE.PerspectiveCamera'));
  assert.ok(js.includes('getDraft()'));
  assert.ok(js.includes('pointermove'));
  assert.ok(js.includes('wheel'));
  assert.ok(!js.includes('localStorage'));
  assert.ok(!js.includes('indexedDB'));
+ assert.ok(read(p+'game.js').includes('V1.4.9'));
  assert.ok(legacy.includes("const RACE='humain'"));
  assert.ok(legacy.includes('SANS SAUVEGARDE'));
  assert.ok(css.includes('.cdm3d-frame'));
