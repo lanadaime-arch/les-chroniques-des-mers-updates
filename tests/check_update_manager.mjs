@@ -8,10 +8,10 @@ const root=path.resolve('.');
 const manifest=JSON.parse(fs.readFileSync('game-versions.json','utf8'));
 const read=pathName=>fs.readFileSync(path.isAbsolute(pathName)?pathName:path.join(root,pathName),'utf8');
 
-test('vingt et une versions disponibles et des chemins locaux, sans publication externe',()=>{
+test('vingt-deux versions disponibles et des chemins locaux, sans publication externe',()=>{
  assert.equal(manifest.schema,1);
- assert.equal(manifest.latest,'1.4.9');
- assert.deepEqual(manifest.versions.map(v=>v.id),['1.2.1','1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4','1.4.5','1.4.6','1.4.7','1.4.8','1.4.9']);
+ assert.equal(manifest.latest,'1.4.10');
+ assert.deepEqual(manifest.versions.map(v=>v.id),['1.2.1','1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4','1.4.5','1.4.6','1.4.7','1.4.8','1.4.9','1.4.10']);
  for(const v of manifest.versions){
   assert.equal(v.directory,`versions/v${v.id}/`);
   assert.match(v.directory,/^versions\/v\d+\.\d+\.\d+\/$/);
@@ -33,7 +33,7 @@ test('vingt et une versions disponibles et des chemins locaux, sans publication 
  for (const f of ['theme-v136.css','assets/chibi-avatar-azur.webp','assets/chibi-avatar-flamme.webp','assets/chibi-avatar-brume.webp'])
    assert.ok(fs.statSync('versions/v1.3.6/'+f).isFile(),f);
 });
-test('scripts JS des vingt et une versions et gestionnaire chargent sans erreurs de syntaxe',()=>{
+test('scripts JS des vingt-deux versions et gestionnaire chargent sans erreurs de syntaxe',()=>{
  for(const v of manifest.versions){
   for(const file of ['game.js','roam.js','tactics.js','fruit-data.js','sw.js']){
    const p=path.join(root,v.directory,file);assert.doesNotThrow(()=>new vm.Script(read(p),{filename:p}),p);
@@ -306,7 +306,7 @@ test('V1.4.7 : splash visible avant le jeu et sans fausse progression',()=>{
  assert.ok(sw.includes('../../loading-screen.js'));
  assert.ok(sw.includes('../../loading-screen.css'));
  assert.ok(read('sw.js').includes('./loading-screen.css'));
- assert.ok(read('update-manager.js').includes("['1.4.7','1.4.8','1.4.9'].includes(version.id)"));
+ assert.ok(read('update-manager.js').includes("['1.4.7','1.4.8','1.4.9','1.4.10'].includes(version.id)"));
  assert.ok(!read('versions/v1.4.6/index.html').includes('chroniques-loading'));
 });
 test('V1.4.8 : le créateur commence sur Humain et ne crée aucune sauvegarde',()=>{
@@ -369,6 +369,27 @@ test('V1.4.9 : atelier chibi en vrai WebGL, indépendant des sauvegardes et hors
  assert.ok(fs.statSync(p+'vendor/three.module.js').size>1000000);
  assert.ok(read(p+'vendor/LICENSE-three.txt').includes('MIT License'));
  assert.ok(!read('versions/v1.4.8/index.html').includes('chibi-3d.js'));
+});
+test('V1.4.10 : compteur FPS temporaire seulement dans le laboratoire 3D',()=>{
+ const p='versions/v1.4.10/';
+ const js=read(p+'chibi-3d.js'),css=read(p+'chibi-3d.css'),sw=read(p+'sw.js');
+ const previous=read('versions/v1.4.9/chibi-3d.js');
+ assert.equal(manifest.latest,'1.4.10');
+ assert.equal(manifest.versions.length,22);
+ assert.ok(read(p+'index.html').includes('type="module" src="chibi-3d.js"'));
+ assert.ok(js.includes("fpsBadge.className='cdm3d-fps'"));
+ assert.ok(js.includes("if(fpsElapsed>=500)"));
+ assert.ok(js.includes("fpsFrames*1000/fpsElapsed"));
+ assert.ok(js.includes("fpsBadge.dataset.level"));
+ assert.ok(css.includes('.cdm3d-fps'));
+ assert.ok(sw.includes('chroniques-version-1-4-10'));
+ assert.ok(sw.includes('./vendor/three.module.js'));
+ assert.ok(read(p+'game.js').includes('V1.4.10'));
+ assert.ok(read(p+'game.js').includes('chroniques_mers_profiles_v1'));
+ assert.ok(!js.includes('localStorage')&&!js.includes('indexedDB'));
+ assert.ok(!previous.includes('fpsBadge'), 'La V1.4.9 reste inchangée');
+ assert.ok(read('update-manager.js').includes("['1.4.9','1.4.10'].includes(version.id)"));
+ assert.ok(fs.statSync(p+'vendor/three.module.js').size>1000000);
 });
 test('origin et chemins : aucun changement de domaine pour les profils locaux',()=>{
  for(const v of manifest.versions){
