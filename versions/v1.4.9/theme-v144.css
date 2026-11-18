@@ -1,0 +1,146 @@
+/* Les Chroniques des Mers — V1.4.4.
+   Retouches ciblées d'après la capture du vrai jeu Windows V1.4.3 (1920 x 1080).
+   Ni écran aplati, ni remplacement de bouton, ni migration de sauvegarde. */
+.v144-menu .v133-header .v143-nav-crest{
+  flex:0 1 240px;max-width:242px;min-width:192px;
+  gap:6px;padding:0 7px;overflow:visible;
+  background:radial-gradient(ellipse at 52% 45%,#e0ae6552,transparent 73%);
+}
+.v144-menu .v143-nav-compass{width:55px;height:55px;flex:0 0 55px;}
+.v144-menu .v143-crest-copy{
+  display:flex;min-width:0;flex:0 0 auto;white-space:nowrap;
+  align-items:flex-start;gap:5px;
+}
+.v144-menu .v143-crest-copy strong{
+  font:900 clamp(12px,.86vw,15px)/1.12 Georgia,serif;
+  letter-spacing:.01em;white-space:nowrap;
+}
+.v144-menu .v143-crest-copy small{
+  font:700 8px/1.1 Georgia,serif;letter-spacing:.1em;
+  color:#b6e4f5;white-space:nowrap;
+}
+.v144-menu .v133-topnav{flex:1 1 auto;min-width:0;gap:2px}
+.v144-menu .v133-topnav button{min-width:78px;flex:1 1 90px}
+.v144-menu .v133-header .v133-brand{flex:0 1 343px;min-width:230px;max-width:27%}
+.v144-menu .v133-brand strong{font-size:clamp(22px,1.9vw,32px)}
+/* The compass stays visible and the entire headline fits, even when the window narrows. */
+@media(min-width:721px) and (max-width:1580px){
+  .v144-menu .v133-header .v143-nav-crest{flex:0 0 63px;min-width:63px;max-width:63px;padding:0 3px}
+  .v144-menu .v143-nav-compass{width:53px;height:53px;flex:0 0 53px}
+  .v144-menu .v143-crest-copy{display:none}
+}
+@media(min-width:721px) and (max-width:1100px){
+  .v144-menu .v133-header .v143-nav-crest{display:none}
+  .v144-menu .v133-header .v133-brand{flex-basis:215px;min-width:175px;max-width:39%}
+}
+/* Richer card interiors: quiet engraved ornaments instead of empty blue gradients. */
+.v144-menu .v133-panel{
+  background:
+    radial-gradient(ellipse at 100% 0%,#438caa35,transparent 72%),
+    radial-gradient(circle at 12% 110%,#b98a4222,transparent 48%),
+    repeating-linear-gradient(135deg,transparent 0 27px,#d6b47908 28px 29px),
+    linear-gradient(158deg,#0b3659fa,#041b32fc 64%,#0a2d48fa);
+}
+.v144-menu .v133-panel-title{
+  background:
+    radial-gradient(ellipse at 50% 0%,#f8d78d62,transparent 59%),
+    repeating-linear-gradient(0deg,transparent 0 8px,#21120b70 9px 10px),
+    linear-gradient(180deg,#b18a51 0%,#7b4a27 24%,#32201b 58%,#875429);
+  box-shadow:inset 0 0 0 2px #64371c,inset 0 1px 0 #fff5c5ce,
+             0 3px 0 #49281a,0 7px 11px #000a;
+}
+.v144-menu .v133-panel-title::after{content:'✥';font-size:18px;color:#fff0be}
+.v144-menu .v133-stat-line{
+  border-bottom:1px solid #f1d4a04a;
+  background:linear-gradient(90deg,transparent,#f1c77909 48%,transparent);
+}
+/* Sturdier illustrated icons with more space than the V1.4.3 screenshot. */
+.v144-menu .v143-quick-icon{
+  width:48px;height:46px;flex:0 0 46px;
+  border:1px solid #f9d48b42;border-radius:14px;
+  background:radial-gradient(circle at 40% 30%,#ffe2a655,transparent 70%);
+  box-shadow:inset 0 1px 2px #fff6d047,0 3px 5px #0005;
+}
+.v144-menu .v143-quick-icon .v136-glyph{
+  width:42px;height:42px;overflow:visible;
+  filter:drop-shadow(0 2px 1px #35200f)
+         drop-shadow(0 0 5px #f5ca668c);
+}
+.v144-menu .v133-quick-grid button{
+  min-height:88px;gap:3px;padding:5px 4px;
+  font-size:clamp(11px,.86vw,13px);
+}
+.v144-menu .v133-quick-grid button:hover .v143-quick-icon{
+  filter:brightness(1.2) drop-shadow(0 0 7px #f9d386);
+}
+/* A visual bridge joins both marine SVG scrolls with the carved red CTA. */
+.v144-menu .v133-main-action{width:min(482px,96%)}
+.v144-menu .v133-play{
+  border-radius:24px 9px 24px 9px;
+  border:4px solid #ffdda0;
+  background:
+    radial-gradient(ellipse at 48% -32%,#ffe5a88d,transparent 65%),
+    linear-gradient(180deg,#c94c35 0%,#9b2822 31%,#61141b 79%,#b63925 100%);
+  box-shadow:inset 0 0 0 2px #64351d,
+    inset 0 0 0 5px #f2ca7c,
+    inset 0 1px 0 8px #8b451c70,
+    inset 0 6px 7px #ffddb47a,
+    inset 0 -10px 12px #2d0a12a6,
+    0 4px 0 #85481f,0 7px 0 #4c291a,0 17px 23px #000a;
+}
+.v144-menu .v133-play::before,.v144-menu .v133-play::after{
+  width:118px;height:74px;left:-54px;top:50%;
+  filter:drop-shadow(0 2px 1px #1b365a)
+         drop-shadow(0 0 2px #ffe6aa66);
+}
+.v144-menu .v133-play::after{left:auto;right:-54px;}
+.v144-menu .v133-play strong{
+  color:#fff6d5;text-shadow:0 1px #fff2bd,
+    0 3px #6f311b,0 5px 2px #2d1712,0 7px 7px #000b;
+}
+.v144-menu .v133-play>span .v136-glyph{
+  width:29px;height:29px;filter:drop-shadow(0 2px #4b291b)
+}
+/* The label sits in front, while a shadow sits beneath the boots instead of the name plaque. */
+.v144-menu .v143-stage-plinth{
+  bottom:30px;height:29px;width:min(46%,208px);filter:blur(6px);
+  background:radial-gradient(ellipse,#0c1720db 0%,#22231991 46%,transparent 77%);
+}
+.v144-menu .v133-stage-shadow{
+  bottom:33px;height:13px;width:min(32%,151px);
+  background:#080d12be;filter:blur(4px);
+}
+.v144-menu .v141-rig-stage{
+  transform:scale(1.03);margin-bottom:17px;
+  filter:drop-shadow(0 3px 2px #362313a5) drop-shadow(0 10px 7px #071c2bb8);
+}
+.v144-menu .v133-scene-ribbon{
+  background:linear-gradient(#1b4660,#061a33 75%,#071427);
+  border-color:#ffe0a1;box-shadow:inset 0 0 0 2px #8c5428,
+  0 3px 0 #40271d,0 5px 9px #0008;
+}
+/* Small Windows windows and mobile must keep the controls tappable and readable. */
+@media(min-width:721px) and (max-height:940px){
+  .v144-menu .v133-header .v143-nav-crest{min-height:48px}
+  .v144-menu .v133-quick-grid button{min-height:68px;gap:2px}
+  .v144-menu .v143-quick-icon{width:40px;height:36px;flex-basis:36px}
+  .v144-menu .v143-quick-icon .v136-glyph{width:35px;height:35px}
+  .v144-menu .v133-play::before,.v144-menu .v133-play::after{height:62px;width:99px}
+}
+@media(max-width:720px){
+  .v144-menu .v133-header .v143-nav-crest{display:none}
+  .v144-menu .v133-header .v133-brand{flex:1 1 auto;max-width:none;min-width:0}
+  .v144-menu .v133-quick-grid button{min-height:64px;gap:3px}
+  .v144-menu .v143-quick-icon{width:39px;height:33px;flex-basis:33px}
+  .v144-menu .v143-quick-icon .v136-glyph{width:31px;height:31px}
+  .v144-menu .v133-main-action{width:min(345px,85%)}
+  .v144-menu .v133-play::before,.v144-menu .v133-play::after{
+    width:68px;height:47px;left:-33px
+  }
+  .v144-menu .v133-play::after{left:auto;right:-33px}
+  .v144-menu .v143-stage-plinth{bottom:30px}
+  .v144-menu .v133-stage-shadow{bottom:33px}
+}
+@media(prefers-reduced-motion:reduce){
+  .v144-menu .v133-play,.v144-menu .v133-quick-grid button{transition:none!important}
+}
