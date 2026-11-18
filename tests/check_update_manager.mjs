@@ -8,10 +8,10 @@ const root=path.resolve('.');
 const manifest=JSON.parse(fs.readFileSync('game-versions.json','utf8'));
 const read=pathName=>fs.readFileSync(path.isAbsolute(pathName)?pathName:path.join(root,pathName),'utf8');
 
-test('vingt versions disponibles et des chemins locaux, sans publication externe',()=>{
+test('vingt et une versions disponibles et des chemins locaux, sans publication externe',()=>{
  assert.equal(manifest.schema,1);
- assert.equal(manifest.latest,'1.4.8');
- assert.deepEqual(manifest.versions.map(v=>v.id),['1.2.1','1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4','1.4.5','1.4.6','1.4.7','1.4.8']);
+ assert.equal(manifest.latest,'1.4.9');
+ assert.deepEqual(manifest.versions.map(v=>v.id),['1.2.1','1.2.2','1.2.3','1.3.0','1.3.3','1.3.4','1.3.5','1.3.6','1.3.7','1.3.8','1.3.9','1.4.0','1.4.1','1.4.2','1.4.3','1.4.4','1.4.5','1.4.6','1.4.7','1.4.8','1.4.9']);
  for(const v of manifest.versions){
   assert.equal(v.directory,`versions/v${v.id}/`);
   assert.match(v.directory,/^versions\/v\d+\.\d+\.\d+\/$/);
@@ -33,7 +33,7 @@ test('vingt versions disponibles et des chemins locaux, sans publication externe
  for (const f of ['theme-v136.css','assets/chibi-avatar-azur.webp','assets/chibi-avatar-flamme.webp','assets/chibi-avatar-brume.webp'])
    assert.ok(fs.statSync('versions/v1.3.6/'+f).isFile(),f);
 });
-test('scripts JS des vingt versions et gestionnaire chargent sans erreurs de syntaxe',()=>{
+test('scripts JS des vingt et une versions et gestionnaire chargent sans erreurs de syntaxe',()=>{
  for(const v of manifest.versions){
   for(const file of ['game.js','roam.js','tactics.js','fruit-data.js','sw.js']){
    const p=path.join(root,v.directory,file);assert.doesNotThrow(()=>new vm.Script(read(p),{filename:p}),p);
@@ -306,7 +306,7 @@ test('V1.4.7 : splash visible avant le jeu et sans fausse progression',()=>{
  assert.ok(sw.includes('../../loading-screen.js'));
  assert.ok(sw.includes('../../loading-screen.css'));
  assert.ok(read('sw.js').includes('./loading-screen.css'));
- assert.ok(read('update-manager.js').includes("['1.4.7','1.4.8'].includes(version.id)"));
+ assert.ok(read('update-manager.js').includes("['1.4.7','1.4.8','1.4.9'].includes(version.id)"));
  assert.ok(!read('versions/v1.4.6/index.html').includes('chroniques-loading'));
 });
 test('V1.4.8 : le créateur commence sur Humain et ne crée aucune sauvegarde',()=>{
@@ -340,6 +340,33 @@ test('V1.4.8 : le créateur commence sur Humain et ne crée aucune sauvegarde',(
  assert.ok(read('update-manager.js').includes("'character-v2-prototype.js'"));
  assert.ok(read('update-manager.js').includes("'character-v2-prototype.css'"));
  assert.ok(!read('versions/v1.4.7/index.html').includes('character-v2-prototype.js'));
+});
+test('V1.4.9 : atelier chibi en vrai WebGL, indépendant des sauvegardes et hors ligne',()=>{
+ const p='versions/v1.4.9/',html=read(p+'index.html'),
+       js=read(p+'chibi-3d.js'),css=read(p+'chibi-3d.css'),sw=read(p+'sw.js'),legacy=read(p+'character-v2-prototype.js');
+ assert.ok(html.includes('type="module" src="chibi-3d.js"'));
+ assert.ok(html.includes('href="chibi-3d.css"'));
+ assert.ok(html.includes('src="../../update-manager.js"'));
+ assert.ok(html.includes('src="../../loading-screen.js"'));
+ assert.ok(js.includes("import * as THREE from './vendor/three.module.js'"));
+ assert.ok(js.includes('THREE.WebGLRenderer'));
+ assert.ok(js.includes('THREE.PerspectiveCamera'));
+ assert.ok(js.includes('getDraft()'));
+ assert.ok(js.includes('pointermove'));
+ assert.ok(js.includes('wheel'));
+ assert.ok(!js.includes('localStorage'));
+ assert.ok(!js.includes('indexedDB'));
+ assert.ok(legacy.includes("const RACE='humain'"));
+ assert.ok(legacy.includes('SANS SAUVEGARDE'));
+ assert.ok(css.includes('.cdm3d-frame'));
+ assert.ok(sw.includes('./chibi-3d.js'));
+ assert.ok(sw.includes('./chibi-3d.css'));
+ assert.ok(sw.includes('./vendor/three.module.js'));
+ assert.ok(sw.includes('./vendor/LICENSE-three.txt'));
+ assert.ok(read('update-manager.js').includes("'chibi-3d.js','vendor/three.module.js'"));
+ assert.ok(fs.statSync(p+'vendor/three.module.js').size>1000000);
+ assert.ok(read(p+'vendor/LICENSE-three.txt').includes('MIT License'));
+ assert.ok(!read('versions/v1.4.8/index.html').includes('chibi-3d.js'));
 });
 test('origin et chemins : aucun changement de domaine pour les profils locaux',()=>{
  for(const v of manifest.versions){
@@ -433,7 +460,7 @@ test('installation et retour arriere sauvegardent les profils avec le meme domai
  first.elements.get('chroniques-updates-button').handlers.click();
  await new Promise(resolve=>setImmediate(resolve));
  const items=first.elements.get('chroniques-update-list').children;
- assert.equal(items.length,20);
+ assert.equal(items.length,21);
  const hidden=items.filter(line=>line.hidden);
  assert.ok(hidden.length>=5,'Les anciennes versions sont repliees par defaut');
  assert.equal(first.elements.get('chroniques-update-history-toggle').hidden,false);
