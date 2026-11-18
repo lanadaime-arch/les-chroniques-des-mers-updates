@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.4.7",
+  "latest": "1.4.8",
   "versions": [
     {
       "id": "1.2.1",
@@ -96,6 +96,11 @@
       "id": "1.4.7",
       "directory": "versions/v1.4.7/",
       "notes": "Écran de chargement marin avec boussole animée, conseils et progression réelle par étapes, sans attente artificielle. Retour à 1.4.6 possible."
+    },
+    {
+      "id": "1.4.8",
+      "directory": "versions/v1.4.8/",
+      "notes": "Prototype du créateur V2 : Humain par défaut, traits du visage et cheveux modifiables, pièces SVG articulées. Sauvegarde de nouveaux personnages désactivée jusqu'à validation."
     }
   ]
 }

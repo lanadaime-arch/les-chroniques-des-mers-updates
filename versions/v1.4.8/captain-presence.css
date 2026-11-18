@@ -1,0 +1,133 @@
+/* V1.4.6 — Kisuke vivant : poses articulées, présence et réactions sur PC.
+   On anime la tête, les bras, les jambes, le torse et les pans indépendamment.
+   Le dessin historique et toutes les options d'apparence restent intacts. */
+.v146-menu .v141-rig-stage {
+  transform:scale(1.06);
+  transform-origin:50% 94%;
+  filter:drop-shadow(0 2px 1px #352315b3)
+    drop-shadow(0 8px 6px #091c2abb)
+    drop-shadow(0 15px 9px #04121cb3);
+}
+.v146-menu .v141-rig-stage .v141-rig-breath {
+  animation:cdm146-breath 3.1s ease-in-out infinite;
+  transform-origin:230px 224px;
+}
+.v146-menu .v141-rig-stage .v141-rig-arm-left {
+  animation:cdm146-left-arm 3.1s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage .v141-rig-arm-right {
+  animation:cdm146-right-arm 4.4s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage .v141-rig-leg-left,
+.v146-menu .v141-rig-stage .v141-rig-leg-right {
+  animation:cdm146-foot-weight 5.9s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage .v141-rig-head{
+  animation:cdm146-head-idle 5s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage .v141-rig-cape-left{
+  animation:cdm146-cape-left 3.2s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage .v141-rig-cape-right{
+  animation:cdm146-cape-right 4s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage .v141-rig-eyes{
+  animation:cdm146-blink 7.2s steps(1,end) infinite;
+}
+/* Character gestures: observed surroundings, stronger breeze, ready to leave. */
+.v146-menu .v141-rig-stage.v146-lookout .v141-rig-head{
+  animation:cdm146-scan 4.2s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage.v146-lookout .v141-rig-arm-right{
+  animation:cdm146-shade-eyes 4.2s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage.v146-breeze .v141-rig-cape-left{
+  animation:cdm146-wind-left 2.5s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage.v146-breeze .v141-rig-cape-right{
+  animation:cdm146-wind-right 2.8s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage.v146-breeze .v141-rig-head{
+  animation:cdm146-lean 3s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage.v146-breeze .v146-wind-lines{
+  opacity:.7;animation:cdm146-windlines 2.8s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage.v146-ready .v141-rig-arm-left{
+  animation:cdm146-brace-left 3s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage.v146-ready .v141-rig-arm-right{
+  animation:cdm146-brace-right 3s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage.v146-ready .v141-rig-head{
+  animation:cdm146-ready-head 3s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage.v146-welcome .v141-rig-head{
+  animation:cdm146-welcome-head 1.7s ease-in-out infinite;
+}
+.v146-menu .v141-rig-stage.v146-welcome .v141-rig-arm-right{
+  animation:cdm146-welcome-arm 1.7s ease-in-out infinite;
+}
+/* Explicit click emote (the old greet button is maintained). */
+.v146-menu .v141-rig-stage.v141-greet .v141-rig-head{
+  animation:cdm-greet-head .85s ease-in-out 1!important;
+}
+.v146-menu .v141-rig-stage.v141-greet .v141-rig-arm-right{
+  animation:cdm-greet .85s ease-in-out 1!important;
+}
+.v146-menu .v141-rig-stage.v141-greet .v141-rig-arm-left{
+  animation:cdm146-greet-left .85s ease-in-out 1!important;
+}
+.v146-menu .v141-rig-stage.v141-greet .v141-rig-cape-left{
+  animation:cdm146-greet-cape .85s ease-in-out 1!important;
+}
+/* Wind lines are SVG geometry in the character, not UI text or sprite filters. */
+.v146-wind-lines{opacity:0;pointer-events:none;transform-origin:50% 50%}
+.v146-wind-lines path{fill:none;stroke:#c1f5ff;stroke-width:3.2;
+  stroke-linecap:round;filter:drop-shadow(0 1px 2px #137393)}
+.v146-menu .v133-stage-shadow{
+  bottom:31px;width:min(38%,167px);height:14px;
+  background:radial-gradient(ellipse,#07151bcc 0%,#1e211e9a 52%,transparent 78%);
+  animation:cdm146-ground 3.1s ease-in-out infinite;
+}
+.v146-menu .v143-stage-plinth{
+  bottom:28px;width:min(51%,224px);height:29px;
+  background:radial-gradient(ellipse,#0e1519c2 0%,#24332173 54%,transparent 78%);
+}
+@keyframes cdm146-breath{0%,100%{transform:scale(1,1)}50%{transform:scale(1.017,1.03)}}
+@keyframes cdm146-left-arm{0%,100%{transform:rotate(0)}50%{transform:rotate(-2.7deg)}}
+@keyframes cdm146-right-arm{0%,100%{transform:rotate(1deg)}50%{transform:rotate(4deg)}}
+@keyframes cdm146-foot-weight{0%,100%{transform:rotate(0)}50%{transform:rotate(.9deg)}}
+@keyframes cdm146-head-idle{0%,100%{transform:rotate(-.5deg)}42%{transform:rotate(1.3deg)}67%{transform:rotate(.5deg)}}
+@keyframes cdm146-cape-left{0%,100%{transform:rotate(-2deg)}52%{transform:rotate(4.3deg)}}
+@keyframes cdm146-cape-right{0%,100%{transform:rotate(2deg)}45%{transform:rotate(-4deg)}}
+@keyframes cdm146-blink{0%,32%,34%,72%,74%,100%{opacity:0}33%,73%{opacity:1}}
+@keyframes cdm146-scan{0%,100%{transform:rotate(-1deg)}28%,72%{transform:rotate(4.8deg)}}
+@keyframes cdm146-shade-eyes{0%,100%{transform:rotate(1deg)}25%,72%{transform:rotate(-11deg)}}
+@keyframes cdm146-wind-left{0%,100%{transform:rotate(-2deg)}24%{transform:rotate(7deg)}68%{transform:rotate(10deg)}}
+@keyframes cdm146-wind-right{0%,100%{transform:rotate(2deg)}25%,75%{transform:rotate(-9deg)}}
+@keyframes cdm146-lean{0%,100%{transform:rotate(-.8deg)}47%{transform:rotate(2.8deg)}}
+@keyframes cdm146-windlines{0%,100%{opacity:0;transform:translateX(-7px)}35%,65%{opacity:.7;transform:translateX(4px)}}
+@keyframes cdm146-brace-left{0%,100%{transform:rotate(0)}45%{transform:rotate(-7deg)}}
+@keyframes cdm146-brace-right{0%,100%{transform:rotate(0)}40%{transform:rotate(6deg)}}
+@keyframes cdm146-ready-head{0%,100%{transform:rotate(0)}43%{transform:rotate(-2.5deg)}}
+@keyframes cdm146-welcome-head{0%,100%{transform:rotate(-1deg)}48%{transform:rotate(3.1deg)}}
+@keyframes cdm146-welcome-arm{0%,100%{transform:rotate(0)}48%{transform:rotate(-9deg)}}
+@keyframes cdm146-greet-left{0%,100%{transform:rotate(0)}38%{transform:rotate(7deg)}}
+@keyframes cdm146-greet-cape{0%,100%{transform:rotate(-1deg)}43%{transform:rotate(6deg)}}
+@keyframes cdm146-ground{0%,100%{opacity:.73;transform:scaleX(1)}50%{opacity:.88;transform:scaleX(.96)}}
+@media(min-width:721px) and (max-height:940px){
+ .v146-menu .v141-rig-stage{transform:scale(1.025)}
+}
+@media(max-width:720px){
+ .v146-menu .v141-rig-stage{transform:scale(1);margin-bottom:30px}
+ .v146-menu .v133-stage-shadow{bottom:31px}
+}
+@media(prefers-reduced-motion:reduce){
+ .v146-menu .v141-rig-stage *,
+ .v146-menu .v141-rig-stage.v141-greet *,
+ .v146-menu .v133-stage-shadow{
+   animation:none!important;transition:none!important;
+ }
+ .v146-wind-lines{display:none}
+}

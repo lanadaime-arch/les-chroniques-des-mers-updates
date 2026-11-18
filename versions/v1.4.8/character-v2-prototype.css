@@ -1,0 +1,55 @@
+/* V2 : prototype humain en pièces SVG propres; pas d'image découpée */
+.cdm2-workshop{min-height:100vh;padding:clamp(12px,2vw,24px);color:#fff1d5;
+ background:radial-gradient(ellipse at 60% 0%,#2b6a8f65,transparent 70%),linear-gradient(140deg,#061b30,#0b3550 54%,#071b32);font:600 13px/1.5 Georgia,serif}
+.cdm2-workshop button{cursor:pointer;color:inherit}
+.cdm2-header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:0 auto 14px;max-width:1600px;border:2px solid #e8ba70;border-radius:14px;background:linear-gradient(#214f65,#061c31);padding:12px 18px;box-shadow:0 5px 18px #0008}
+.cdm2-header>div{flex:1}.cdm2-header h1{font:bold clamp(23px,2.3vw,34px)/1.1 Georgia,serif}.cdm2-header span{color:#f5cc82;font-size:10px;letter-spacing:.12em}
+.cdm2-header>button,.cdm2-header>strong{padding:10px 14px;border:1px solid #e7bd76;border-radius:9px;background:#0b2a43;font-size:12px}
+.cdm2-header>strong{color:#ffe1a1;font-size:11px}
+.cdm2-layout{display:grid;max-width:1600px;margin:auto;grid-template-columns:minmax(280px,.95fr) minmax(370px,1.25fr) minmax(230px,.78fr);gap:14px;align-items:start}
+.cdm2-panel{min-width:0;border:2px solid #c79b58;border-radius:13px;background:linear-gradient(155deg,#123f60ed,#051b32f5);box-shadow:inset 0 0 0 3px #6e462740,0 10px 24px #0008;padding:15px}
+.cdm2-panel h2{font:800 clamp(17px,1.5vw,22px)/1.25 Georgia,serif;color:#ffe5b1;margin:0 0 10px}
+.cdm2-panel p{color:#cbdce2;margin:9px 0 14px;font:500 12px/1.5 system-ui,sans-serif}
+.cdm2-preview{text-align:center}.cdm2-model-holder{display:grid;place-items:center;height:clamp(335px,57vh,575px);background:radial-gradient(ellipse at 50% 55%,#1c8aa263,transparent 65%);overflow:hidden}
+.cdm2-hero{width:auto;height:100%;max-width:100%;filter:drop-shadow(0 8px 9px #0009)}
+.cdm2-hero [data-bone]{transform-box:view-box;transform-origin:center}
+.cdm2-hero .cdm2-body{transform-origin:170px 285px;animation:cdm2-breathe 3s ease-in-out infinite}
+.cdm2-hero .cdm2-head{transform-origin:171px 187px;animation:cdm2-look 5.2s ease-in-out infinite}
+.cdm2-hero .cdm2-arm-left{transform-origin:127px 219px;animation:cdm2-left 3.2s ease-in-out infinite}
+.cdm2-hero .cdm2-arm-right{transform-origin:205px 219px;animation:cdm2-right 3.4s ease-in-out infinite}
+.cdm2-hero .cdm2-leg-left{transform-origin:146px 283px}
+.cdm2-hero .cdm2-leg-right{transform-origin:192px 283px}
+.cdm2-hero .cdm2-forearm-right{transform-origin:239px 275px}
+.cdm2-hero .cdm2-forearm-left{transform-origin:85px 275px}
+.cdm2-hero .cdm2-blink{opacity:0;animation:cdm2-blink 6.3s steps(1,end) infinite}
+.cdm2-hero.cdm2-pose-wave .cdm2-arm-right{animation:cdm2-wave-upper .8s ease-in-out infinite}
+.cdm2-hero.cdm2-pose-wave .cdm2-forearm-right{animation:cdm2-wave-forearm .8s ease-in-out infinite}
+.cdm2-hero.cdm2-pose-wave .cdm2-head{animation:cdm2-wave-head 1.2s ease-in-out infinite}
+.cdm2-hero.cdm2-pose-walk .cdm2-leg-left{animation:cdm2-step-left .65s ease-in-out infinite}
+.cdm2-hero.cdm2-pose-walk .cdm2-leg-right{animation:cdm2-step-right .65s ease-in-out infinite}
+.cdm2-hero.cdm2-pose-walk .cdm2-arm-left{animation:cdm2-step-right .65s ease-in-out infinite}
+.cdm2-hero.cdm2-pose-walk .cdm2-arm-right{animation:cdm2-step-left .65s ease-in-out infinite}
+@keyframes cdm2-breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes cdm2-look{0%,100%{transform:rotate(-1deg)}55%{transform:rotate(2deg)}}
+@keyframes cdm2-left{0%,100%{transform:rotate(0)}50%{transform:rotate(-2deg)}}
+@keyframes cdm2-right{0%,100%{transform:rotate(1deg)}50%{transform:rotate(3deg)}}
+@keyframes cdm2-blink{0%,29%,31%,100%{opacity:0}30%{opacity:1}}
+@keyframes cdm2-wave-upper{0%,100%{transform:rotate(-32deg)}50%{transform:rotate(-47deg)}}
+@keyframes cdm2-wave-forearm{0%,100%{transform:rotate(-29deg)}50%{transform:rotate(-65deg)}}
+@keyframes cdm2-wave-head{0%,100%{transform:rotate(0)}50%{transform:rotate(5deg)}}
+@keyframes cdm2-step-left{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+@keyframes cdm2-step-right{0%,100%{transform:rotate(14deg)}50%{transform:rotate(-14deg)}}
+.cdm2-pose-buttons,.cdm2-tabs,.cdm2-options,.cdm2-class-options{display:flex;flex-wrap:wrap;gap:8px}
+.cdm2-pose-buttons button,.cdm2-tabs button,.cdm2-options button,.cdm2-class-options button,.cdm2-summary>button{
+ padding:10px 12px;border:2px solid #a78250;border-radius:9px;background:#0c2945;color:#ffe9c8;font:750 12px/1.25 system-ui,sans-serif}
+.cdm2-workshop button[aria-pressed="true"]{border-color:#ffe0a0;background:linear-gradient(#976329,#173e59);box-shadow:0 0 7px #f9cd7688}
+.cdm2-workshop button:focus-visible{outline:3px solid #d6fdff;outline-offset:2px}
+.cdm2-editor{padding:18px 5px}.cdm2-editor h2{font-size:24px}
+.cdm2-field{border:0;border-top:1px solid #c2965b;padding:13px 0;margin:6px 0}.cdm2-field legend{color:#ffe2a6;font-size:17px;padding:0 7px}
+.cdm2-race-selected,.cdm2-summary>div{display:flex;justify-content:space-between;gap:7px;border-bottom:1px solid #e4b36c55;padding:12px 3px;color:#f3dcb2}
+.cdm2-race-selected span{font-size:11px;color:#aed0dc}.cdm2-summary>div strong{font-size:12px;color:#fff1cd}
+.cdm2-summary>button{width:100%;margin-top:16px;background:linear-gradient(#9f7538,#554020)}
+.cdm2-class-options{flex-direction:column}.cdm2-class-options button{text-align:left;display:flex;justify-content:space-between}.cdm2-class-options small{color:#c9dde5}
+@media(max-width:1250px){.cdm2-layout{grid-template-columns:minmax(250px,.95fr) minmax(330px,1.3fr)}.cdm2-summary{grid-column:1/-1}.cdm2-model-holder{height:min(57vh,495px)}}
+@media(max-width:760px){.cdm2-layout{display:flex;flex-direction:column}.cdm2-panel{width:100%}.cdm2-header{flex-wrap:wrap}.cdm2-header>strong{order:3}.cdm2-model-holder{height:280px}.cdm2-hero{height:280px}.cdm2-preview{position:static}}
+@media(prefers-reduced-motion:reduce){.cdm2-hero *{animation:none!important}.cdm2-workshop *{transition:none!important}}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 98" fill="none">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#c8f8ff"/><stop offset=".27" stop-color="#37c8ec"/>
+      <stop offset=".68" stop-color="#1274b6"/><stop offset="1" stop-color="#082b66"/>
+    </linearGradient>
+    <linearGradient id="foil" x1="0" y1="0" x2=".6" y2="1">
+      <stop stop-color="#fff8c9"/><stop offset=".5" stop-color="#ffd77d"/><stop offset="1" stop-color="#a56224"/>
+    </linearGradient>
+  </defs>
+  <path d="M166 37C130 41 107 23 79 20 54 18 36 36 39 52 50 39 68 37 79 45 90 53 82 70 63 71 32 72 15 45 4 43 17 70 38 90 65 88 89 87 107 66 111 52 125 61 145 62 166 48Z" fill="url(#sea)" stroke="#073462" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M167 38C144 43 120 33 100 25 75 13 51 16 38 31 46 31 62 29 73 32 99 38 110 61 144 54" stroke="#dafaff" stroke-width="5" stroke-linecap="round"/>
+  <path d="M7 43C23 48 38 70 59 68 76 67 81 58 76 49" stroke="#b7f9ff" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M112 52C124 61 143 63 169 47" stroke="url(#foil)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M37 52c4-16 16-23 30-23" stroke="url(#foil)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M16 61C34 87 68 99 95 73" stroke="#11417e" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="98" cy="36" r="4" fill="#f9df98" stroke="#6b461b" stroke-width="2"/>
+</svg>

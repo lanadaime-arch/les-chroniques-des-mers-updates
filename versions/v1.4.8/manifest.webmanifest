@@ -1,0 +1,24 @@
+{
+  "name": "Les Chroniques des Mers — Aventure solo",
+  "short_name": "Chroniques des Mers",
+  "description": "Explorez les îles, affrontez les ennemis et découvrez des reliques dans une aventure solo.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#071827",
+  "theme_color": "#0a293e",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ],
+  "id": "./",
+  "lang": "fr",
+  "orientation": "any",
+  "categories": [
+    "games"
+  ]
+}
