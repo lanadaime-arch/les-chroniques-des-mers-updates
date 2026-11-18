@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "latest": "1.4.10",
+  "latest": "1.4.11",
   "versions": [
     {
       "id": "1.2.1",
@@ -111,6 +111,11 @@
       "id": "1.4.10",
       "directory": "versions/v1.4.10/",
       "notes": "Compteur FPS temporaire dans l'atelier chibi 3D, actualisé deux fois par seconde. Aucun changement des personnages ni sauvegardes. Retour à 1.4.9 possible."
+    },
+    {
+      "id": "1.4.11",
+      "directory": "versions/v1.4.11/",
+      "notes": "Bouton Nouveautés dans l'accueil : fenêtre de notes de mise à jour, historique lisible et données séparées. Sauvegardes intactes, retour à 1.4.10 possible."
     }
   ]
 }
