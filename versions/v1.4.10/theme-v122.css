@@ -1,0 +1,303 @@
+/* LES CHRONIQUES DES MERS — V1.2.2 · PC / MONITEURS
+   Présentation uniquement : les commandes, les ressources de combat et les sauvegardes
+   restent pilotées par le moteur V1.2.1. Aucun style mobile n'est remplacé ici. */
+@media (min-width: 1050px) and (orientation: landscape) {
+  :root { --pc-gold: #ecc88c; --pc-blue: #102e40; --pc-line: #ac9063; }
+  /* Fenêtre de personnage : véritable interface de jeu, pas une page web étirée. */
+  .game-overlay.panel-character { padding: 18px 24px; backdrop-filter: blur(5px); }
+  .panel-character .overlay-sheet {
+    width: min(1540px, calc(100vw - 48px));
+    height: min(860px, calc(100dvh - 36px));
+    max-height: calc(100dvh - 36px);
+    border: 1px solid #d2ab71;
+    background: linear-gradient(145deg,#0d3446,#061a2e 55%,#071d30);
+    box-shadow: 0 0 0 3px #071928,0 0 0 4px #8b6f4d,0 28px 95px #000c;
+  }
+  .panel-character .overlay-header { flex-basis: 56px; min-height: 56px; padding: 7px 18px; }
+  .panel-character .overlay-heading h2 { font-size: 24px; }
+  .panel-character .overlay-character-meta { font-size: 11px; }
+  .panel-character .overlay-scroll { padding: 10px !important; }
+  .panel-character .character-page { grid-template-columns: 190px minmax(0,1fr); gap: 10px; }
+  .panel-character .char-sidebar { padding: 11px 9px; border-color: #9d825b; }
+  .panel-character .char-side-name { padding: 10px 7px 15px; margin-bottom: 8px; }
+  .panel-character .char-side-name h3 { font-size: 25px; }
+  .panel-character .char-side-name small { font-size: 11px; }
+  .panel-character .char-nav { gap: 4px; }
+  .panel-character .char-nav button {
+    min-height: 43px; font-size: 12px; padding: 8px 11px; gap: 11px;
+    border-bottom: 1px solid #47657847;
+    transition: background-color .15s, border-color .15s;
+  }
+  .panel-character .char-nav button:focus-visible,
+  .panel-character .loot-slot:focus-visible,
+  .panel-character .rpg-bag-tabs button:focus-visible { outline: 2px solid #f9d490; outline-offset: 2px; }
+  .panel-character .char-detail { padding: 12px; border-color: #a58e64; }
+  .panel-character .rpg-block-title { height: 36px; font-size: 17px; margin-bottom: 10px; }
+  .panel-character .rpg-block-title small { font-size: 11px; }
+
+  /* Armure + inventaire : silhouette plus contenue ; vraie zone d'objets lisible. */
+  .panel-character .rpg-equip-layout { grid-template-columns: minmax(380px, 43%) minmax(0,1fr); gap: 12px; }
+  .panel-character .rpg-paper, .panel-character .rpg-bag { padding: 12px; }
+  .panel-character .rpg-paper-layout { grid-template-columns: 56px minmax(0,1fr) 56px; gap: 7px; min-height: 0; max-height: 520px; }
+  .panel-character .paper-slots { justify-content: space-evenly; }
+  .panel-character .paper-slot { height: 57px; }
+  .panel-character .paper-slot:hover { border-color: #f5d99c; box-shadow: inset 0 0 0 2px #1e394d,0 0 10px #e5b66b3c; }
+  .panel-character .paper-person { max-height: 520px; background-position: center center; }
+  .panel-character .paper-stage { flex: 1 1 auto; justify-content: center; align-items: end; }
+  .panel-character .paper-stage .captain-portrait { max-height: 350px; max-width: min(96%,300px); height: auto; object-fit: contain; }
+  .panel-character .paper-name { padding: 6px 2px 2px; font-size: 18px; }
+  .panel-character .paper-profession { padding-bottom: 6px; }
+  .panel-character .paper-bonus { margin-top: 10px; }
+
+  /* Sac : taille d'une case constante sur PC ; les détails restent visibles à droite. */
+  .panel-character .rpg-bag { display: grid; grid-template-columns: minmax(0,1fr) 206px; grid-template-rows: auto auto minmax(0,1fr); gap: 8px; }
+  .panel-character .rpg-bag > .rpg-block-title { grid-column: 1/-1; margin: 0; }
+  .panel-character .rpg-bag > .rpg-bag-controls { grid-column: 1/-1; }
+  .panel-character .rpg-bag > .rpg-bag-content { grid-column: 1; grid-row: 3; align-self: stretch; min-height: 0; padding: 9px; }
+  .panel-character .rpg-bag > .rpg-bag-detail {
+    grid-column: 2; grid-row: 3;
+    display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start;
+    gap: 10px; padding: 16px 12px;
+    border: 1px solid #8c7551; background: linear-gradient(180deg,#1b4350,#091e2f 75%);
+    box-shadow: inset 0 0 0 1px #e0be7b24;
+    min-height: 220px; max-height: 330px;
+  }
+  .panel-character .rpg-bag-detail .rpg-item-pic { width: 62px; height: 62px; flex: 0 0 62px; font-size: 30px; align-self: center; }
+  .panel-character .rpg-bag-detail > div { min-width: 0; flex: 0 0 auto; width: 100%; text-align: center; }
+  .panel-character .rpg-bag-detail strong { font-size: 16px; white-space: normal; }
+  .panel-character .rpg-bag-detail p { font-size: 11px; line-height: 1.5; max-height: none; margin-top: 8px; }
+  .panel-character .rpg-bag-detail .rpg-use-btn { min-height: 35px; align-self: center; padding: 7px 16px; }
+  .panel-character .rpg-bag-grid,
+  .panel-character .rpg-tab-inventory .rpg-bag-grid { grid-template-columns: repeat(auto-fill, minmax(48px, 54px)); grid-auto-rows: 54px; gap: 6px; align-content: start; }
+  .panel-character .loot-slot,.panel-character .bag-empty-tile { min-width: 0; width: 100%; height: 54px; max-height: 54px; }
+  .panel-character .rpg-tab-inventory .rpg-bag { width: 100%; height: 100%; }
+  .panel-character .rpg-tab-inventory .rpg-bag-content { overflow-y: auto; }
+  .panel-character .rpg-bag-tabs button { padding: 7px 10px; min-height: 32px; font-size: 11px; }
+  .panel-character .rpg-money { font-size: 12px; }
+  .panel-character .rpg-bag-mini .rpg-bag-detail { max-height: 270px; }
+  .panel-character .rpg-bag-mini .rpg-bag-grid { grid-template-columns: repeat(auto-fill,minmax(46px,52px)); grid-auto-rows: 52px; }
+
+  /* Fiche de caractéristiques : portrait maîtrisé, statistiques plus lisibles. */
+  .panel-character .rpg-stats-layout { grid-template-columns: minmax(270px, 34%) minmax(0,1fr); gap: 15px; }
+  .panel-character .rpg-character-display { max-height: 610px; }
+  .panel-character .rpg-character-art .captain-portrait { max-height: 360px; width: auto; }
+  .panel-character .rpg-stat-sheet { max-width: 730px; }
+  .panel-character .rpg-resource-line { gap: 9px; }
+  .panel-character .char-gauge>span,.panel-character .char-gauge>span b { font-size: 12px; }
+  .panel-character .rpg-stat-caption { margin: 14px 0 12px; padding: 11px; font-size: 12px; }
+  .panel-character .rpg-stat-list { gap: 9px; }
+  .panel-character .rpg-stat-cell { padding: 10px 13px; min-height: 58px; }
+  .panel-character .rpg-stat-cell > span { font-size: 12px; }
+  .panel-character .rpg-stat-cell b { font-size: 21px; }
+  .panel-character .rpg-skill-list { grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 8px; }
+  .panel-character .rpg-skill { min-height: 66px; }
+
+  /* Exploration à la souris : boutons rassemblés, joystick tactile masqué. */
+  .play-stage .scene-stick { display: none !important; }
+  .play-stage .scene-toolbar {
+    /* Centrage sur le viewport, même si le conteneur canvas ne calcule pas sa largeur. */
+    left: 50vw !important; right: auto !important; transform: translateX(-50%);
+    width: max-content; max-width: calc(100vw - 40px); min-height: 64px;
+    padding: 6px 14px; border: 1px solid #d4af75; border-bottom: 0;
+    border-radius: 11px 11px 0 0; background: linear-gradient(180deg,#173d4deb,#051727f8);
+    box-shadow: 0 -6px 23px #010a13b8, inset 0 1px #f9d7a64d;
+  }
+  .play-stage .scene-links { width: auto; grid-template-columns: repeat(4,70px); gap: 6px; }
+  .play-stage .scene-links button { min-height: 52px; font-size: 22px; border-radius: 5px; }
+  .play-stage .scene-links button span { font-size: 10px; }
+  .play-stage .scene-topline { padding: 12px 16px; }
+  .play-stage .scene-camera-tools { top: 125px; right: 16px; }
+  .play-stage .scene-camera-tools button { width: 42px; height: 42px; min-width: 42px; min-height: 42px; border-radius: 5px; }
+
+  /* Combat PC : vraie hotbar centrale + lisibilité des tours et ressources. */
+  .play-stage .tactical-v12 .tactical-action-dock {
+    left: 50vw !important; right: auto !important; transform: translateX(-50%);
+    width: max-content; max-width: calc(100vw - 32px);
+    height: 76px; padding: 7px 10px;
+    border: 1px solid #d8b179; border-bottom: 0; border-radius: 10px 10px 0 0;
+    background: linear-gradient(180deg,#1a4152fa,#071a2dfb);
+    box-shadow: 0 -7px 32px #000b, inset 0 1px #f7d4a942;
+  }
+  .play-stage .tactical-v12 .tactical-buttons { flex: 0 1 auto; gap: 5px; overflow-x: auto; }
+  .play-stage .tactical-v12 .tactical-buttons .tactic-btn,
+  .play-stage .tactical-v12 .tactical-buttons .fruit-tactic {
+    width: 60px; flex-basis: 60px !important; min-width: 60px !important; max-width: 60px !important;
+    height: 60px; max-height: 60px; border-radius: 5px;
+  }
+  .play-stage .tactical-v12 .tactical-buttons .tactic-glyph { height: 32px; max-height: 32px; font-size: 26px; }
+  .play-stage .tactical-v12 .tactical-buttons .tactic-btn kbd { font-size: 10px; }
+  .play-stage .tactical-v12 .tactical-turn-actions { flex-basis: 99px; min-width: 99px; }
+  .play-stage .tactical-v12 .tactical-turn-actions .tactic-btn b { font-size: 12px; }
+  .play-stage .tactical-v12 .tactical-message { bottom: 83px; }
+  .play-stage .tactical-v12 .tactic-info { bottom: 88px; width: 390px; }
+  .play-stage .tactical-v12 .tactical-hud { top: 47px; left: 15px; right: auto; justify-content: flex-start; }
+  .play-stage .tactical-v12 .tactical-hud span { font-size: 11px; padding: 5px 8px; }
+  .play-stage .tactical-v12 .tactic-initiative { top: 80px; left: 15px; right: auto; width: auto; max-width: 62vw; }
+  .play-stage .tactical-v12 .tactic-initiative > span { font-size: 11px; padding: 5px 8px; }
+  .play-stage .tactical-v12 .tactical-head { padding: 10px 15px 8px; }
+  .play-stage .tactical-v12 .tactical-head h2 { font-size: 19px; }
+  .play-stage .tactical-v12 .tactic-camera-tools { top: 38%; right: 15px; }
+}
+/* Un écran moyen conserve une grille confortable sans étirer les objets. */
+@media (min-width: 1050px) and (max-width: 1300px) and (orientation: landscape) {
+  .panel-character .character-page { grid-template-columns: 168px minmax(0,1fr); }
+  .panel-character .rpg-equip-layout { grid-template-columns: minmax(300px,40%) minmax(0,1fr); }
+  .panel-character .rpg-bag { grid-template-columns: minmax(0,1fr) 150px; }
+  .panel-character .rpg-bag-detail strong { font-size: 13px; }
+  .panel-character .rpg-bag-grid,.panel-character .rpg-tab-inventory .rpg-bag-grid { grid-template-columns: repeat(auto-fill,minmax(40px,48px)); grid-auto-rows:48px; }
+  .panel-character .loot-slot,.panel-character .bag-empty-tile {height:48px;max-height:48px}
+  .panel-character .rpg-paper-layout {grid-template-columns:42px minmax(0,1fr) 42px}
+  .panel-character .paper-slot{height:48px}
+}
+/* Les gestes tactiles restent disponibles sur les appareils hybrides. */
+@media (min-width: 1050px) and (pointer: coarse) {
+  .play-stage .scene-stick { display: block !important; }
+}
+
+/* V1.2.2 — seconde passe PC : classes réellement utilisées dans game.js.
+   L'ancienne barre .scene-links n'existe plus : le HUD utilise .hud-action-list. */
+@media (min-width: 1050px) and (orientation: landscape) {
+  .play-stage .scene-toolbar {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; padding: 7px 12px; min-height: 72px;
+  }
+  .play-stage .scene-toolbar .hud-dock-title {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0; font: 700 10px/1.25 Georgia, serif; letter-spacing: .05em;
+    color: #e6c68f; border-right: 1px solid #a68a6170; padding-right: 11px;
+  }
+  .play-stage .scene-toolbar .hud-dock-title > span { font-size: 20px; }
+  .play-stage .scene-toolbar .hud-action-list {
+    display: grid; grid-template-columns: repeat(4, 76px);
+    align-items: center; gap: 7px; min-width: 0;
+  }
+  .play-stage .scene-toolbar .hud-action {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; gap: 3px; min-width: 0; min-height: 55px; padding: 5px 7px;
+    border: 1px solid #8e7756; border-radius: 5px;
+    background: linear-gradient(160deg,#285165,#0a2136 80%);
+    color: #f6e4bd; font: 700 11px/1.15 Georgia,serif;
+    box-shadow: inset 0 0 0 1px #dbb77c19;
+    transition: border-color .16s, background-color .16s;
+  }
+  .play-stage .scene-toolbar .hud-action:hover,
+  .play-stage .scene-toolbar .hud-action:focus-visible {
+    border-color: #ffe0a4; outline: 2px solid #e7c78c; outline-offset: 1px;
+  }
+  .play-stage .scene-toolbar .hud-action:disabled { opacity: .45; cursor: not-allowed; }
+  .play-stage .scene-toolbar .hud-action-icon { font-size: 23px; line-height: 1; }
+  .play-stage .scene-toolbar .hud-action em {
+    position: absolute; top: 2px; right: 3px; min-width: 15px; padding: 1px 3px;
+    border-radius: 8px; background: #092235; color: #fee7b2; font: 700 10px system-ui;
+  }
+  .play-stage .scene-toolbar .hud-dock-sigil { font-size: 20px; color: #cda86e; }
+
+  /* Équipement : le mini-sac ne doit pas écraser ses cases d'objets
+     par un panneau de détails sur le côté. */
+  .panel-character .rpg-equip-layout .rpg-bag-mini {
+    grid-template-columns: minmax(0,1fr);
+    grid-template-rows: auto auto minmax(105px,1fr) auto;
+    min-height: 0;
+  }
+  .panel-character .rpg-equip-layout .rpg-bag-mini > .rpg-block-title,
+  .panel-character .rpg-equip-layout .rpg-bag-mini > .rpg-bag-controls {
+    grid-column: 1;
+  }
+  .panel-character .rpg-equip-layout .rpg-bag-mini > .rpg-bag-content {
+    grid-column: 1; grid-row: 3; min-height: 105px;
+  }
+  .panel-character .rpg-equip-layout .rpg-bag-mini > .rpg-bag-detail {
+    grid-column: 1; grid-row: 4; min-height: 76px; max-height: 100px;
+    flex-direction: row; align-items: center; text-align: left;
+    padding: 8px; gap: 9px;
+  }
+  .panel-character .rpg-equip-layout .rpg-bag-mini .rpg-bag-detail > div {
+    flex: 1 1 auto; text-align: left;
+  }
+  .panel-character .rpg-equip-layout .rpg-bag-mini .rpg-bag-detail .rpg-item-pic {
+    width: 42px; height: 42px; flex: 0 0 42px; font-size: 25px;
+  }
+  .panel-character .rpg-equip-layout .rpg-bag-mini .rpg-bag-detail p {
+    margin: 3px 0 0; max-height: 34px; overflow: hidden;
+  }
+  .panel-character .rpg-tab-inventory .rpg-bag { min-height: 0; }
+  .panel-character .rpg-tab-inventory .rpg-bag-content {
+    overflow-y: auto; scrollbar-width: thin;
+  }
+  /* La grille conserve quelques cases vides, mais ne simule pas
+     une énorme capacité d'inventaire encore non implémentée. */
+  /* Les cases de fond restent visibles : décor uniquement, aucune capacité limite. */
+}
+
+/* PC portables : adapter la hauteur sans réduire les cibles cliquables. */
+@media (min-width: 1050px) and (max-height: 760px) and (orientation: landscape) {
+  .game-overlay.panel-character { padding: 8px 14px; }
+  .panel-character .overlay-sheet { height: calc(100dvh - 16px); max-height: calc(100dvh - 16px); }
+  .panel-character .overlay-header { flex-basis: 43px; min-height: 43px; }
+  .panel-character .overlay-scroll { padding: 6px !important; }
+  .panel-character .char-sidebar,
+  .panel-character .char-detail { padding: 7px; }
+  .panel-character .char-side-name { padding: 5px 6px; }
+  .panel-character .char-side-name h3 { font-size: 20px; }
+  .panel-character .char-nav button { min-height: 35px; font-size: 11px; padding: 5px 8px; }
+  .panel-character .rpg-block-title { height: 30px; font-size: 14px; margin-bottom: 5px; }
+  .panel-character .rpg-paper-layout { max-height: 360px; }
+  .panel-character .paper-stage .captain-portrait { max-height: 235px; }
+  .panel-character .paper-slot { height: 44px; }
+  .panel-character .rpg-stats-layout { gap: 8px; }
+  .panel-character .rpg-character-art .captain-portrait { max-height: 250px; }
+  .panel-character .rpg-equip-layout .rpg-bag-mini > .rpg-bag-detail {
+    min-height: 60px; max-height: 77px;
+  }
+  .play-stage .tactical-v12 .tactical-action-dock { height: 66px; padding: 5px 8px; }
+  .play-stage .tactical-v12 .tactical-buttons .tactic-btn,
+  .play-stage .tactical-v12 .tactical-buttons .fruit-tactic {
+    width: 52px; min-width: 52px !important; max-width: 52px !important;
+    flex-basis: 52px !important; height: 54px; max-height: 54px;
+  }
+  .play-stage .scene-toolbar { min-height: 63px; padding: 5px 10px; }
+  .play-stage .scene-toolbar .hud-action { min-height: 49px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel-character .char-nav button,
+  .play-stage .scene-toolbar .hud-action { transition: none !important; }
+}
+
+
+/* Correctif ergonomique mobile sans toucher au moteur et aux gestes tactiles :
+   les anciens styles génériques agrandissaient les libellés d'onglets à 20px,
+   ce qui faisait se chevaucher Équip., Sac et Techniques sur téléphone. */
+@media (max-width: 1049px) {
+  .panel-character .char-nav button .char-nav-label {
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+    font: 600 12px/1.15 system-ui, sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 600px) {
+  .panel-character .char-nav button .char-nav-label {
+    font-size: 11px;
+  }
+}
+
+/* V1.2.2 : cibles tactiles plus confortables sur petits téléphones en paysage.
+   Correctif limité aux menus du personnage, sans changer la zone de jeu ni le moteur. */
+@media (max-width: 1049px) and (max-height: 450px) and (orientation: landscape) and (pointer: coarse) {
+  .panel-character .char-nav button,
+  .panel-character .rpg-bag-tabs button {
+    min-height: 42px;
+    touch-action: manipulation;
+  }
+  .panel-character .char-nav button .char-nav-label {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+  .panel-character .overlay-scroll {
+    overscroll-behavior: contain;
+  }
+}

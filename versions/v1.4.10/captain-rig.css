@@ -1,0 +1,42 @@
+/* Rig hybride SVG de découpes d'illustration : la qualité graphique provient
+   du chibi d'origine ; la tête, les bras, les jambes et les pans sont animés
+   par des groupes distincts. Aucun mouvement de l'image entière. */
+.v141-menu .v141-rig-stage{
+  display:block;position:relative;z-index:3;
+  width:min(75%,275px);height:auto;max-height:100%;
+  filter:drop-shadow(0 3px 0 #1c2735a9) drop-shadow(0 12px 12px #00172670);
+  object-fit:contain;overflow:visible;flex-shrink:1;
+  user-select:none;pointer-events:auto;cursor:pointer;transform:scale(1.02);margin-bottom:14px;
+  transform-origin:50% 94%;animation:none!important;
+}
+.v141-rig-stage .v141-rig-head{animation:cdm-head 4.1s ease-in-out infinite;transform-origin:0 0}
+.v141-rig-stage .v141-rig-cape-left{animation:cdm-cape-l 3.8s ease-in-out infinite;transform-origin:0 0}
+.v141-rig-stage .v141-rig-cape-right{animation:cdm-cape-r 3.4s ease-in-out infinite;transform-origin:0 0}
+.v141-rig-stage .v141-rig-arm-left{animation:cdm-arm-l 3.9s ease-in-out infinite;transform-origin:0 0}
+.v141-rig-stage .v141-rig-arm-right{animation:cdm-arm-r 4.5s ease-in-out infinite;transform-origin:0 0}
+.v141-rig-stage .v141-rig-leg-left{animation:cdm-foot-l 5.2s ease-in-out infinite;transform-origin:0 0}
+.v141-rig-stage .v141-rig-leg-right{animation:cdm-foot-r 5.4s ease-in-out infinite;transform-origin:0 0}
+.v141-rig-stage .v141-rig-breath{animation:cdm-breath 3.8s ease-in-out infinite;transform-origin:230px 220px}
+.v141-rig-stage .v141-rig-eyes{opacity:0;animation:cdm-blink 5.5s steps(1,end) infinite}
+@keyframes cdm-head{0%,100%{transform:rotate(-.8deg)}50%{transform:rotate(1.5deg)}}
+@keyframes cdm-cape-l{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(2.6deg)}}
+@keyframes cdm-cape-r{0%,100%{transform:rotate(1.3deg)}50%{transform:rotate(-2.8deg)}}
+@keyframes cdm-arm-l{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-2.2deg)}}
+@keyframes cdm-arm-r{0%,100%{transform:rotate(0deg)}50%{transform:rotate(2.6deg)}}
+@keyframes cdm-foot-l{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-.7deg)}}
+@keyframes cdm-foot-r{0%,100%{transform:rotate(0deg)}50%{transform:rotate(.7deg)}}
+@keyframes cdm-breath{0%,100%{transform:scale(1,1)}50%{transform:scale(1.012,1.018)}}
+@keyframes cdm-blink{0%,42%,45%,100%{opacity:0}43%,44%{opacity:1}}
+.v141-rig-portrait{display:block;width:100%!important;height:100%!important;max-width:none!important;transform:none!important;overflow:visible;}
+.v141-menu .v133-portrait .v141-rig-portrait,.v141-menu .v133-slot-face .v141-rig-portrait{object-fit:contain;border:0;border-radius:0;}
+.v138-chooser-portrait .v141-rig-portrait{display:block;width:100%;height:100%;max-width:none;object-fit:contain;overflow:visible;}
+@media(max-width:720px){.v141-menu .v141-rig-stage{width:auto;height:min(29vh,225px);max-height:225px;transform:scale(1);margin-bottom:30px;}}
+@media(prefers-reduced-motion:reduce){.v141-menu .v141-rig-stage *, .v141-rig-portrait *{animation:none!important;transition:none!important;}}
+
+/* Le joueur peut interagir avec son capitaine sans ouvrir un panneau. */
+.v141-menu .v141-rig-stage:focus-visible{outline:3px solid #ffdfa0;outline-offset:4px;border-radius:12px;}
+.v141-menu .v141-rig-stage.v141-greet .v141-rig-arm-right{animation:cdm-greet .85s ease-in-out 1!important;}
+.v141-menu .v141-rig-stage.v141-greet .v141-rig-head{animation:cdm-greet-head .85s ease-in-out 1!important;}
+@keyframes cdm-greet{0%,100%{transform:rotate(0)}20%{transform:rotate(-13deg)}47%{transform:rotate(8deg)}70%{transform:rotate(-10deg)}}
+@keyframes cdm-greet-head{0%,100%{transform:rotate(0)}25%{transform:rotate(-4deg)}55%{transform:rotate(4deg)}}
+@media(prefers-reduced-motion:reduce){.v141-menu .v141-rig-stage.v141-greet *{animation:none!important}}
