@@ -1,0 +1,60 @@
+/* V1.3.7 — Navigation du menu : aucune modification des scènes ni des sauvegardes.
+   La fiche du capitaine, l'équipement et les onglets s'ouvrent dans l'accueil. */
+.chroniques-lobby-v137 #chroniques-updates-button {display:none!important}
+.v137-menu .v133-topnav button[data-lobby-scroll="slots"] {min-width:105px}
+.v137-menu .v133-quick-grid button {min-height:68px}
+.v137-menu .v133-quick-grid button span .v136-glyph {width:25px;height:25px}
+.v137-menu .v133-slot:focus-visible {
+  outline:3px solid #ffdc8c;
+  outline-offset:3px;
+  box-shadow:0 0 0 5px #14263edb,0 0 20px #ffd88a8a
+}
+.v137-lobby-dialog {
+  position:fixed;
+  z-index:9970;
+  padding:clamp(8px,2vw,24px)
+}
+.v137-lobby-dialog .overlay-scrim {background:#00101cce}
+.v137-lobby-dialog .overlay-sheet {
+  width:min(1080px,100%);
+  height:min(88dvh,840px);
+  border:2px solid #e5b75f;
+  border-radius:13px;
+  background:linear-gradient(150deg,#172c3fee,#091f34fa);
+  box-shadow:inset 0 0 0 3px #c68e4340,0 25px 85px #000e;
+}
+.v137-lobby-dialog .overlay-header {
+  background:linear-gradient(105deg,#3a281c,#112a3d 47%,#312414);
+  border-bottom:1px solid #d6a652
+}
+.v137-lobby-dialog .overlay-heading h2 {color:#ffdf9c}
+.v137-lobby-dialog .overlay-scroll {
+  overflow-y:auto;
+  overflow-x:hidden;
+  scrollbar-color:#c28c48 #092439
+}
+.v137-lobby-dialog .overlay-close {
+  min-height:44px;
+  min-width:44px;
+  border:1px solid #d8b478;
+  border-radius:8px
+}
+.v137-lobby-dialog .overlay-close:hover {background:#553720}
+.v137-lobby-dialog .char-nav button:focus-visible,
+.v137-lobby-dialog .overlay-close:focus-visible {
+  outline:3px solid #ffda88;
+  outline-offset:2px
+}
+@media(max-width:720px){
+  .v137-menu .v133-topnav button[data-lobby-scroll="slots"] {min-width:105px}
+  .v137-menu .v133-quick-grid button {min-height:65px}
+  .v137-lobby-dialog {padding:0}
+  .v137-lobby-dialog .overlay-sheet {
+    width:100%;
+    height:100dvh;
+    max-height:none;
+    border-radius:0;
+    border-width:0
+  }
+  .v137-lobby-dialog .overlay-scroll {padding-bottom:max(22px,env(safe-area-inset-bottom))}
+}
