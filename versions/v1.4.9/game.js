@@ -459,7 +459,7 @@ function welcomeView(){
         <button type="button" data-lobby-open="comptoir"><span aria-hidden="true">${menuIcon('shop')}</span> Boutique</button>
         <button type="button" data-lobby-updates><span aria-hidden="true">${menuIcon('refresh')}</span> Mises à jour</button>
       </nav>
-      <span class="v133-version" aria-label="Version 1.4.8, Fuchsia sur l’Île de l’Aube">V1.4.8</span>
+      <span class="v133-version" aria-label="Version 1.4.8, Fuchsia sur l’Île de l’Aube">V1.4.9</span>
     </header>
     <div class="v133-layout">
       <aside class="v133-sidebar v133-sidebar-left" aria-label="Mon aventure">
