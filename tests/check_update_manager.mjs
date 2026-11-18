@@ -323,8 +323,12 @@ test('V1.4.8 : le créateur commence sur Humain et ne crée aucune sauvegarde',(
  assert.ok(game.includes('V1.4.8'));
  assert.ok(game.includes('chroniques_mers_profiles_v1'));
  assert.ok(source.includes("const RACE='humain'"));
- assert.ok(source.includes('data-v2-tab="race"'));
- assert.ok(source.includes('data-v2-tab="class"')||source.includes("['class','Classe']"));
+ const sandbox={window:{}};
+ vm.runInNewContext(source,sandbox);
+ const workshop=sandbox.window.ChroniquesCharacterV2.render();
+ assert.equal(sandbox.window.ChroniquesCharacterV2.getRace(),'humain');
+ assert.ok(workshop.includes('data-v2-tab="race" aria-pressed="true"'));
+ assert.ok(workshop.includes('data-v2-tab="class"'));
  assert.ok(source.includes('Sans chapeau')||source.includes('sans chapeau'));
  assert.ok(!source.includes('localStorage'));
  assert.ok(!source.includes('<image'));
