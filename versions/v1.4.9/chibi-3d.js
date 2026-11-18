@@ -151,6 +151,7 @@ let stableDraft='';
 function shutdown(){
   if(!current)return;
   cancelAnimationFrame(current.raf);
+  current.ro?.disconnect();
   current.renderer.dispose();
   current.renderer.domElement.remove();
   current=null;
@@ -232,7 +233,7 @@ function init(host){
     renderer.render(scene,camera);
     raf=requestAnimationFrame(tick);if(current)current.raf=raf;
   }
-  current={renderer,raf:0,host};raf=requestAnimationFrame(tick);current.raf=raf;
+  current={renderer,raf:0,host,ro};raf=requestAnimationFrame(tick);current.raf=raf;
 }
 function check(){
   const host=document.querySelector('.cdm2-workshop .cdm2-model-holder');
