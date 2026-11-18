@@ -1,0 +1,8 @@
+/* Scène de validation 3D — ne change pas les sauvegardes. */
+.cdm2-model-holder {position:relative;isolation:isolate;background:radial-gradient(ellipse at 50% 62%,#29697d96,#0b314966 49%,#061a2c 80%);}
+.cdm2-model-holder .cdm2-hero[hidden]{display:none!important;}
+.cdm3d-frame{position:absolute;inset:0;display:block;overflow:hidden;}
+.cdm3d-frame canvas{display:block;width:100%;height:100%;cursor:grab;outline:none;}
+.cdm3d-frame canvas:active{cursor:grabbing;}
+.cdm3d-hint{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:6px 11px;border:1px solid #d5ab6590;border-radius:20px;color:#fff4da;background:#091b2bc9;font:650 10px system-ui,sans-serif;pointer-events:none;z-index:1;}
+@media(max-width:760px){.cdm3d-hint{font-size:9px;}}
