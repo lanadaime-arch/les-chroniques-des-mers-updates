@@ -483,7 +483,7 @@ test('installation et retour arriere sauvegardent les profils avec le meme domai
  first.elements.get('chroniques-updates-button').handlers.click();
  await new Promise(resolve=>setImmediate(resolve));
  const items=first.elements.get('chroniques-update-list').children;
- assert.equal(items.length,21);
+ assert.equal(items.length,22);
  const hidden=items.filter(line=>line.hidden);
  assert.ok(hidden.length>=5,'Les anciennes versions sont repliees par defaut');
  assert.equal(first.elements.get('chroniques-update-history-toggle').hidden,false);
