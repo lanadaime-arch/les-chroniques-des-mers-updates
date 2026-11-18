@@ -1,6 +1,6 @@
 /* Atelier personnages V2 — premier jalon: HUMAIN par défaut.
    100% SVG en pièces originales, sans découpe d'illustration existante.
-   Prototype non sauvegardé: aucun accès à localStorage ni création d'emplacement. */
+   Prototype non sauvegardé: aucune écriture de sauvegarde ni création d'emplacement. */
 (function(){
 'use strict';
 const RACE='humain';
