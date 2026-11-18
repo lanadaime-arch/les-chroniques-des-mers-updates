@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "entries": [
+    {
+      "id": "1.4.11",
+      "date": "18 novembre 2026",
+      "title": "Un journal de bord pour suivre les nouveautés",
+      "summary": "Les mises à jour possèdent désormais leur propre fenêtre de présentation, accessible depuis le menu principal.",
+      "sections": [
+        {
+          "label": "Nouveautés",
+          "items": [
+            "Ajout d’un bouton « Notes de mise à jour » dans l’en-tête de l’accueil.",
+            "Création d’une fenêtre dédiée avec les versions récentes, leur date et leurs changements.",
+            "Historique consultable sans quitter l’application ni commencer une partie."
+          ]
+        },
+        {
+          "label": "Confort d’utilisation",
+          "items": [
+            "Navigation entre les versions avec une présentation adaptée aux écrans PC et aux petites fenêtres.",
+            "Fermeture par la croix, un clic hors de la fenêtre ou la touche Échap.",
+            "Contenu stocké dans un fichier indépendant pour préparer la future refonte graphique."
+          ]
+        },
+        {
+          "label": "À savoir",
+          "items": [
+            "Cette mise à jour ne modifie ni les personnages, ni les quatre emplacements de sauvegarde.",
+            "L’atelier chibi 3D reste expérimental ; la reconstruction sur un moteur 3D définitif n’est pas encore intégrée."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1.4.10",
+      "date": "18 novembre 2026",
+      "title": "Mesurer les performances du personnage 3D",
+      "summary": "Un premier indicateur de fluidité accompagne notre laboratoire de création de personnage.",
+      "sections": [
+        {
+          "label": "Nouveautés",
+          "items": [
+            "Affichage d’un compteur d’images par seconde (FPS) directement dans l’aperçu du personnage chibi 3D.",
+            "Actualisation de la mesure toutes les demi-secondes et variation de la couleur selon la valeur observée."
+          ]
+        },
+        {
+          "label": "À savoir",
+          "items": [
+            "Le compteur sert uniquement au diagnostic dans cette scène de test ; il ne prédit pas les performances du futur jeu complet.",
+            "La version 1.4.9 reste disponible pour un retour arrière."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1.4.9",
+      "date": "18 novembre 2026",
+      "title": "Premier personnage chibi en véritable 3D",
+      "summary": "L’atelier passe d’une silhouette vectorielle à un premier modèle WebGL manipulable.",
+      "sections": [
+        {
+          "label": "Nouveautés",
+          "items": [
+            "Ajout d’un personnage humain chibi en 3D avec une scène Three.js.",
+            "Rotation à la souris, zoom et animations de repos, marche et salut.",
+            "Premiers réglages visuels pour les yeux, la peau, les cheveux et les vêtements."
+          ]
+        },
+        {
+          "label": "En développement",
+          "items": [
+            "Les proportions, la coiffure et l’intégration du visage restent à retravailler.",
+            "La création et l’enregistrement définitifs d’un nouveau personnage restent désactivés pendant les essais."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1.4.8",
+      "date": "18 novembre 2026",
+      "title": "Les premières bases du nouvel atelier",
+      "summary": "Un prototype de création plus détaillé prépare la future personnalisation des héros.",
+      "sections": [
+        {
+          "label": "Nouveautés",
+          "items": [
+            "Race « Humain » proposée par défaut dans le créateur.",
+            "Premières variations des traits du visage et des cheveux sur un personnage SVG articulé."
+          ]
+        },
+        {
+          "label": "À savoir",
+          "items": [
+            "Ce modèle 2D était une étape préparatoire et non l’apparence finale.",
+            "Aucun nouveau personnage n’était sauvegardé à cette étape."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1.4.7",
+      "date": "18 novembre 2026",
+      "title": "Un accueil plus soigné pendant le chargement",
+      "summary": "L’entrée dans le jeu s’accompagne d’une animation maritime de préparation.",
+      "sections": [
+        {
+          "label": "Nouveautés",
+          "items": [
+            "Ajout d’un écran de chargement avec boussole animée, étapes de progression et conseils.",
+            "L’animation suit les étapes réelles de préparation du jeu plutôt qu’un délai artificiel."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1.4.6",
+      "date": "18 novembre 2026",
+      "title": "Un capitaine plus vivant à l’accueil",
+      "summary": "Le personnage du menu gagne en expressivité avant les prochains essais 3D.",
+      "sections": [
+        {
+          "label": "Améliorations",
+          "items": [
+            "Ajout de mouvements de regard, d’attitudes articulées et d’effets de brise.",
+            "Réactions du personnage au survol et au clic dans le menu."
+          ]
+        }
+      ]
+    }
+  ]
+}

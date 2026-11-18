@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b1727">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Chroniques">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="RPG solo de pirates, nouvelle ville isométrique, caméra tactile et combats tactiques.">
+  <!-- Préaffichage natif avant le téléchargement des feuilles de style. -->
+  <style id="chroniques-loading-critical">
+    html{background:#071b30}
+    body{margin:0}
+    #chroniques-loading{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;
+      background:radial-gradient(ellipse at 50% 38%,#174966 0%,#09243d 52%,#061426 100%);color:#fff2d5}
+    #chroniques-loading[hidden]{display:none!important}
+    #chroniques-loading .chroniques-loading-title{text-align:center;font:700 clamp(26px,4vw,47px) Georgia,serif}
+    #chroniques-loading .chroniques-loading-compass{width:180px;height:180px;margin:18px auto}
+    #chroniques-loading .chroniques-loading-compass svg{width:100%;height:100%}
+  </style>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme-v08.css">
+  <link rel="stylesheet" href="theme-v09.css">
+  <link rel="stylesheet" href="theme-v091.css">
+  <link rel="stylesheet" href="theme-v10.css">
+  <link rel="stylesheet" href="theme-v11.css">
+  <link rel="stylesheet" href="theme-v12.css">
+  <link rel="stylesheet" href="theme-v121.css">
+  <link rel="stylesheet" href="theme-v122.css">
+  <link rel="stylesheet" href="theme-v123.css">
+  <link rel="stylesheet" href="theme-v130.css">
+  <link rel="stylesheet" href="theme-v133.css">
+  <link rel="stylesheet" href="theme-v134.css">
+  <link rel="stylesheet" href="theme-v135.css">
+  <link rel="stylesheet" href="theme-v136.css">
+  <link rel="stylesheet" href="theme-v137.css">
+  <link rel="stylesheet" href="theme-v138.css">
+  <link rel="stylesheet" href="theme-v140.css">
+  <link rel="stylesheet" href="theme-v141.css">
+  <link rel="stylesheet" href="captain-rig.css">
+  <link rel="stylesheet" href="captain-customization.css">
+  <link rel="stylesheet" href="theme-v142.css">
+  <link rel="stylesheet" href="theme-v143.css">
+  <link rel="stylesheet" href="theme-v144.css">
+  <link rel="stylesheet" href="theme-v145.css">
+  <link rel="stylesheet" href="captain-presence.css">
+  <link rel="stylesheet" href="../../loading-screen.css">
+  <link rel="stylesheet" href="character-v2-prototype.css">
+  <link rel="stylesheet" href="chibi-3d.css">
+  <link rel="stylesheet" href="patch-notes.css">
+  <link rel="preload" as="image" href="assets/fuchsia-aube-quai.webp">
+  <link rel="stylesheet" href="../../update-manager.css">
+  <title>Les Chroniques des Mers — Aventure solo</title>
+</head>
+<body>
+  <div id="chroniques-loading" class="chroniques-loading" role="status" aria-live="polite" aria-label="Chargement des Chroniques des Mers">
+    <div class="chroniques-loading-horizon" aria-hidden="true"></div>
+    <section class="chroniques-loading-panel" aria-label="Préparation de l'aventure">
+      <p class="chroniques-loading-eyebrow">UNE AVENTURE DE PIRATES</p>
+      <h1 class="chroniques-loading-title">Les Chroniques <span>des Mers</span></h1>
+      <div class="chroniques-loading-compass" aria-hidden="true">
+        <svg viewBox="0 0 240 240" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="cl-gold" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#fff0bc"/><stop offset=".48" stop-color="#d99d4d"/><stop offset="1" stop-color="#875120"/>
+            </linearGradient>
+            <linearGradient id="cl-blue" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#1b789c"/><stop offset="1" stop-color="#072139"/>
+            </linearGradient>
+          </defs>
+          <circle cx="120" cy="120" r="113" fill="#062139" stroke="url(#cl-gold)" stroke-width="6"/>
+          <circle cx="120" cy="120" r="99" fill="url(#cl-blue)" stroke="#e2bf7b" stroke-width="2"/>
+          <circle cx="120" cy="120" r="76" fill="none" stroke="#9bd7db" stroke-width="1.5" opacity=".62"/>
+          <circle cx="120" cy="120" r="60" fill="#071f37" stroke="#f2cb7a" stroke-width="1.5"/>
+          <g stroke="#d4c399" stroke-width="2">
+            <path d="M120 19v17M120 204v17M19 120h17M204 120h17"/>
+            <path d="M49 49l13 13M178 178l13 13M191 49l-13 13M62 178l-13 13" opacity=".7"/>
+          </g>
+          <g fill="#f9dfaa" font-family="Georgia,serif" font-size="14" text-anchor="middle">
+            <text x="120" y="48">N</text><text x="120" y="202">S</text>
+            <text x="39" y="125">O</text><text x="201" y="125">E</text>
+          </g>
+          <g class="chroniques-loading-needle">
+            <path d="M120 32L137 119 120 208 103 121Z" fill="#b64b37" stroke="#fbd68b" stroke-width="2.5"/>
+            <path d="M120 32L120 208 137 119Z" fill="#ecd394" opacity=".95"/>
+            <path d="M120 32L103 121 120 119Z" fill="#8b2925"/>
+            <circle cx="120" cy="120" r="12" fill="#f2d089" stroke="#53311e" stroke-width="3"/>
+            <circle cx="120" cy="120" r="4.5" fill="#10354f"/>
+          </g>
+        </svg>
+      </div>
+      <p class="chroniques-loading-tagline">CAP SUR L’AVENTURE</p>
+      <div class="chroniques-loading-progress" role="progressbar" aria-label="Étapes de préparation du jeu" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0">
+        <span id="chroniques-loading-progress-fill"></span>
+      </div>
+      <p class="chroniques-loading-stage" id="chroniques-loading-stage">Préparation de la traversée…</p>
+      <p class="chroniques-loading-tip" id="chroniques-loading-tip">Conseil : explore chaque île pour découvrir ses secrets.</p>
+      <button id="chroniques-loading-retry" class="chroniques-loading-retry" type="button" hidden>Réessayer le lancement</button>
+    </section>
+    <span class="chroniques-loading-bottom" aria-hidden="true">✦ &nbsp; L’HORIZON NOUS ATTEND &nbsp; ✦</span>
+  </div>
+  <div id="app" aria-live="polite"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="../../update-manager.js" defer></script>
+  <script src="roam.js" defer></script>
+  <script src="fruit-data.js" defer></script>
+  <script src="tactics.js" defer></script>
+  <script src="captain-ribbon-masks.js" defer></script>
+  <script src="captain-rig.js" defer></script>
+  <script src="captain-presence.js" defer></script>
+  <script src="../../loading-screen.js" defer></script>
+  <script src="character-v2-prototype.js" defer></script>
+  <script src="patch-notes.js" defer></script>
+  <script src="game.js" defer></script>
+  <script type="module" src="chibi-3d.js"></script>
+</body>
+</html>
